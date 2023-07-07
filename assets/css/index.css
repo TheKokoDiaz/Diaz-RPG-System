@@ -1,0 +1,156 @@
+/* #region Fonts Importation */
+@font-face{
+    font-family: 'Raleway-Regular';
+    src: url('../fonts/Raleway-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Raleway-Black';
+    src: url('../fonts/Raleway-Black.ttf');
+}
+/* #endregion */
+
+/* #region General */
+html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-family: 'Raleway-Regular';
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+/* #endregion */
+
+/* #region Player */
+    /* #region HUD */
+    .player_hud_status{
+        width: 30%;
+        height: auto;
+        position: fixed;
+        top: 1vh;
+        left: 2vh;
+        padding: 1vh;
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        flex-direction: row;
+        gap: 2vh;
+        border-radius: 8px;
+        box-sizing: border-box;
+        border: 1px solid black;
+    }           
+
+    .player_hud_status .image{
+        width: 60px;
+        height: 60px;
+        border: 1px solid black;
+        transition-duration: 300ms;
+    }
+
+    .player_hud_status .bar{
+        flex-basis: 80%;
+        height: 50px;
+        box-sizing: border-box;
+        transition-duration: 300ms;
+    }
+
+    .bar .health, .bar .armor{
+        box-sizing: border-box;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        border: 1.5px solid black;
+        transition-duration: 300ms;
+    }
+    
+    .bar .health{
+        width: 100%;
+        height: 60%;
+    }
+    
+    .bar .armor{
+        width: 40%;
+        height: 40%;
+    }
+
+    .bar .health .text, .bar .armor .text{
+        position: absolute;
+        font-weight: bold;
+        padding-left: 1.5vh;
+    }
+
+    .bar .health .graffic, .bar .armor .graffic{
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    .bar .health .graffic{
+        border: 1px green solid;
+    }
+    
+    .bar .armor .graffic{
+        border: 1px blue solid;
+    }
+    /* #endregion */
+    /* #region Moves */
+    .player_hud_moves{
+        width: 70%;
+        height: 20%;
+        left: 2vh;
+        bottom: 1vh;
+        padding: 0.5vh;
+        position: fixed;
+        border-radius: 8px;
+        box-sizing: border-box;
+        border: 1px solid black;
+        gap: 0.5vh 0.1vh;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        transition-duration: 300ms;
+    }
+
+    .player_hud_moves .move, .player_hud_moves .description{
+        flex-basis: 48.5%;
+        width: 32%;
+        user-select: none;
+        border-radius: 8px;
+        box-sizing: border-box;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition-duration: 300ms;
+    }
+    
+    .player_hud_moves .move{
+        flex-basis: 48.5%;
+        width: 32%;
+    }
+
+    .player_hud_moves .description{
+        flex-basis: 99%;
+        width: 35%;
+    }
+
+    .player_hud_moves .move:hover{
+        background-color: aquamarine;
+        border-color: aqua;
+    }
+    
+    .player_hud_moves .move:active{
+        background-color: yellow;
+        border-color: yellowgreen;
+    }
+    /* #endregion */
+/* #endregion */

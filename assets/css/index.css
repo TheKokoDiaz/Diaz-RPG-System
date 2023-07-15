@@ -29,34 +29,35 @@ body{
 /* #endregion */
 
 /* #region Player */
-    /* #region HUD */
+    /* #region Status */
     .player_hud_status{
         width: 30%;
-        height: auto;
+        height: 80px;
         position: fixed;
         top: 1vh;
         left: 2vh;
         padding: 1vh;
         display: flex;
-        align-items: start;
+        align-items: center;
         justify-content: center;
         flex-direction: row;
-        gap: 2vh;
+        gap: 1vh;
         border-radius: 8px;
         box-sizing: border-box;
         border: 1px solid black;
+        z-index: 5;;
     }           
 
     .player_hud_status .image{
-        width: 60px;
         height: 60px;
+        aspect-ratio: 1/1;
         border: 1px solid black;
         transition-duration: 300ms;
     }
 
     .player_hud_status .bar{
         flex-basis: 80%;
-        height: 50px;
+        height: 60px;
         box-sizing: border-box;
         transition-duration: 300ms;
     }
@@ -70,39 +71,73 @@ body{
         transition-duration: 300ms;
     }
     
-    .bar .health{
+    .player_hud_status .bar .health{
         width: 100%;
         height: 60%;
+        background-color: rgb(0, 180, 0);
     }
     
-    .bar .armor{
+    .player_hud_status .bar .armor{
         width: 40%;
         height: 40%;
+        background-color: rgb(0, 80, 180);
     }
 
-    .bar .health .text, .bar .armor .text{
+    .player_hud_status .bar .health .text, .player_hud_status .bar .armor .text{
         position: absolute;
         font-weight: bold;
         padding-left: 1.5vh;
     }
 
-    .bar .health .graffic, .bar .armor .graffic{
+    .player_hud_status .bar .health .graffic, .player_hud_status .bar .armor .graffic{
         width: 100%;
         height: 100%;
         box-sizing: border-box;
     }
 
-    .bar .health .graffic{
+    .player_hud_status .bar .health .graffic{
         border: 1px green solid;
     }
     
-    .bar .armor .graffic{
+    .player_hud_status .bar .armor .graffic{
         border: 1px blue solid;
+    }
+    /* #endregion */
+    /* #region Effects*/
+    .player_hud_effects{
+        width: 30%;
+        position: fixed;
+        top: 90px;
+        left: 2vh;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.4vh;
+        z-index: 5;
+    }
+
+    .player_hud_effects .buff, .player_hud_effects .debuff{
+        border: 1px solid black;
+        width: 25px;
+        height: 25px;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .player_hud_effects .buff img, .player_hud_effects .debuff img{
+        width: 100%;
+        height: 100%;
+        opacity: 50%;
     }
     /* #endregion */
     /* #region Moves */
     .player_hud_moves{
-        width: 70%;
+        width: 50%;
         height: 20%;
         left: 2vh;
         bottom: 1vh;
@@ -111,19 +146,20 @@ body{
         border-radius: 8px;
         box-sizing: border-box;
         border: 1px solid black;
-        gap: 0.5vh 0.1vh;
         display: flex;
-        justify-content: start;
+        justify-content: space-between;
         align-items: center;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: wrap;
         transition-duration: 300ms;
+        z-index: 5;
     }
 
-    .player_hud_moves .move, .player_hud_moves .description{
-        flex-basis: 48.5%;
-        width: 32%;
+    .player_hud_moves .move{
+        height: 47%;
+        flex-basis: 49.8%;
         user-select: none;
+        cursor: pointer;
         border-radius: 8px;
         box-sizing: border-box;
         border: 1px solid black;
@@ -132,25 +168,116 @@ body{
         align-items: center;
         transition-duration: 300ms;
     }
-    
-    .player_hud_moves .move{
-        flex-basis: 48.5%;
-        width: 32%;
-    }
 
-    .player_hud_moves .description{
-        flex-basis: 99%;
-        width: 35%;
-    }
+        /* #region Attack*/
+        #player_hud_moves_attack{
+            z-index: 6;
+            bottom: -31%;
+        }
 
-    .player_hud_moves .move:hover{
-        background-color: aquamarine;
-        border-color: aqua;
-    }
-    
-    .player_hud_moves .move:active{
-        background-color: yellow;
-        border-color: yellowgreen;
+        #player_hud_moves_attack .move{
+            background-color: rgb(200, 25, 25);
+            border: 1px solid rgb(100, 0, 0);
+        }
+        
+        #player_hud_moves_attack .move:hover{
+            animation: hover_attack 900ms infinite;
+        }
+
+        @keyframes hover_attack {
+            0%{
+                background-color: rgb(200, 25, 25);
+                border: 1px solid rgb(100, 0, 0);
+            }
+            50%{
+                background-color: rgb(220, 100, 100);
+                border: 1px solid rgb(200, 25, 25);
+            }
+            100%{
+                background-color: rgb(200, 25, 25);
+                border: 1px solid rgb(100, 0, 0);
+            }
+        }
+
+        #player_hud_moves_attack .move:active{
+            background-color: rgb(255, 200, 200);
+            border: 1px solid rgb(200, 25, 25);
+            color: rgb(200, 25, 25);
+            font-weight: bold;
+            animation: none;
+        }
+        /* #endregion */
+
+    #player_hud_moves_return{
+        height: 10%;
+        aspect-ratio: 1/1;
+        left: 51.8%;
+        bottom: -31%;
+        position: fixed;
+        border-radius: 8px;
+        border: 1px solid black;
+        user-select: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition-duration: 300ms;
     }
     /* #endregion */
+    /* #region Sprite*/
+    .player_sprite{
+        height: 40%;
+        width: 300px;
+        left: 10%;
+        bottom: 25%;
+        border: 1px solid black;
+        position: absolute;
+    }
+    /* #endregion */
+
+/* #endregion */
+
+/* #region Enemy */
+    /* #region Status */
+    .enemy_hud_status{
+        border: 1px solid orange;
+        width: 30%;
+        height: 80px;
+        top: 1vh;
+        right: 2vh;
+        padding: 1vh;
+        border-radius: 8px;
+        box-sizing: border-box;
+        position: fixed;
+        z-index: 5;
+    }
+
+    .enemy_hud_status .text{
+        font-weight: bold;
+    }
+
+    .enemy_hud_status .bar{
+        width: 100%;
+        height: 20px;
+        border: 1px solid black;
+    }
+
+    .enemy_hud_status .bar .health{
+        width: 100%;
+        height: 100%;
+        border: 1px solid red;
+        background-color: red;
+    }
+    /* #endregion */
+    /* #region Sprite */
+    .enemy_sprite{
+        height: 45%;
+        width: 300px;
+        right: 10%;
+        bottom: 25%;
+        border: 1px solid black;
+        position: absolute;
+    }
+    /* #endregion */
+
 /* #endregion */

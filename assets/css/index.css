@@ -16,7 +16,7 @@ html{
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: rgba(0, 0, 50);
+    background-color: rgba(0, 0, 50, 50%);
     font-family: 'Raleway-Regular';
 }
 
@@ -231,12 +231,11 @@ body{
     }
     /* #endregion */
     /* #region Sprite*/
-    .player_sprite{
+    #player_sprite{
         height: 40%;
-        width: 300px;
-        left: 10%;
+        left: 5%;
         bottom: 25%;
-        border: 1px solid white;
+        border: 1px solid rgba(255, 255, 255, 10%);
         position: absolute;
     }
     /* #endregion */

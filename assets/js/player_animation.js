@@ -20,10 +20,23 @@ function player_animation(){
     player_ctx.drawImage(player_canvas_sprite, frameX * player_sprite_width, frameY * player_sprite_height, player_sprite_width, player_sprite_height,  0, 0, player_canvas_width, player_canvas_height);
 
     if(player_game_frame % straggerFrames == 0){
-        if(frameX < (player_animation_limit - 1)){
-            frameX++;
+        if(frameY == 0){
+            //! To infinite animations
+            if(frameX < (player_animation_limit - 1)){
+                frameX++;
+            } else {
+                frameX = 0;
+            }
         } else {
-            frameX = 0;
+            //! To linear animations
+            if(frameX < (player_animation_limit - 1)){
+                frameX++;
+            } else {
+                //When the animation finish, the player will return to his idle animation
+                frameY = 0;
+                frameX = 0;
+                straggerFrames = 5;
+            }
         }
     }
 

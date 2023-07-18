@@ -117,6 +117,7 @@ body{
         left: 2vh;
         box-sizing: border-box;
         display: flex;
+        user-select: none;
         justify-content: start;
         align-items: center;
         flex-wrap: wrap;
@@ -211,6 +212,7 @@ body{
         color: rgb(20, 20, 20);
         background-color: rgb(80, 80, 80);
         pointer-events: none;
+        opacity: 0%;
     }
 
     #player_hud_moves_return{
@@ -255,6 +257,7 @@ body{
         box-sizing: border-box;
         position: fixed;
         z-index: 5;
+        user-select: none;
     }
 
     .enemy_hud_status .text{
@@ -274,12 +277,11 @@ body{
     }
     /* #endregion */
     /* #region Sprite */
-    .enemy_sprite{
+    #enemy_sprite{
         height: 45%;
-        width: 300px;
-        right: 10%;
+        right: 5%;
         bottom: 25%;
-        border: 1px solid white;
+        border: 1px solid rgba(255, 255, 255, 10%);
         position: absolute;
     }
     /* #endregion */

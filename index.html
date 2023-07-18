@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- !Programed by El Koko Díaz -->
+    <!-- !Programed by "El Koko Díaz" -->
+    
+    <!-- !Start Date: July 6th, 2023 -->
+    <!-- TODOS Update: July 18th, 2023 -->
+
+    <!-- !Icons from web site: "https://www.flaticon.es" -->
+    <!-- !SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +19,8 @@
 </head>
 <body>
     <!-- #region Player -->
+    <audio src="" id="player_sfx"></audio>
+    <audio src="" id="enemy_sfx"></audio>
     <!-- #region Photo, Health and Armor bars-->
     <div class="player_hud_status" draggable="false">
         <!-- PLayer's Photo -->
@@ -20,13 +29,13 @@
             <!-- Health (HP) Bar -->
             <div class="health">
                 <div class="graffic" id="player_health_graffic"></div>
-                <div class="text" id="player_health_text">HP: 100 / 100</div>
+                <div class="text" id="player_health_text">HP:</div>
             </div>
 
             <!-- Armor (AR) Bar -->
             <div class="armor">
-                <div class="graffic"></div>
-                <div class="text">AR: 10 / 10</div>
+                <div class="graffic" id="player_armor_graffic"></div>
+                <div class="text" id="player_armor_text">AR:</div>
             </div>
         </div>
     </div>
@@ -41,7 +50,7 @@
             <p>Attack</p>
             <img src="assets/icons/attack.png" draggable="false">
         </div>
-        <div class="move">
+        <div class="move disable">
             <p>Backpack</p>
             <img src="assets/icons/backpack.png" draggable="false">
         </div>
@@ -69,19 +78,20 @@
     <!-- #region Status -->
     <div class="enemy_hud_status">
         <div class="text">Enemy:</div>
-        <div class="text" id="enemy_health_text">HP: 250/250</div>
+        <div class="text" id="enemy_health_text">HP:</div>
         <div class="bar">
             <div class="health" id="enemy_health_graffic"></div>
         </div>
     </div>
     <!-- #endregion -->
     <!-- #region Sprite -->
-    <div class="enemy_sprite"></div>
+    <canvas id="enemy_sprite"></canvas>
     <!-- #endregion -->
     <!-- #endregion -->
     <!-- * JavaScript -->
     <script src="assets/js/variables.js"></script>
     <script src="assets/js/player_animation.js"></script>
+    <script src="assets/js/enemy_animation.js"></script>
     <script src="assets/js/index.js"></script>
 </body>
 </html>

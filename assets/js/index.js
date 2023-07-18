@@ -38,49 +38,134 @@ function TogglePlayerMenus({menu = ''}){
 //Changes the Player's animation
 function ChangePlayerAnimation({animation}){
     //Resets the animation progress to the start
-    frameX = 0;
+    player_frameX = 0;
 
     //Changes the animation
     switch(animation){
         case 'sword':
-            frameY = 1;
-            straggerFrames = 3;
+            player_frameY = 1;
+            player_straggerFrames = 3;
+            break;
+        case 'damage':
+            player_frameY = 2;
+            player_animation_limit = 7;
+            break;
+    }
+}
+
+//Changes the Enemy animation
+function ChangeEnemyAnimation({animation}){
+    enemy_frameX = 0;
+
+    switch(animation){
+        case 'damage':
+            enemy_frameY = 1;
+            enemy_animation_limit = 10;
+            break;
+        case 'attack':
+            enemy_frameY = 2;
+            enemy_animation_limit = 10;
             break;
     }
 }
 //#endregion
 
-function UpdateStats(){
+//#region Changes Audio
+//Changes the Sound Effects that do the player
+function ChangePlayerSfx({sfx}){
+    player_sfx.volume = sfx_volume;
+    player_sfx.setAttribute('src', '../assets/sfx/' + sfx + '.mp3');
+    player_sfx.play();
+}
+
+function ChangeEnemySfx({sfx}){
+    enemy_sfx.volume = sfx_volume;
+    enemy_sfx.setAttribute('src', '../assets/sfx/' + sfx + '.mp3');
+    enemy_sfx.play();
+}
+//#endregion
+
+//#region Update Stats
+function UpdatePlayerStats(){
+    //Prevents hight numbers that the maximum
+    if(player_stats[0].health > player_stats[0].max_health){ player_stats[0].health = player_stats[0].max_health; }
+    if(player_equipment_stats[0].armor > player_equipment_stats[0].max_armor){ player_equipment_stats[0].armor = player_equipment_stats[0].max_armor; }
+
+    //Prevents negative numbers
+    if(player_stats[0].health < 0){ player_stats[0].health = 0; }
+    if(player_equipment_stats[0].armor < 0){ player_equipment_stats[0].armor = 0; }
+
+    //Updates the graffic bars and texts of the player's HUD
+    player_health_text.innerText = 'HP: ' + player_stats[0].health + ' / ' + player_stats[0].max_health;
+    player_health_graffic.style.width = Math.round((player_stats[0].health / player_stats[0].max_health)*100) + '%';
+    player_armor_text.innerText = 'AR: ' + player_equipment_stats[0].armor + ' / ' + player_equipment_stats[0].max_armor;
+    player_armor_graffic.style.width = Math.round((player_equipment_stats[0].armor / player_equipment_stats[0].max_armor)*100) + '%';
+}
+
+function UpdateEnemyStats(){
+    //Prevents negative numbers
     if(enemy_stats[0].health < 0){ enemy_stats[0].health = 0; }
 
+    //Updates the graffic bar and the text numbers of the enemy´s HUD
     enemy_health_text.innerText = 'HP: ' + enemy_stats[0].health + '/' + enemy_stats[0].max_health;
     enemy_health_graffic.style.width = Math.round((enemy_stats[0].health / enemy_stats[0].max_health)*100) + '%';
 }
+//#endregion
 
 //Player's Turn
 function PlayerTurn(move){
+    //Calculate Crit Attacks
     switch(move){
         case 'sword':
-            ChangePlayerAnimation({animation: 'sword'});
+            ChangePlayerSfx({sfx: move});
+            ChangePlayerAnimation({animation: move});
             enemy_stats[0].health -= player_equipment_stats[0].sword_damage;
             break;
     }
 
-    UpdateStats();
+    ChangeEnemyAnimation({animation: 'damage'});
+    ChangeEnemySfx({sfx:'bone_crush'});
+    UpdateEnemyStats();
+}
+
+//Enemy turn
+function EnemyTurn(){
+    let enemy_damage = enemy_stats[0].damage;
+    let player_armor_absortion = 0;
+    //Change Player Animation to receive damage
+    //Change Player Audio to receive damage
+    if(player_equipment_stats[0].armor > 0){
+        player_equipment_stats[0].armor -= 1;
+        player_armor_absortion = enemy_damage - player_equipment_stats[0].armor_protection;
+
+        player_stats[0].health -= player_armor_absortion;
+    } else {
+        player_stats[0].health -= enemy_damage;
+    }
+    
+    ChangeEnemyAnimation({animation: 'attack'});
+    ChangeEnemySfx({sfx: 'punch'});
+    
+    ChangePlayerAnimation({animation: 'damage'});
+    UpdatePlayerStats();
 }
 
 //Delay function to avoid cuts in the animations
-function delay(ms) {
+function delay(ms){
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+//Sets the order of the turns in combat
 async function SetCombatTurns({move}){
     HideAllMenus();
 
     if(player_stats[0].speed > enemy_stats[0].speed){
         PlayerTurn(move);
         await delay(900);
-        /* Enemy's Turn */
+
+        EnemyTurn();
+        await delay(900);
+
         TogglePlayerMenus({menu: 'general'});
     } else {
         if(player_stats[0].speed < enemy_stats[0].speed){
@@ -93,4 +178,6 @@ async function SetCombatTurns({move}){
     }
 }
 
-/* setInterval(UpdateStats(), 1000); */
+//After loading all, the player and enemy stats will be updated
+UpdatePlayerStats();
+UpdateEnemyStats();

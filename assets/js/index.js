@@ -4,12 +4,9 @@ function HideAllMenus(){
     player_hud_moves_attack.style.bottom = '-31%';
     player_hud_moves_return.style.bottom = '-31%';
     player_hud_moves_general.style.bottom = '-31%';
+    player_hud_backpack.style.bottom = '-75%';
+    
 }
-
-// Function from Return' Button
-player_hud_moves_return.addEventListener('click', function() {
-    TogglePlayerMenus({menu: 'general'});
-});
 
 //Show and hides the Player´s HUD Menus
 function TogglePlayerMenus({menu = ''}){
@@ -23,10 +20,14 @@ function TogglePlayerMenus({menu = ''}){
         case 'attack':
             player_hud_moves_attack.style.bottom = '1vh';
             break;
+        
+        case 'backpack':
+            player_hud_backpack.style.bottom = '0';
+            break;
 
-            default:
-                console.log('ERROR: No recognized argument for TogglePlayerMenus');
-                break;
+        default:
+            console.log('ERROR: No recognized argument for TogglePlayerMenus');
+            break;
     }
 
     if(menu != 'general'){ player_hud_moves_return.style.bottom = '1vh'; }

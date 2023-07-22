@@ -11,6 +11,7 @@
     const player_hud_moves_return = document.querySelector('#player_hud_moves_return');
     const player_hud_moves_general = document.querySelector('#player_hud_moves_general');
     const player_hud_moves_attack = document.querySelector('#player_hud_moves_attack');
+    const player_hud_backpack = document.querySelector('#player_hud_backpack');
 
     //Graffics and numbers of the player's status
     const player_health_text = document.getElementById('player_health_text');
@@ -70,9 +71,11 @@
     //Audio
     const enemy_sfx = document.getElementById('enemy_sfx');
 
+    //Menus
     const enemy_health_graffic = document.getElementById('enemy_health_graffic');
     const enemy_health_text = document.getElementById('enemy_health_text');
 
+    //Stats from the enemy
     let enemy_stats = [{
         health: 500,
         max_health: 500,

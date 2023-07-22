@@ -26,6 +26,12 @@ body{
     margin: 0;
     padding: 0;
 }
+
+img{
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
 /* #endregion */
 
 /* #region Player */
@@ -45,7 +51,7 @@ body{
         gap: 1vh;
         border-radius: 8px;
         box-sizing: border-box;
-        background-color: rgba(0, 50, 150, 70%);
+        background-color: rgb(0, 50, 150);
         z-index: 5;;
     }           
 
@@ -153,7 +159,7 @@ body{
         position: fixed;
         border-radius: 8px;
         box-sizing: border-box;
-        background-color: rgba(0, 20, 100, 0.6);
+        background-color: rgb(40, 40, 120);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -200,7 +206,7 @@ body{
     }
 
     .player_hud_moves .move img{
-        width: 22%;
+        height: 130%;
         opacity: 30%;
     }
 
@@ -218,12 +224,13 @@ body{
     #player_hud_moves_return{
         height: 10%;
         aspect-ratio: 1/1;
-        left: 51.8%;
+        left: 50%;
         bottom: -31%;
+        margin-left: 3vh;
         color: white;
         position: fixed;
         border-radius: 8px;
-        background-color: rgb(0, 20,  100, 0.6);
+        background-color: rgb(40, 40, 120);
         user-select: none;
         cursor: pointer;
         display: flex;
@@ -239,6 +246,80 @@ body{
         bottom: 25%;
         border: 1px solid rgba(255, 255, 255, 10%);
         position: absolute;
+    }
+    /* #endregion */
+    /* #region Backpack */
+    #player_hud_backpack{
+        position: fixed;
+        bottom: -75%;
+        left: 2vh;
+        width: 50%;
+        height: 75%;
+        border-radius: 8px 8px 0 0;
+        box-sizing: border-box;
+        background-color: rgb(40, 40, 120);
+        padding: 1vh;
+        z-index: 6;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        transition-duration: 300ms;
+    }
+
+    #player_hud_backpack .player_hud_backpack_description{
+        width: 100%;
+        height: 100px;
+        color: white;
+        border-radius: 8px;
+        box-sizing: border-box;
+        background-color: rgb(50, 50, 150);
+        margin-bottom: 1vh;
+        flex-shrink: 0;
+    }
+
+    #player_hud_backpack .player_hud_backpack_items{
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-wrap: wrap;
+    }
+
+    #player_hud_backpack .player_hud_backpack_items div{
+        width: 100%;
+        height: 50px;
+        color: white;
+        padding: 0 2vh;
+        margin-bottom: 0.75vh;
+        border-radius: 8px;
+        box-sizing: border-box;
+        background-color: rgb(0, 25, 110);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        overflow: hidden;
+        flex-shrink: 0;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    #player_hud_backpack .player_hud_backpack_items div:hover{ animation: player_hud_moves_animation 1s infinite; }
+
+    #player_hud_backpack .player_hud_backpack_items div:active{
+        animation: none;
+        background-color: rgb(0, 50, 150);
+    }
+
+    #player_hud_backpack .player_hud_backpack_items div img{
+        height: 150%;
+        opacity: 60%;
     }
     /* #endregion */
 

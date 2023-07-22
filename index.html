@@ -4,7 +4,7 @@
     <!-- !Programed by "El Koko Díaz" -->
     
     <!-- !Start Date: July 6th, 2023 -->
-    <!-- TODOS Update: July 18th, 2023 -->
+    <!-- TODOS Update: July 22th, 2023 -->
 
     <!-- !Icons from web site: "https://www.flaticon.es" -->
     <!-- !SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
@@ -20,9 +20,8 @@
 <body>
     <!-- #region Player -->
     <audio src="" id="player_sfx"></audio>
-    <audio src="" id="enemy_sfx"></audio>
     <!-- #region Photo, Health and Armor bars-->
-    <div class="player_hud_status" draggable="false">
+    <div class="player_hud_status">
         <!-- PLayer's Photo -->
         <div class="image"><img src=""></div>
         <div class="bar">
@@ -39,20 +38,20 @@
             </div>
         </div>
     </div>
-    <div class="player_hud_effects" draggable="false">
+    <div class="player_hud_effects">
         <div class="buff">1</div>
         <div class="debuff">2</div>
     </div>
     <!-- #endregion -->
     <!-- #region Moves -->
-    <div class="player_hud_moves" id="player_hud_moves_general" draggable="false">
+    <div class="player_hud_moves" id="player_hud_moves_general">
         <div class="move" onclick="TogglePlayerMenus({menu: 'attack'})">
             <p>Attack</p>
-            <img src="assets/icons/attack.png" draggable="false">
+            <img src="assets/icons/attack.png">
         </div>
-        <div class="move disable">
+        <div class="move" onclick="TogglePlayerMenus({menu: 'backpack'})">
             <p>Backpack</p>
-            <img src="assets/icons/backpack.png" draggable="false">
+            <img src="assets/icons/backpack.png">
         </div>
         <div class="move disable">3</div>
         <div class="move disable">4</div>
@@ -67,14 +66,38 @@
     </div>
 
     <!-- * Return Button -->
-    <div id="player_hud_moves_return">↩</div>
+    <div id="player_hud_moves_return" onclick="TogglePlayerMenus({menu: 'general'})">↩</div>
     <!-- #endregion -->
     <!-- #region Sprite -->
     <canvas id="player_sprite"></canvas>
     <!-- #endregion -->
+    <!-- #region Backpack -->
+    <div id="player_hud_backpack">
+        <div class="player_hud_backpack_description"></div>
+        <div class="player_hud_backpack_items">
+            <div>
+                Bandage x1
+                <img src="assets/icons/bandage.png">
+            </div>
+            <div>
+                Plate x1
+                <img src="assets/icons/plate.png">
+            </div>
+            <div>
+                Med-Kit x1
+                <img src="assets/icons/med-kit.png">
+            </div>
+            <div>
+                Adhesive Strip x1
+                <img src="assets/icons/adhesive-strip.png">
+            </div>
+        </div>
+    </div>
+    <!-- #endregion -->
     <!-- #endregion -->
 
     <!-- #region Enemy-->
+    <audio src="" id="enemy_sfx"></audio>
     <!-- #region Status -->
     <div class="enemy_hud_status">
         <div class="text">Enemy:</div>
@@ -88,6 +111,7 @@
     <canvas id="enemy_sprite"></canvas>
     <!-- #endregion -->
     <!-- #endregion -->
+
     <!-- * JavaScript -->
     <script src="assets/js/variables.js"></script>
     <script src="assets/js/player_animation.js"></script>

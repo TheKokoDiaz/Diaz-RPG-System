@@ -265,8 +265,6 @@ img{
         align-items: start;
         flex-direction: column;
         flex-wrap: nowrap;
-        overflow-x: hidden;
-        overflow-y: scroll;
         transition-duration: 300ms;
     }
 
@@ -291,10 +289,26 @@ img{
         justify-content: start;
         align-items: start;
         flex-wrap: wrap;
+        overflow-y: scroll;
+    }
+
+    #player_hud_backpack .player_hud_backpack_items::-webkit-scrollbar{
+        width: 8px;
+        border-radius: 8px;
+        background-color: rgb(80, 80, 150);
+    }
+    
+    #player_hud_backpack .player_hud_backpack_items::-webkit-scrollbar-thumb{
+        border-radius: 8px;
+        background-color: rgb(50, 50, 150);
+    }
+    
+    #player_hud_backpack .player_hud_backpack_items::-webkit-scrollbar-thumb:active{
+        background-color: rgb(0, 40, 140);
     }
 
     #player_hud_backpack .player_hud_backpack_items div{
-        width: 100%;
+        width: 99%;
         height: 50px;
         color: white;
         padding: 0 2vh;

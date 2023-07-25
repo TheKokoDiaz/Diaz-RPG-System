@@ -50,28 +50,28 @@
             quantity: 2,
             description: 'Use it to heal 60 HP',
             category: 'HP',
-            points: '60'
+            points: 60
         },
         {
             item: 'plate',
             quantity: 3,
             description: 'Use it to repair 20 AR',
             category: 'AR',
-            points: '20'
+            points: 20
         },
         {
             item: 'med-kit',
             quantity: 1,
             description: 'Use it to heal 150 HP',
             category: 'HP',
-            points: '150'
+            points: 150
         },
         {
             item: 'adhesive strip',
             quantity: 5,
             description: 'Use it to heal 20 HP',
             category: 'HP',
-            points: '20'
+            points: 20
         },
     ];
 

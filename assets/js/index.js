@@ -92,8 +92,12 @@ function ChangeEnemySfx({sfx}){
 function UpdatePlayerBackpack(){
     player_hud_backpack_items.innerHTML = '';
     
+    //Writes a list withe the items that are in the backpack
     for(let n = 0; n < player_backpack_healing_items.length; n++){
-        player_hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + player_backpack_healing_items[n].item + '`})">' + player_backpack_healing_items[n].item + ' x' + player_backpack_healing_items[n].quantity + '<img src="assets/icons/' + player_backpack_healing_items[n].item + '.png"></div>';
+        //If there's not an item, will not be written
+        if(player_backpack_healing_items[n].quantity != 0){
+            player_hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + player_backpack_healing_items[n].item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + player_backpack_healing_items[n].item + '`})">' + player_backpack_healing_items[n].item + ' x' + player_backpack_healing_items[n].quantity + '<img src="assets/icons/' + player_backpack_healing_items[n].item + '.png"></div>';
+        }
     }
 }
 
@@ -110,8 +114,19 @@ function EraseItemDescription(){
     player_hud_backpack_description.innerText = '';
 }
 
-function UseBackpackItem(){
+function UseBackpackItem({item}){
+    //Identificar objeto
+    let item_index = player_backpack_healing_items.findIndex(array => array.item === item);
+    if(player_backpack_healing_items[item_index].category == 'HP'){
+        player_stats[0].health += player_backpack_healing_items[item_index].points;
+    }
 
+    if(player_backpack_healing_items[item_index].category == 'AR'){
+        player_equipment_stats[0].armor += player_backpack_healing_items[item_index].points;
+    }
+    
+    player_backpack_healing_items[item_index].quantity -= 1;
+    UpdatePlayerStats();
 }
 //#endregion
 
@@ -144,27 +159,31 @@ function UpdateEnemyStats(){
 
 //#region Set Turns
 //Player's Turn
-function PlayerTurn(move){
+function PlayerTurn({category, move}){
     //Calculate Crit Attacks
-    switch(move){
-        case 'sword':
-            ChangePlayerSfx({sfx: move});
-            ChangePlayerAnimation({animation: move});
-            enemy_stats[0].health -= player_equipment_stats[0].sword_damage;
-            break;
+    if(category == 'attack'){
+        switch(move){
+            case 'sword':
+                ChangePlayerSfx({sfx: move});
+                ChangePlayerAnimation({animation: move});
+                enemy_stats[0].health -= player_equipment_stats[0].sword_damage;
+                break;
+        }
+    
+        ChangeEnemyAnimation({animation: 'damage'});
+        ChangeEnemySfx({sfx:'bone_crush'});
+        UpdateEnemyStats();
     }
 
-    ChangeEnemyAnimation({animation: 'damage'});
-    ChangeEnemySfx({sfx:'bone_crush'});
-    UpdateEnemyStats();
+    if(category == 'backpack'){
+        UseBackpackItem({item: move});
+    }
 }
 
 //Enemy turn
 function EnemyTurn(){
     let enemy_damage = enemy_stats[0].damage;
     let player_armor_absortion = 0;
-    //Change Player Animation to receive damage
-    //Change Player Audio to receive damage
     if(player_equipment_stats[0].armor > 0){
         player_equipment_stats[0].armor -= 1;
         player_armor_absortion = enemy_damage - player_equipment_stats[0].armor_protection;
@@ -187,11 +206,11 @@ function delay(ms){
 }
 
 //Sets the order of the turns in combat
-async function SetCombatTurns({move}){
+async function SetCombatTurns({category, move}){
     HideAllMenus();
 
     if(player_stats[0].speed > enemy_stats[0].speed){
-        PlayerTurn(move);
+        PlayerTurn({category, move});
         await delay(900);
 
         EnemyTurn();

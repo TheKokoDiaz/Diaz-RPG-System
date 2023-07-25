@@ -86,6 +86,29 @@ function ChangeEnemySfx({sfx}){
 }
 //#endregion
 
+//#region Backpack
+function UpdatePlayerBackpack(){
+
+}
+
+function WriteItemDescription({item}){
+    let item_index = '';
+    let item_description = '';
+
+    item_index = player_backpack_healing_items.findIndex(array => array.item === item);
+    item_description = player_backpack_healing_items[item_index].description;
+    player_hud_backpack_description.innerText = item_description;
+}
+
+function EraseItemDescription(){
+    player_hud_backpack_description.innerText = '';
+}
+
+function UseBackpackItem(){
+    
+}
+//#endregion
+
 //#region Update Stats
 function UpdatePlayerStats(){
     //Prevents hight numbers that the maximum
@@ -113,6 +136,7 @@ function UpdateEnemyStats(){
 }
 //#endregion
 
+//#region Set Turns
 //Player's Turn
 function PlayerTurn(move){
     //Calculate Crit Attacks
@@ -178,6 +202,7 @@ async function SetCombatTurns({move}){
         }
     }
 }
+//#endregion
 
 //After loading all, the player and enemy stats will be updated
 UpdatePlayerStats();

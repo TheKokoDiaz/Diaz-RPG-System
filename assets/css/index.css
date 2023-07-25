@@ -278,6 +278,8 @@ img{
         box-sizing: border-box;
         background-color: rgb(50, 50, 150);
         margin-bottom: 1vh;
+        padding: 1vh 2vh;
+        user-select: none;
         flex-shrink: 0;
     }
 

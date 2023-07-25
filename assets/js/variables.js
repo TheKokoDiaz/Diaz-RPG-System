@@ -12,6 +12,8 @@
     const player_hud_moves_general = document.querySelector('#player_hud_moves_general');
     const player_hud_moves_attack = document.querySelector('#player_hud_moves_attack');
     const player_hud_backpack = document.querySelector('#player_hud_backpack');
+    const player_hud_backpack_description = document.querySelector('.player_hud_backpack_description');
+    const player_hud_backpack_items = document.querySelector('#player_hud_backpack_items');
 
     //Graffics and numbers of the player's status
     const player_health_text = document.getElementById('player_health_text');
@@ -41,6 +43,37 @@
         shield_block: 5,
         shield_weight: 5
     }];
+
+    let player_backpack_healing_items = [
+        {
+            item: 'bandage',
+            quantity: 2,
+            description: 'Use it to heal 60 HP',
+            category: 'HP',
+            points: '60'
+        },
+        {
+            item: 'plate',
+            quantity: 3,
+            description: 'Use it to repair 20 AR',
+            category: 'AR',
+            points: '20'
+        },
+        {
+            item: 'med-kit',
+            quantity: 1,
+            description: 'Use it to heal 150 HP',
+            category: 'HP',
+            points: '150'
+        },
+        {
+            item: 'adhesive strip',
+            quantity: 5,
+            description: 'Use it to heal 20 HP',
+            category: 'HP',
+            points: '20'
+        },
+    ];
 
     // Animation
     const spritesheet_width = 911;

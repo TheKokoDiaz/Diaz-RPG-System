@@ -13,7 +13,7 @@
     const player_hud_moves_attack = document.querySelector('#player_hud_moves_attack');
     const player_hud_backpack = document.querySelector('#player_hud_backpack');
     const player_hud_backpack_description = document.querySelector('.player_hud_backpack_description');
-    const player_hud_backpack_items = document.querySelector('#player_hud_backpack_items');
+    const player_hud_backpack_items = document.querySelector('.player_hud_backpack_items');
 
     //Graffics and numbers of the player's status
     const player_health_text = document.getElementById('player_health_text');

@@ -23,6 +23,7 @@ function TogglePlayerMenus({menu = ''}){
         
         case 'backpack':
             player_hud_backpack.style.bottom = '0';
+            UpdatePlayerBackpack();
             break;
 
         default:
@@ -87,8 +88,13 @@ function ChangeEnemySfx({sfx}){
 //#endregion
 
 //#region Backpack
+//When the backpack menu is showed, all the list items will be updated
 function UpdatePlayerBackpack(){
-
+    player_hud_backpack_items.innerHTML = '';
+    
+    for(let n = 0; n < player_backpack_healing_items.length; n++){
+        player_hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + player_backpack_healing_items[n].item + '`})">' + player_backpack_healing_items[n].item + ' x' + player_backpack_healing_items[n].quantity + '<img src="assets/icons/' + player_backpack_healing_items[n].item + '.png"></div>';
+    }
 }
 
 function WriteItemDescription({item}){
@@ -105,7 +111,7 @@ function EraseItemDescription(){
 }
 
 function UseBackpackItem(){
-    
+
 }
 //#endregion
 

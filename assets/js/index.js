@@ -161,12 +161,21 @@ function UpdateEnemyStats(){
 //Player's Turn
 function PlayerTurn({category, move}){
     //Calculate Crit Attacks
+    //? When the bar to measure the time to attack, the crit damage will be not necesary
+    let crit_multiplier = 1;
+    let crit_chance = Math.round(Math.random() * 10);
+
+    //Find out a critical hit
+    if(crit_chance == 0){
+        crit_multiplier = player_stats[0].crit_multiplier;
+    }
+
     if(category == 'attack'){
         switch(move){
             case 'sword':
                 ChangePlayerSfx({sfx: move});
                 ChangePlayerAnimation({animation: move});
-                enemy_stats[0].health -= player_equipment_stats[0].sword_damage;
+                enemy_stats[0].health -= player_equipment_stats[0].sword_damage * crit_multiplier;
                 break;
         }
     
@@ -213,10 +222,14 @@ async function SetCombatTurns({category, move}){
         PlayerTurn({category, move});
         await delay(900);
 
-        EnemyTurn();
-        await delay(900);
+        if(enemy_stats[0].health != 0){
+            EnemyTurn();
+            await delay(900);
+        }
 
-        TogglePlayerMenus({menu: 'general'});
+        if(enemy_stats[0].health != 0 && player_stats[0].health != 0){
+            TogglePlayerMenus({menu: 'general'});
+        }
     } else {
         if(player_stats[0].speed < enemy_stats[0].speed){
             /* Enemy's Turn */
@@ -226,6 +239,18 @@ async function SetCombatTurns({category, move}){
             do "Choque" */
         }
     }
+
+    /* if(enemy_stats[0].health == 0){
+        //*Change the enemy and player animation
+        //*Show earned things, like medicine, weapons and EXP
+        //*Sfx of Victory
+    } */
+
+    /* if(player_stats[0].health == 0){
+        //*Change the Player and enemy animation
+        //*Sfx of Defeat
+        //*Game Over
+    } */
 }
 //#endregion
 

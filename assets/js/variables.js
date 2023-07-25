@@ -1,6 +1,6 @@
 //#region Variables
     //#region Game Settings
-    let sfx_volume = 15/100;
+    let sfx_volume = 25/100;
     //#endregion
 
     //#region Player
@@ -29,6 +29,7 @@
         max_stamina: 100,
         speed: 5,
         strength: 5,
+        crit_multiplier: 1.5
     }];
 
     //Stats from the player equipment (armor, shield and weapons)

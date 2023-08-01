@@ -5,6 +5,7 @@ function HideAllMenus(){
     player_hud_moves_return.style.bottom = '-31%';
     player_hud_moves_general.style.bottom = '-31%';
     player_hud_backpack.style.bottom = '-75%';
+    EraseItemDescription();
     
 }
 
@@ -90,44 +91,45 @@ function ChangeEnemySfx({sfx}){
 //#region Backpack
 //When the backpack menu is showed, all the list items will be updated
 function UpdatePlayerBackpack(){
+    let item_array = '';
     player_hud_backpack_items.innerHTML = '';
     
     //Writes a list withe the items that are in the backpack
     for(let n = 0; n < player_backpack_healing_items.length; n++){
+        item_array = player_backpack_healing_items[n];
         //If there's not an item, will not be written
-        if(player_backpack_healing_items[n].quantity != 0){
-            player_hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + player_backpack_healing_items[n].item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + player_backpack_healing_items[n].item + '`})">' + player_backpack_healing_items[n].item + ' x' + player_backpack_healing_items[n].quantity + '<img src="assets/icons/' + player_backpack_healing_items[n].item + '.png"></div>';
+        if(item_array.quantity != 0){
+            player_hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + item_array.item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + item_array.item + '`})">' + item_array.item + ' x' + item_array.quantity + '<img src="assets/icons/' + item_array.item + '.png"></div>';
         }
     }
 }
 
 function WriteItemDescription({item}){
+    let item_array = '';
     let item_name = '';
     let item_index = '';
-    let item_description = '';
 
     item_index = player_backpack_healing_items.findIndex(array => array.item === item);
-    item_name = player_backpack_healing_items[item_index].item.charAt(0).toUpperCase() + player_backpack_healing_items[item_index].item.slice(1);
-    item_description = '<b>' + item_name + ':</b> ' + player_backpack_healing_items[item_index].description;
-    player_hud_backpack_description.innerHTML = item_description;
+    item_array = player_backpack_healing_items[item_index];
+
+    item_name = item_array.item.charAt(0).toUpperCase() + item_array.item.slice(1);
+    player_hud_backpack_description.innerHTML = '<b>' + item_name + ':</b> ' + item_array.description;
 }
 
-function EraseItemDescription(){
-    player_hud_backpack_description.innerText = '';
-}
+function EraseItemDescription(){ player_hud_backpack_description.innerHTML = ''; }
 
 function UseBackpackItem({item}){
-    //Identificar objeto
     let item_index = player_backpack_healing_items.findIndex(array => array.item === item);
-    if(player_backpack_healing_items[item_index].category == 'HP'){
-        player_stats[0].health += player_backpack_healing_items[item_index].points;
+    let item_array = player_backpack_healing_items[item_index];
+    if(item_array.category == 'HP'){
+        player_stats[0].health += item_array.points;
     }
 
-    if(player_backpack_healing_items[item_index].category == 'AR'){
-        player_equipment_stats[0].armor += player_backpack_healing_items[item_index].points;
+    if(item_array.category == 'AR'){
+        player_equipment_stats[0].armor += item_array.points;
     }
     
-    player_backpack_healing_items[item_index].quantity -= 1;
+    item_array.quantity -= 1;
     UpdatePlayerStats();
 }
 //#endregion

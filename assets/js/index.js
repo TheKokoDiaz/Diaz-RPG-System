@@ -102,12 +102,14 @@ function UpdatePlayerBackpack(){
 }
 
 function WriteItemDescription({item}){
+    let item_name = '';
     let item_index = '';
     let item_description = '';
 
     item_index = player_backpack_healing_items.findIndex(array => array.item === item);
-    item_description = player_backpack_healing_items[item_index].description;
-    player_hud_backpack_description.innerText = item_description;
+    item_name = player_backpack_healing_items[item_index].item.charAt(0).toUpperCase() + player_backpack_healing_items[item_index].item.slice(1);
+    item_description = '<b>' + item_name + ':</b> ' + player_backpack_healing_items[item_index].description;
+    player_hud_backpack_description.innerHTML = item_description;
 }
 
 function EraseItemDescription(){

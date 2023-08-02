@@ -85,16 +85,28 @@ img{
     }
     
     .player_hud_status .bar .armor{
-        width: 40%;
+        width: 80%;
         height: 40%;
         border: 2px rgb(150, 150, 0) solid;
         background-color: rgba(200, 200, 0, 30%);
     }
 
+    .player_hud_status .bar .health .icon{
+        position: absolute;
+        width: 3vh;
+        padding-left: 0.5vh;
+    }
+
+    .player_hud_status .bar .armor .icon{
+        position: absolute;
+        width: 2vh;
+        padding-left: 1vh;
+    }
+
     .player_hud_status .bar .health .text, .player_hud_status .bar .armor .text{
         position: absolute;
         font-weight: bold;
-        padding-left: 1.5vh;
+        padding-left: 4.5vh;
     }
 
     .player_hud_status .bar .health .graffic, .player_hud_status .bar .armor .graffic{

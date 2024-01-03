@@ -1,12 +1,12 @@
+//ChangeMusic({theme: "Test_Battle_Theme"});
+
 //#region Toggle (Show / Hide) Menus
-//Hide all menus to focus in combat
 function HideAllMenus(){
     player_hud_moves_attack.style.bottom = '-31%';
     player_hud_moves_return.style.bottom = '-31%';
     player_hud_moves_general.style.bottom = '-31%';
     player_hud_backpack.style.bottom = '-75%';
     EraseItemDescription();
-    
 }
 
 //Show and hides the Player´s HUD Menus
@@ -40,18 +40,19 @@ function TogglePlayerMenus({menu = ''}){
 //#region Change Animations
 //Changes the Player's animation
 function ChangePlayerAnimation({animation}){
-    //Resets the animation progress to the start
     player_frameX = 0;
 
-    //Changes the animation
     switch(animation){
         case 'sword':
             player_frameY = 1;
-            player_straggerFrames = 3;
             break;
         case 'damage':
             player_frameY = 2;
             player_animation_limit = 7;
+            break;
+        case 'defeated':
+            player_frameY = 5;
+            player_animation_limit = 9;
             break;
     }
 }
@@ -74,7 +75,14 @@ function ChangeEnemyAnimation({animation}){
 //#endregion
 
 //#region Changes Audio
-//Changes the Sound Effects that do the player
+//Music
+function ChangeMusic({theme}){
+    music.volume = music_volume;
+    music.setAttribute('src', '../assets/music/' + theme + '.mp3');
+    music.play();
+}
+
+//SFX
 function ChangePlayerSfx({sfx}){
     player_sfx.volume = sfx_volume;
     player_sfx.setAttribute('src', '../assets/sfx/' + sfx + '.mp3');
@@ -250,11 +258,12 @@ async function SetCombatTurns({category, move}){
         //*Sfx of Victory
     } */
 
-    /* if(player_stats[0].health == 0){
-        //*Change the Player and enemy animation
+    if(player_stats[0].health == 0){
+        //*Change the enemy animation
+        ChangePlayerAnimation({animation: 'defeated'})
         //*Sfx of Defeat
         //*Game Over
-    } */
+    }
 }
 //#endregion
 

@@ -4,10 +4,18 @@
     <!-- !Programed by "El Koko Díaz" -->
     
     <!-- !Start Date: July 6th, 2023 -->
-    <!-- TODOS Update: August 1th, 2023 -->
+    <!-- TODOS Update: January 3nd, 2024 -->
 
     <!-- !Icons from web site: "https://www.flaticon.es" -->
     <!-- !SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
+
+    <!-- !Things to do: 
+        + Add Music
+        + Add Animations
+        + Add Victory and Defeat text
+        + Write the backpack items with the first letter in mayus
+        ~ Frame account to crit hits
+    -->
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,11 +26,13 @@
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
+    <audio src="" id="music"></audio>
+
     <!-- #region Player -->
     <audio src="" id="player_sfx"></audio>
     <!-- #region Photo, Health and Armor bars-->
     <div class="player_hud_status">
-        <!-- PLayer's Photo -->
+        <!-- Player's Photo -->
         <div class="image"><img src=""></div>
         <div class="bar">
             <!-- Health (HP) Bar -->
@@ -45,6 +55,7 @@
         <div class="debuff">2</div>
     </div>
     <!-- #endregion -->
+
     <!-- #region Moves -->
     <div class="player_hud_moves" id="player_hud_moves_general">
         <div class="move" onclick="TogglePlayerMenus({menu: 'attack'})">
@@ -61,7 +72,10 @@
 
     <!-- * Attack Moves -->
     <div class="player_hud_moves" id="player_hud_moves_attack">
-        <div class="move" onclick="SetCombatTurns({category: 'attack', move: 'sword'})">Sword</div>
+        <div class="move" onclick="SetCombatTurns({category: 'attack', move: 'sword'})">
+            <p>Sword</p>
+            <img src="assets/icons/sword.png">
+        </div>
         <div class="move disable">Bow</div>
         <div class="move disable">Greatsword</div>
         <div class="move disable">Lance</div>

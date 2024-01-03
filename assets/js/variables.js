@@ -1,6 +1,9 @@
 //#region Variables
     //#region Game Settings
-    let sfx_volume = 25/100;
+    let sfx_volume = 60/100;
+    let music_volume = 80/100;
+
+    const music = document.getElementById("music");
     //#endregion
 
     //#region Player
@@ -36,7 +39,7 @@
     let player_equipment_stats = [{
         armor: 5,
         max_armor: 5,
-        armor_protection: 1,
+        armor_protection: 5,
         sword_damage: 30,
         bow_damage: 15,
         greatsword_damage: 50,
@@ -95,7 +98,7 @@
     const player_sprite_height = spritesheet_height;
 
     let player_game_frame = 0;
-    let player_straggerFrames = 5;
+    let player_straggerFrames = 6;
 
     //Player's Turn
     let player_move = '';
@@ -135,6 +138,6 @@
     const enemy_sprite_height = spritesheet_height;
 
     let enemy_game_frame = 0;
-    let enemy_straggerFrames = 5;
+    let enemy_straggerFrames = 6;
     //#endregion 
 //#endregion

@@ -71,7 +71,7 @@
             points: 150
         },
         {
-            item: 'adhesive strip',
+            item: 'band-aid',
             quantity: 5,
             description: 'Use it to heal 20 HP',
             category: 'HP',

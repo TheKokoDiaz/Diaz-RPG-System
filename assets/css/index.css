@@ -38,32 +38,31 @@ img{
     /* #region Status */
     .player_hud_status{
         width: 30%;
-        height: 80px;
+        height: 6rem;
         position: fixed;
         top: 1vh;
         left: 2vh;
         padding: 1vh;
         user-select: none;
         display: flex;
-        align-items: center;
+        align-items: start;
         justify-content: space-around;
-        flex-direction: row;
+        flex-direction: column;
         gap: 1vh;
         border-radius: 8px;
         box-sizing: border-box;
         background-color: rgb(0, 50, 150);
-        z-index: 5;;
+        z-index: 5;
     }           
 
-    .player_hud_status .image{
-        height: 60px;
-        aspect-ratio: 1/1;
-        border: 1px solid black;
-        transition-duration: 300ms;
+    .player_hud_status .name{
+        font-weight: bold;
+        color: white;
     }
 
     .player_hud_status .bar{
-        flex-basis: 90%;
+        flex-direction: row;
+        width: 100%;
         height: 60px;
         box-sizing: border-box;
         transition-duration: 300ms;
@@ -79,34 +78,29 @@ img{
     
     .player_hud_status .bar .health{
         width: 100%;
-        height: 60%;
+        height: 50%;
         border: 2px rgb(0, 200, 0) solid;
         background-color: rgba(0, 255, 0, 30%);
     }
     
     .player_hud_status .bar .armor{
         width: 80%;
-        height: 40%;
+        height: 50%;
         border: 2px rgb(150, 150, 0) solid;
         background-color: rgba(200, 200, 0, 30%);
     }
 
-    .player_hud_status .bar .health .icon{
+    .player_hud_status .bar .health .icon, .player_hud_status .bar .armor .icon{
         position: absolute;
-        width: 3vh;
-        padding-left: 0.5vh;
-    }
-
-    .player_hud_status .bar .armor .icon{
-        position: absolute;
-        width: 2vh;
+        height: 1.5vh;
         padding-left: 1vh;
     }
 
     .player_hud_status .bar .health .text, .player_hud_status .bar .armor .text{
         position: absolute;
         font-weight: bold;
-        padding-left: 4.5vh;
+        font-size: 14px;
+        padding-left: 3.5vh;
     }
 
     .player_hud_status .bar .health .graffic, .player_hud_status .bar .armor .graffic{
@@ -131,15 +125,15 @@ img{
     .player_hud_effects{
         width: 30%;
         position: fixed;
-        top: 90px;
+        top: 6.7rem;
         left: 2vh;
         box-sizing: border-box;
-        display: flex;
+        display: none; /* ! */
         user-select: none;
         justify-content: start;
         align-items: center;
         flex-wrap: wrap;
-        gap: 0.4vh;
+        gap: 0.5vh;
         z-index: 5;
     }
 
@@ -282,7 +276,7 @@ img{
 
     #player_hud_backpack .player_hud_backpack_description{
         width: 100%;
-        height: 100px;
+        height: 5rem;
         color: white;
         border-radius: 8px;
         box-sizing: border-box;
@@ -295,13 +289,14 @@ img{
 
     #player_hud_backpack .player_hud_backpack_items{
         width: 100%;
-        height: auto;
+        height: 100%;
         box-sizing: border-box;
         display: flex;
         justify-content: start;
         align-items: start;
         flex-wrap: wrap;
         overflow-y: scroll;
+        gap: 1vh;
     }
 
     #player_hud_backpack .player_hud_backpack_items::-webkit-scrollbar{
@@ -320,22 +315,36 @@ img{
     }
 
     #player_hud_backpack .player_hud_backpack_items div{
-        width: 99%;
-        height: 50px;
-        color: white;
-        padding: 0 2vh;
+        width: 19%;
+        aspect-ratio: 1/1;
+        padding: 0vh;
         margin-bottom: 0.75vh;
         border-radius: 8px;
         box-sizing: border-box;
         background-color: rgb(0, 25, 110);
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        flex-direction: row;
+        flex-direction: column;
         overflow: hidden;
         flex-shrink: 0;
         user-select: none;
         cursor: pointer;
+        position: relative;
+    }
+
+    #player_hud_backpack .player_hud_backpack_items div p{
+        position: absolute;
+        bottom: -1vh;
+        right: 1vh;
+        width: 2rem;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        background-color: rgba(50, 50, 150);
+        border-radius: 8px;
     }
 
     #player_hud_backpack .player_hud_backpack_items div:hover{ animation: player_hud_moves_animation 1s infinite; }
@@ -346,8 +355,9 @@ img{
     }
 
     #player_hud_backpack .player_hud_backpack_items div img{
-        height: 150%;
+        height: 70%;
         opacity: 60%;
+        margin: 2vh;
     }
     /* #endregion */
 

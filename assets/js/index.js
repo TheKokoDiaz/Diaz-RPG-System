@@ -107,7 +107,7 @@ function UpdatePlayerBackpack(){
         item_array = player_backpack_healing_items[n];
         //If there's not an item, will not be written
         if(item_array.quantity != 0){
-            player_hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + item_array.item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + item_array.item + '`})">' + item_array.item + ' x' + item_array.quantity + '<img src="assets/icons/' + item_array.item + '.png"></div>';
+            player_hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + item_array.item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + item_array.item + '`})"><img src="assets/icons/' + item_array.item + '.png"> <p>' + item_array.quantity + '</p></div>';
         }
     }
 }
@@ -153,9 +153,9 @@ function UpdatePlayerStats(){
     if(player_equipment_stats[0].armor < 0){ player_equipment_stats[0].armor = 0; }
 
     //Updates the graffic bars and texts of the player's HUD
-    player_health_text.innerText = 'HP: ' + player_stats[0].health + ' / ' + player_stats[0].max_health;
+    player_health_text.innerText = player_stats[0].health + ' / ' + player_stats[0].max_health;
     player_health_graffic.style.width = Math.round((player_stats[0].health / player_stats[0].max_health)*100) + '%';
-    player_armor_text.innerText = 'AR: ' + player_equipment_stats[0].armor + ' / ' + player_equipment_stats[0].max_armor;
+    player_armor_text.innerText = player_equipment_stats[0].armor + ' / ' + player_equipment_stats[0].max_armor;
     player_armor_graffic.style.width = Math.round((player_equipment_stats[0].armor / player_equipment_stats[0].max_armor)*100) + '%';
 }
 

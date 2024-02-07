@@ -1,6 +1,6 @@
-//ChangeMusic({theme: "Test_Battle_Theme"});
+////ChangeMusic({theme: "Test_Battle_Theme"});
 
-//#region Toggle (Show / Hide) Menus
+//! Toggle HUD
 function HideAllMenus(){
     player_hud_moves_attack.style.bottom = '-31%';
     player_hud_moves_return.style.bottom = '-31%';
@@ -9,7 +9,7 @@ function HideAllMenus(){
     EraseItemDescription();
 }
 
-//Show and hides the Player´s HUD Menus
+//+ Show and hides the Player´s HUD Menus
 function TogglePlayerMenus({menu = ''}){
     HideAllMenus();
 
@@ -35,10 +35,9 @@ function TogglePlayerMenus({menu = ''}){
     if(menu != 'general'){ player_hud_moves_return.style.bottom = '1vh'; }
     else{ player_hud_moves_return.style.bottom = '-31%'; }
 }
-//#endregion
 
-//#region Change Animations
-//Changes the Player's animation
+//! Change Animations
+//+ Player
 function ChangePlayerAnimation({animation}){
     player_frameX = 0;
 
@@ -57,7 +56,7 @@ function ChangePlayerAnimation({animation}){
     }
 }
 
-//Changes the Enemy animation
+//+ Enemy
 function ChangeEnemyAnimation({animation}){
     enemy_frameX = 0;
 
@@ -72,17 +71,15 @@ function ChangeEnemyAnimation({animation}){
             break;
     }
 }
-//#endregion
 
-//#region Changes Audio
-//Music
+//! Audio
 function ChangeMusic({theme}){
     music.volume = music_volume;
     music.setAttribute('src', '../assets/music/' + theme + '.mp3');
     music.play();
 }
 
-//SFX
+//! SFX
 function ChangePlayerSfx({sfx}){
     player_sfx.volume = sfx_volume;
     player_sfx.setAttribute('src', '../assets/sfx/' + sfx + '.mp3');
@@ -94,24 +91,23 @@ function ChangeEnemySfx({sfx}){
     enemy_sfx.setAttribute('src', '../assets/sfx/' + sfx + '.mp3');
     enemy_sfx.play();
 }
-//#endregion
 
-//#region Backpack
-//When the backpack menu is showed, all the list items will be updated
+//! Backpack
+//+ Update & Writing
 function UpdatePlayerBackpack(){
     let item_array = '';
     player_hud_backpack_items.innerHTML = '';
     
-    //Writes a list withe the items that are in the backpack
     for(let n = 0; n < player_backpack_healing_items.length; n++){
         item_array = player_backpack_healing_items[n];
-        //If there's not an item, will not be written
+        
         if(item_array.quantity != 0){
             player_hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + item_array.item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + item_array.item + '`})"><img src="assets/icons/' + item_array.item + '.png"> <p>' + item_array.quantity + '</p></div>';
         }
     }
 }
 
+//+ Description
 function WriteItemDescription({item}){
     let item_array = '';
     let item_name = '';
@@ -140,9 +136,9 @@ function UseBackpackItem({item}){
     item_array.quantity -= 1;
     UpdatePlayerStats();
 }
-//#endregion
 
-//#region Update Stats
+//! Update Stats
+//+ Player
 function UpdatePlayerStats(){
     //Prevents hight numbers that the maximum
     if(player_stats[0].health > player_stats[0].max_health){ player_stats[0].health = player_stats[0].max_health; }
@@ -159,6 +155,7 @@ function UpdatePlayerStats(){
     player_armor_graffic.style.width = Math.round((player_equipment_stats[0].armor / player_equipment_stats[0].max_armor)*100) + '%';
 }
 
+//+ Enemy
 function UpdateEnemyStats(){
     //Prevents negative numbers
     if(enemy_stats[0].health < 0){ enemy_stats[0].health = 0; }
@@ -167,17 +164,15 @@ function UpdateEnemyStats(){
     enemy_health_text.innerText = 'HP: ' + enemy_stats[0].health + '/' + enemy_stats[0].max_health;
     enemy_health_graffic.style.width = Math.round((enemy_stats[0].health / enemy_stats[0].max_health)*100) + '%';
 }
-//#endregion
 
-//#region Set Turns
-//Player's Turn
+//! Turns
+//+ Player
 function PlayerTurn({category, move}){
-    //Calculate Crit Attacks
+    //* Crit Attacks
     //? When the bar to measure the time to attack, the crit damage will be not necesary
     let crit_multiplier = 1;
     let crit_chance = Math.round(Math.random() * 10);
 
-    //Find out a critical hit
     if(crit_chance == 0){
         crit_multiplier = player_stats[0].crit_multiplier;
     }
@@ -201,7 +196,7 @@ function PlayerTurn({category, move}){
     }
 }
 
-//Enemy turn
+//+ Enemy
 function EnemyTurn(){
     let enemy_damage = enemy_stats[0].damage;
     let player_armor_absortion = 0;
@@ -226,7 +221,7 @@ function delay(ms){
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-//Sets the order of the turns in combat
+//! Combat turns
 async function SetCombatTurns({category, move}){
     HideAllMenus();
 
@@ -253,20 +248,19 @@ async function SetCombatTurns({category, move}){
     }
 
     /* if(enemy_stats[0].health == 0){
-        //*Change the enemy and player animation
-        //*Show earned things, like medicine, weapons and EXP
-        //*Sfx of Victory
+        + Change the enemy and player animation
+        + Show earned things, like medicine, weapons and EXP
+        + Sfx of Victory
     } */
 
     if(player_stats[0].health == 0){
-        //*Change the enemy animation
+        //* Change the enemy animation
         ChangePlayerAnimation({animation: 'defeated'})
         //*Sfx of Defeat
         //*Game Over
     }
 }
-//#endregion
 
-//After loading all, the player and enemy stats will be updated
+//After loading all, the stats will be updated
 UpdatePlayerStats();
 UpdateEnemyStats();

@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- !Programed by "El Koko Díaz" -->
+    <!-- ? Programed by "El Koko Díaz" -->
     
     <!-- !Start Date: July 6th, 2023 -->
-    <!-- TODOS Update: January 3nd, 2024 -->
+    <!-- + Update: February 3nd, 2024 -->
 
-    <!-- !Icons from web site: "https://www.flaticon.es" -->
-    <!-- !SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
+    <!-- ? Icons from web site: "https://www.flaticon.es" -->
+    <!-- ? SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
 
     <!-- !Things to do: 
         + Add Music
         + Add Animations
         + Add Victory and Defeat text
-        + Write the backpack items with the first letter in mayus
-        ~ Frame account to crit hits
+        + Frame account to crit hits
     -->
 
     <meta charset="UTF-8">
@@ -28,20 +27,23 @@
 <body>
     <audio src="" id="music"></audio>
 
-    <!-- #region Player -->
+    <!-- ! Player -->
+    <!-- + SFX -->
     <audio src="" id="player_sfx"></audio>
-    <!-- #region Player Status-->
+    
+    <!-- +  Status-->
     <div class="player_hud_status">
         <div class="name">Player</div>
+
         <div class="bar">
-            <!-- Health (HP) Bar -->
+            <!-- Health (HP) -->
             <div class="health">
                 <div class="graffic" id="player_health_graffic"></div>
                 <img class="icon" src="assets/icons/HP.png">
                 <div class="text" id="player_health_text"></div>
             </div>
 
-            <!-- Armor (AR) Bar -->
+            <!-- Armor (AR) -->
             <div class="armor">
                 <div class="graffic" id="player_armor_graffic"></div>
                 <img class="icon" src="assets/icons/AR.png">
@@ -49,13 +51,14 @@
             </div>
         </div>
     </div>
+
+    <!-- + Buffs & Debuffs -->
     <div class="player_hud_effects">
         <div class="buff">1</div>
         <div class="debuff">2</div>
     </div>
-    <!-- #endregion -->
 
-    <!-- #region Moves -->
+    <!-- + Moves -->
     <div class="player_hud_moves" id="player_hud_moves_general">
         <div class="move" onclick="TogglePlayerMenus({menu: 'attack'})">
             <p>Attack</p>
@@ -82,21 +85,21 @@
 
     <!-- * Return Button -->
     <div id="player_hud_moves_return" onclick="TogglePlayerMenus({menu: 'general'})">↩</div>
-    <!-- #endregion -->
-    <!-- #region Sprite -->
+    
+    <!-- + Sprite -->
     <canvas id="player_sprite"></canvas>
-    <!-- #endregion -->
-    <!-- #region Backpack -->
+    
+    <!-- + Backpack -->
     <div id="player_hud_backpack">
         <div class="player_hud_backpack_description"></div>
         <div class="player_hud_backpack_items"></div>
     </div>
-    <!-- #endregion -->
-    <!-- #endregion -->
 
-    <!-- #region Enemy-->
+    <!-- ! Enemy-->
+    <!-- + SFX -->
     <audio src="" id="enemy_sfx"></audio>
-    <!-- #region Status -->
+    
+    <!-- + Status HUD -->
     <div class="enemy_hud_status">
         <div class="text">Enemy:</div>
         <div class="text" id="enemy_health_text">HP:</div>
@@ -104,11 +107,9 @@
             <div class="health" id="enemy_health_graffic"></div>
         </div>
     </div>
-    <!-- #endregion -->
-    <!-- #region Sprite -->
+
+    <!-- + Sprite -->
     <canvas id="enemy_sprite"></canvas>
-    <!-- #endregion -->
-    <!-- #endregion -->
 
     <!-- * JavaScript -->
     <script src="assets/js/variables.js"></script>

@@ -1,4 +1,3 @@
-//#region Animation
 function player_animation(){
     player_ctx.clearRect(0, 0, player_canvas_width, player_canvas_height);
     player_ctx.drawImage(player_canvas_sprite, player_frameX * player_sprite_width, player_frameY * player_sprite_height, player_sprite_width, player_sprite_height,  0, 0, player_canvas_width, player_canvas_height);
@@ -35,4 +34,3 @@ function player_animation(){
     requestAnimationFrame(player_animation);
 }
 player_animation();
-//#endregion

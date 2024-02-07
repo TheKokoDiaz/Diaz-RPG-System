@@ -1,4 +1,4 @@
-/* #region Fonts Importation */
+/* ! Fonts Importation */
 @font-face{
     font-family: 'Raleway-Regular';
     src: url('../fonts/Raleway-Regular.ttf');
@@ -8,7 +8,6 @@
     font-family: 'Raleway-white';
     src: url('../fonts/Raleway-white.ttf');
 }
-/* #endregion */
 
 /* #region General */
 html{

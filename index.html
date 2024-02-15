@@ -4,7 +4,7 @@
     <!-- ? Programed by "El Koko Díaz" -->
     
     <!-- !Start Date: July 6th, 2023 -->
-    <!-- + Update: February 3nd, 2024 -->
+    <!-- + Update: February 15nd, 2024 -->
 
     <!-- ? Icons from web site: "https://www.flaticon.es" -->
     <!-- ? SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
@@ -12,8 +12,9 @@
     <!-- !Things to do: 
         + Add Music
         + Add Animations
-        + Add Victory and Defeat text
+        + Add Defeat text
         + Frame account to crit hits
+        + Use animations and effects to represent the crits
     -->
 
     <meta charset="UTF-8">
@@ -25,7 +26,30 @@
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
+    <!-- ! Game -->
+    <!-- + Music -->
     <audio src="" id="music"></audio>
+
+    <!-- + Screens -->
+    <div id="hud_victory_screen">
+        <div class="title">Victory</div>
+        <div class="results_box">
+            <div class="sub_box stats">
+                <div class="subtitle">Stats:</div>
+                <ul class="list" id="victory_stats"></ul>
+            </div>
+            <div class="sub_box objects">
+                <div class="subtitle">Obtained Items:</div>
+            </div>
+            <div class="sub_box exp">
+                <div class="subtitle">Earned Exp:</div>
+                <div class="body"></div>
+            </div>
+            <div class="sub_box continue">
+                <div class="button">Continue</div>
+            </div>
+        </div>
+    </div>
 
     <!-- ! Player -->
     <!-- + SFX -->

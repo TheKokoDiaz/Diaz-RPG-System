@@ -32,6 +32,116 @@ img{
     user-select: none;
 }
 
+/* + Victory Screen */
+#hud_victory_screen{
+    border: 0.2rem solid whitesmoke;
+    border-width: 0.2rem 0 0.2rem 0;
+    width: 100%;
+    position: fixed;
+    box-sizing: border-box;
+    user-select: none;
+    z-index: 20;
+    padding: 2rem;
+    top: 38.5%;
+    height: 25%;
+    opacity: 0%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(0, 40, 140);
+    transition-duration: 450ms;
+    overflow: hidden;
+}
+
+#hud_victory_screen .title{
+    font-size: 5rem;
+    font-weight: bold;
+    color: whitesmoke;
+    transition-duration: 650ms;
+}
+
+#hud_victory_screen .results_box{
+    width: 80%;
+    height: 100%;
+    margin-top: 1.5rem;
+    border: solid whitesmoke;
+    border-width: 0.15rem 0 0 0;
+    color: whitesmoke;
+    transition-duration: 650ms;
+    box-sizing: border-box;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    display: none;
+    padding: 0.8rem;
+}
+
+#hud_victory_screen .results_box .subtitle{
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+#hud_victory_screen .results_box .sub_box{
+    width: 10%;
+    height: 10%;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 10%);
+    color: whitesmoke;
+    transition-duration: 650ms;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+#hud_victory_screen .results_box .stats{
+    width: 49%;
+    height: 76%;
+    line-height: 2;
+}
+
+#hud_victory_screen .results_box .objects{
+    width: 49%;
+    height: 76%;
+}
+
+#hud_victory_screen .results_box .exp{
+    width: 49%;
+    height: 19%;
+}
+
+#hud_victory_screen .results_box .continue{
+    width: 49%;
+    height: 19%;
+    background-color: rgb(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hud_victory_screen .results_box .continue .button{
+    width: 30%;
+    border: 1px solid whitesmoke;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition-duration: 300ms;
+    display: none;
+}
+
+#hud_victory_screen .results_box .continue .button:hover{
+    background-color: whitesmoke;
+    color: rgb(0, 40, 140);
+}
+
+#hud_victory_screen .results_box .continue .button:active{
+    color: whitesmoke;
+    background-color: rgba(0, 40, 100);
+    font-weight: bold;
+}
+
 /* ! Player */
 /* + Status */
 .player_hud_status{
@@ -97,7 +207,7 @@ img{
 .player_hud_status .bar .health .text, .player_hud_status .bar .armor .text{
     position: absolute;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 1rem;
     padding-left: 3.5vh;
 }
 

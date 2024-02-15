@@ -36,6 +36,25 @@ function TogglePlayerMenus({menu = ''}){
     else{ player_hud_moves_return.style.bottom = '-31%'; }
 }
 
+//+ Victory Screen
+function ShowVictoryScreen(){
+    player_hud_victory.style.display = 'flex';
+    
+    setTimeout(function(){
+        player_hud_victory.style.opacity = '100%';
+    }, 450);
+    
+    setTimeout(function(){
+        player_hud_victory.style.top = '0';
+        player_hud_victory.style.height = '100%';
+        player_hud_victory.style.justifyContent = 'start';
+        player_hud_victory_results_box.style.display = 'flex'
+    }, 1950);
+
+    //* Stats
+    player_hud_victory_stats.innerHTML = '<li> Attacks: ' + battle_stats.attacks + '</li>' + '<li> Criticals: ' + battle_stats.criticals + '</li>' + '<li> Damage Given: ' + battle_stats.damage_given + '</li>' + '<li> Medicine Used: ' + battle_stats.medicine_used + '</li>' + '<li> Hits Taken: ' + battle_stats.hits_taken + '</li>' + '<li> Damage Taken: ' + battle_stats.damage_taken + '</li>';
+}
+
 //! Change Animations
 //+ Player
 function ChangePlayerAnimation({animation}){
@@ -133,6 +152,7 @@ function UseBackpackItem({item}){
         player_equipment_stats[0].armor += item_array.points;
     }
     
+    battle_stats.medicine_used += 1;
     item_array.quantity -= 1;
     UpdatePlayerStats();
 }
@@ -168,24 +188,33 @@ function UpdateEnemyStats(){
 //! Turns
 //+ Player
 function PlayerTurn({category, move}){
-    //* Crit Attacks
-    //? When the bar to measure the time to attack, the crit damage will be not necesary
-    let crit_multiplier = 1;
-    let crit_chance = Math.round(Math.random() * 10);
-
-    if(crit_chance == 0){
-        crit_multiplier = player_stats[0].crit_multiplier;
-    }
-
     if(category == 'attack'){
+        //* Crit Attacks
+        //? When the bar to measure the time to attack, the crit damage will be not necesary
+        let damage = 0;
+        let crit_multiplier = 1;
+        let crit_chance = Math.round(Math.random() * 10);
+    
+        if(crit_chance == 0){
+            battle_stats.criticals += 1;
+            crit_multiplier = player_stats[0].crit_multiplier;
+        }
+    
+        //* Moves
         switch(move){
             case 'sword':
                 ChangePlayerSfx({sfx: move});
                 ChangePlayerAnimation({animation: move});
-                enemy_stats[0].health -= player_equipment_stats[0].sword_damage * crit_multiplier;
+                damage = player_equipment_stats[0].sword_damage;
                 break;
         }
-    
+        
+        damage *= crit_multiplier;
+
+        enemy_stats[0].health -= damage;
+        battle_stats.damage_given +=  damage;
+        battle_stats.attacks += 1;
+        
         ChangeEnemyAnimation({animation: 'damage'});
         ChangeEnemySfx({sfx:'bone_crush'});
         UpdateEnemyStats();
@@ -200,15 +229,20 @@ function PlayerTurn({category, move}){
 function EnemyTurn(){
     let enemy_damage = enemy_stats[0].damage;
     let player_armor_absortion = 0;
+
     if(player_equipment_stats[0].armor > 0){
         player_equipment_stats[0].armor -= 1;
         player_armor_absortion = enemy_damage - player_equipment_stats[0].armor_protection;
 
         player_stats[0].health -= player_armor_absortion;
+        battle_stats.damage_taken += player_armor_absortion;
     } else {
         player_stats[0].health -= enemy_damage;
+        battle_stats.damage_taken += enemy_damage;
     }
     
+    battle_stats.hits_taken += 1;
+
     ChangeEnemyAnimation({animation: 'attack'});
     ChangeEnemySfx({sfx: 'punch'});
     
@@ -247,11 +281,11 @@ async function SetCombatTurns({category, move}){
         }
     }
 
-    /* if(enemy_stats[0].health == 0){
-        + Change the enemy and player animation
-        + Show earned things, like medicine, weapons and EXP
-        + Sfx of Victory
-    } */
+    if(enemy_stats[0].health == 0){
+        /* + Change the enemy and player animation
+        + Sfx of Victory */
+        ShowVictoryScreen();
+    }
 
     if(player_stats[0].health == 0){
         //* Change the enemy animation
@@ -261,6 +295,5 @@ async function SetCombatTurns({category, move}){
     }
 }
 
-//After loading all, the stats will be updated
 UpdatePlayerStats();
 UpdateEnemyStats();

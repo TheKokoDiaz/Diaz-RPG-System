@@ -16,8 +16,11 @@ const player_hud_moves_attack = document.querySelector('#player_hud_moves_attack
 const player_hud_backpack = document.querySelector('#player_hud_backpack');
 const player_hud_backpack_description = document.querySelector('.player_hud_backpack_description');
 const player_hud_backpack_items = document.querySelector('.player_hud_backpack_items');
+const player_hud_victory = document.querySelector('#hud_victory_screen');
+const player_hud_victory_results_box = document.querySelector('.results_box');
+const player_hud_victory_stats = document.querySelector('#victory_stats');
 
-//+ Graffics
+//+ Graphics
 const player_health_text = document.getElementById('player_health_text');
 const player_health_graffic = document.getElementById('player_health_graffic');
 const player_armor_text = document.getElementById('player_armor_text');
@@ -38,7 +41,7 @@ let player_stats = [{
 let player_equipment_stats = [{
     armor: 5,
     max_armor: 5,
-    armor_protection: 5,
+    armor_protection: 6,
     sword_damage: 30,
     bow_damage: 15,
     greatsword_damage: 50,
@@ -100,10 +103,20 @@ const player_sprite_height = spritesheet_height;
 let player_game_frame = 0;
 let player_straggerFrames = 6;
 
-//Player's Turn
+//+ Player's Turn
 let player_move = '';
 
-//!region Enemy
+//+ Battle Stats
+let battle_stats = {
+    attacks: 0,
+    criticals: 0,
+    damage_given: 0,
+    medicine_used: 0,
+    hits_taken: 0,
+    damage_taken: 0
+};
+
+//! Enemy
 //+ SFX
 const enemy_sfx = document.getElementById('enemy_sfx');
 
@@ -113,8 +126,8 @@ const enemy_health_text = document.getElementById('enemy_health_text');
 
 //+ Stats
 let enemy_stats = [{
-    health: 500,
-    max_health: 500,
+    health: 150,
+    max_health: 150,
     speed: 2,
     strength: 2,
     damage: 12

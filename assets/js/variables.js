@@ -27,7 +27,7 @@ const player_armor_text = document.getElementById('player_armor_text');
 const player_armor_graffic = document.getElementById('player_armor_graffic');
 
 //+ Stats
-let player_stats = [{
+let player_stats = {
     health: 100,
     max_health: 100,
     stamina: 100,
@@ -35,10 +35,10 @@ let player_stats = [{
     speed: 5,
     strength: 5,
     crit_multiplier: 1.5
-}];
+};
 
 //+ Equipment
-let player_equipment_stats = [{
+let player_equipment_stats = {
     armor: 5,
     max_armor: 5,
     armor_protection: 6,
@@ -48,7 +48,7 @@ let player_equipment_stats = [{
     lance_damage: 10,
     shield_block: 5,
     shield_weight: 5
-}];
+};
 
 //+ Backpack Items
 let player_backpack_healing_items = [

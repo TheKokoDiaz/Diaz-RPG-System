@@ -144,12 +144,13 @@ function EraseItemDescription(){ player_hud_backpack_description.innerHTML = '';
 function UseBackpackItem({item}){
     let item_index = player_backpack_healing_items.findIndex(array => array.item === item);
     let item_array = player_backpack_healing_items[item_index];
+    
     if(item_array.category == 'HP'){
-        player_stats[0].health += item_array.points;
+        player_stats.health += item_array.points;
     }
 
     if(item_array.category == 'AR'){
-        player_equipment_stats[0].armor += item_array.points;
+        player_equipment_stats.armor += item_array.points;
     }
     
     battle_stats.medicine_used += 1;
@@ -161,18 +162,18 @@ function UseBackpackItem({item}){
 //+ Player
 function UpdatePlayerStats(){
     //Prevents hight numbers that the maximum
-    if(player_stats[0].health > player_stats[0].max_health){ player_stats[0].health = player_stats[0].max_health; }
-    if(player_equipment_stats[0].armor > player_equipment_stats[0].max_armor){ player_equipment_stats[0].armor = player_equipment_stats[0].max_armor; }
+    if(player_stats.health > player_stats.max_health){ player_stats.health = player_stats.max_health; }
+    if(player_equipment_stats.armor > player_equipment_stats.max_armor){ player_equipment_stats.armor = player_equipment_stats.max_armor; }
 
     //Prevents negative numbers
-    if(player_stats[0].health < 0){ player_stats[0].health = 0; }
-    if(player_equipment_stats[0].armor < 0){ player_equipment_stats[0].armor = 0; }
+    if(player_stats.health < 0){ player_stats.health = 0; }
+    if(player_equipment_stats.armor < 0){ player_equipment_stats.armor = 0; }
 
     //Updates the graffic bars and texts of the player's HUD
-    player_health_text.innerText = player_stats[0].health + ' / ' + player_stats[0].max_health;
-    player_health_graffic.style.width = Math.round((player_stats[0].health / player_stats[0].max_health)*100) + '%';
-    player_armor_text.innerText = player_equipment_stats[0].armor + ' / ' + player_equipment_stats[0].max_armor;
-    player_armor_graffic.style.width = Math.round((player_equipment_stats[0].armor / player_equipment_stats[0].max_armor)*100) + '%';
+    player_health_text.innerText = player_stats.health + ' / ' + player_stats.max_health;
+    player_health_graffic.style.width = Math.round((player_stats.health / player_stats.max_health)*100) + '%';
+    player_armor_text.innerText = player_equipment_stats.armor + ' / ' + player_equipment_stats.max_armor;
+    player_armor_graffic.style.width = Math.round((player_equipment_stats.armor / player_equipment_stats.max_armor)*100) + '%';
 }
 
 //+ Enemy
@@ -197,7 +198,7 @@ function PlayerTurn({category, move}){
     
         if(crit_chance == 0){
             battle_stats.criticals += 1;
-            crit_multiplier = player_stats[0].crit_multiplier;
+            crit_multiplier = player_stats.crit_multiplier;
         }
     
         //* Moves
@@ -205,7 +206,7 @@ function PlayerTurn({category, move}){
             case 'sword':
                 ChangePlayerSfx({sfx: move});
                 ChangePlayerAnimation({animation: move});
-                damage = player_equipment_stats[0].sword_damage;
+                damage = player_equipment_stats.sword_damage;
                 break;
         }
         
@@ -230,14 +231,14 @@ function EnemyTurn(){
     let enemy_damage = enemy_stats[0].damage;
     let player_armor_absortion = 0;
 
-    if(player_equipment_stats[0].armor > 0){
-        player_equipment_stats[0].armor -= 1;
-        player_armor_absortion = enemy_damage - player_equipment_stats[0].armor_protection;
+    if(player_equipment_stats.armor > 0){
+        player_equipment_stats.armor -= 1;
+        player_armor_absortion = enemy_damage - player_equipment_stats.armor_protection;
 
-        player_stats[0].health -= player_armor_absortion;
+        player_stats.health -= player_armor_absortion;
         battle_stats.damage_taken += player_armor_absortion;
     } else {
-        player_stats[0].health -= enemy_damage;
+        player_stats.health -= enemy_damage;
         battle_stats.damage_taken += enemy_damage;
     }
     
@@ -259,7 +260,7 @@ function delay(ms){
 async function SetCombatTurns({category, move}){
     HideAllMenus();
 
-    if(player_stats[0].speed > enemy_stats[0].speed){
+    if(player_stats.speed > enemy_stats[0].speed){
         PlayerTurn({category, move});
         await delay(900);
 
@@ -268,11 +269,11 @@ async function SetCombatTurns({category, move}){
             await delay(900);
         }
 
-        if(enemy_stats[0].health != 0 && player_stats[0].health != 0){
+        if(enemy_stats[0].health != 0 && player_stats.health != 0){
             TogglePlayerMenus({menu: 'general'});
         }
     } else {
-        if(player_stats[0].speed < enemy_stats[0].speed){
+        if(player_stats.speed < enemy_stats[0].speed){
             /* Enemy's Turn */
             /* Player's Turn */
         } else {
@@ -287,7 +288,7 @@ async function SetCombatTurns({category, move}){
         ShowVictoryScreen();
     }
 
-    if(player_stats[0].health == 0){
+    if(player_stats.health == 0){
         //* Change the enemy animation
         ChangePlayerAnimation({animation: 'defeated'})
         //*Sfx of Defeat

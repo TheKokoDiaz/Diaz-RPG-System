@@ -1,4 +1,3 @@
-//#region Animation
 function enemy_animation(){
     enemy_ctx.clearRect(0, 0, enemy_canvas_width, enemy_canvas_height);
     enemy_ctx.drawImage(enemy_canvas_sprite, enemy_frameX * enemy_sprite_width, enemy_frameY * enemy_sprite_height, enemy_sprite_width, enemy_sprite_height,  0, 0, enemy_canvas_width, enemy_canvas_height);
@@ -29,4 +28,3 @@ function enemy_animation(){
     requestAnimationFrame(enemy_animation);
 }
 enemy_animation();
-//#endregion

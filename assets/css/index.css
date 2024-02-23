@@ -32,6 +32,22 @@ img{
     user-select: none;
 }
 
+/* + Warning Bars */
+#hud_top_warning_bar, #hud_bottom_warning_bar{
+    position: fixed;
+    left: -10%;
+    width: 120%;
+    height: 22%;
+    box-sizing: border-box;
+    transform: rotate(-4deg);
+    background-color: rgba(10, 10, 10, 75%);
+    transition-duration: 450ms;
+}
+
+#hud_top_warning_bar{top: -30%;}
+
+#hud_bottom_warning_bar{bottom: -30%;}
+
 /* + Victory Screen */
 #hud_victory_screen{
     border: 0.2rem solid whitesmoke;
@@ -189,6 +205,14 @@ img{
     height: 50%;
     border: 2px rgb(0, 200, 0) solid;
     background-color: rgba(0, 255, 0, 30%);
+    animation: none;
+    transition-duration: 300ms;
+}
+
+@keyframes border_health_warning {
+    0%{border-color: rgb(220, 0, 0);}
+    50%{border-color: rgb(220, 120, 0);}
+    100%{border-color: rgb(220, 0, 0);}
 }
 
 .player_hud_status .bar .armor{
@@ -207,7 +231,7 @@ img{
 .player_hud_status .bar .health .text, .player_hud_status .bar .armor .text{
     position: absolute;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding-left: 3.5vh;
 }
 
@@ -221,6 +245,16 @@ img{
     width: 100%;
     background-color: rgb(0, 220, 0);
     transition-duration: 500ms;
+}
+
+#player_health_graffic{
+    animation: none;
+}
+
+@keyframes graphic_health_warning {
+    0%{background-color: rgb(220, 0, 0);}
+    50%{background-color: rgb(220, 120, 0);}
+    100%{background-color: rgb(220, 0, 0);}
 }
 
 .player_hud_status .bar .armor .graffic{

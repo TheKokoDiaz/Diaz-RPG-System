@@ -4,7 +4,7 @@
     <!-- ? Programed by "El Koko Díaz" -->
     
     <!-- !Start Date: July 6th, 2023 -->
-    <!-- + Update: February 16th, 2024 -->
+    <!-- + Update: February 22th, 2024 -->
 
     <!-- ? Icons from web site: "https://www.flaticon.es" -->
     <!-- ? SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
@@ -15,6 +15,9 @@
         + Add Defeat text
         + Frame account to crit hits
         + Use animations and effects to represent the crits
+        + Loading Screen
+        + Custom Status Bar
+        + Adaptive music
     -->
 
     <meta charset="UTF-8">
@@ -29,6 +32,10 @@
     <!-- ! Game -->
     <!-- + Music -->
     <audio src="" id="music"></audio>
+
+    <!-- + HUD -->
+    <span id="hud_top_warning_bar"></span>
+    <span id="hud_bottom_warning_bar"></span>
 
     <!-- + Screens -->
     <div id="hud_victory_screen">
@@ -50,6 +57,8 @@
             </div>
         </div>
     </div>
+
+    <div id="hud_defeat_screen"></div>
 
     <!-- ! Player -->
     <!-- + SFX -->

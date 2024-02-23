@@ -10,6 +10,9 @@ const music = document.getElementById("music");
 const player_sfx = document.getElementById('player_sfx');
 
 //+ HUD
+const hud_top_warning_bar = document.querySelector('#hud_top_warning_bar')
+const hud_bottom_warning_bar = document.querySelector('#hud_bottom_warning_bar')
+
 const player_hud_moves_return = document.querySelector('#player_hud_moves_return');
 const player_hud_moves_general = document.querySelector('#player_hud_moves_general');
 const player_hud_moves_attack = document.querySelector('#player_hud_moves_attack');
@@ -22,13 +25,14 @@ const player_hud_victory_stats = document.querySelector('#victory_stats');
 
 //+ Graphics
 const player_health_text = document.getElementById('player_health_text');
+const player_health_border = document.querySelector('.player_hud_status .bar .health')
 const player_health_graffic = document.getElementById('player_health_graffic');
 const player_armor_text = document.getElementById('player_armor_text');
 const player_armor_graffic = document.getElementById('player_armor_graffic');
 
 //+ Stats
 let player_stats = {
-    health: 100,
+    health: 30,
     max_health: 100,
     stamina: 100,
     max_stamina: 100,
@@ -39,7 +43,7 @@ let player_stats = {
 
 //+ Equipment
 let player_equipment_stats = {
-    armor: 5,
+    armor: 0,
     max_armor: 5,
     armor_protection: 6,
     sword_damage: 30,
@@ -126,8 +130,8 @@ const enemy_health_text = document.getElementById('enemy_health_text');
 
 //+ Stats
 let enemy_stats = [{
-    health: 150,
-    max_health: 150,
+    health: 250,
+    max_health: 250,
     speed: 2,
     strength: 2,
     damage: 12

@@ -19,8 +19,21 @@ function player_animation(){
                 if(player_frameY != 5){
                     //When the player has low HP, he will change his animation
                     player_frameY = 0;
-                    if(player_stats.health < player_stats.max_health/4){
+                    hud_top_warning_bar.style.top = '-30%';
+                    hud_bottom_warning_bar.style.bottom = '-30%';
+
+                    player_health_graffic.style.animation = 'none';
+                    player_health_border.style.animation = 'none';
+                    player_health_border.style.backgroundColor = 'rgba(0, 255, 0, 30%)';
+
+                    if(player_stats.health <= player_stats.max_health/4){
                         player_frameY = 3;
+                        hud_top_warning_bar.style.top = '-10%';
+                        hud_bottom_warning_bar.style.bottom = '-10%';
+
+                        player_health_graffic.style.animation = 'graphic_health_warning 1s infinite';
+                        player_health_border.style.animation = 'border_health_warning 1s infinite';
+                        player_health_border.style.backgroundColor = 'rgba(255, 0, 0, 30%)';
                     }
                     player_frameX = 0;
                     player_animation_limit = 8;

@@ -16,9 +16,11 @@ const hud_bottom_warning_bar = document.querySelector('#hud_bottom_warning_bar')
 const player_hud_moves_return = document.querySelector('#player_hud_moves_return');
 const player_hud_moves_general = document.querySelector('#player_hud_moves_general');
 const player_hud_moves_attack = document.querySelector('#player_hud_moves_attack');
+
 const player_hud_backpack = document.querySelector('#player_hud_backpack');
 const player_hud_backpack_description = document.querySelector('.player_hud_backpack_description');
 const player_hud_backpack_items = document.querySelector('.player_hud_backpack_items');
+
 const player_hud_victory = document.querySelector('#hud_victory_screen');
 const player_hud_victory_results_box = document.querySelector('.results_box');
 const player_hud_victory_stats = document.querySelector('#victory_stats');
@@ -27,12 +29,13 @@ const player_hud_victory_stats = document.querySelector('#victory_stats');
 const player_health_text = document.getElementById('player_health_text');
 const player_health_border = document.querySelector('.player_hud_status .bar .health')
 const player_health_graffic = document.getElementById('player_health_graffic');
+
 const player_armor_text = document.getElementById('player_armor_text');
 const player_armor_graffic = document.getElementById('player_armor_graffic');
 
 //+ Stats
 let player_stats = {
-    health: 30,
+    health: 100,
     max_health: 100,
     stamina: 100,
     max_stamina: 100,
@@ -43,7 +46,7 @@ let player_stats = {
 
 //+ Equipment
 let player_equipment_stats = {
-    armor: 0,
+    armor: 5,
     max_armor: 5,
     armor_protection: 6,
     sword_damage: 30,
@@ -93,6 +96,7 @@ const spritesheet_height = 512;
 let player_frameX = 0;
 let player_frameY = 0;
 let player_animation_limit = 8;
+let player_animation_infinite = false;
 
 const player_canvas = document.getElementById('player_sprite');
 const player_ctx = player_canvas.getContext('2d');
@@ -142,6 +146,7 @@ let enemy_stats = [{
 let enemy_frameX = 0;
 let enemy_frameY = 0;
 let enemy_animation_limit = 7;
+let enemy_animation_infinite = false;
 
 const enemy_canvas = document.getElementById('enemy_sprite');
 const enemy_ctx = enemy_canvas.getContext('2d');

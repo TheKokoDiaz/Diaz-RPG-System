@@ -36,6 +36,27 @@ function TogglePlayerMenus({menu = ''}){
     else{ player_hud_moves_return.style.bottom = '-31%'; }
 }
 
+//+ Warnings
+function SwitchWarnings(action){
+    if(action == 'off'){
+        hud_top_warning_bar.style.top = '-30%';
+        hud_bottom_warning_bar.style.bottom = '-30%';
+
+        player_health_graffic.style.animation = 'none';
+        player_health_border.style.animation = 'none';
+        player_health_border.style.backgroundColor = 'rgba(0, 255, 0, 30%)';
+    }
+    
+    if(action == 'on'){
+        hud_top_warning_bar.style.top = '-10%';
+        hud_bottom_warning_bar.style.bottom = '-10%';
+
+        player_health_graffic.style.animation = 'graphic_health_warning 1s infinite';
+        player_health_border.style.animation = 'border_health_warning 1s infinite';
+        player_health_border.style.backgroundColor = 'rgba(255, 0, 0, 30%)';
+    }
+}
+
 //+ Victory Screen
 function ShowVictoryScreen(){
     player_hud_victory.style.display = 'flex';
@@ -61,16 +82,33 @@ function ChangePlayerAnimation({animation}){
     player_frameX = 0;
 
     switch(animation){
+        case 'idle':
+            if(player_stats.health <= player_stats.max_health/4){
+                player_frameY = 3;
+                SwitchWarnings('on');
+            } else {
+                player_frameY = 0;
+                SwitchWarnings('off');
+            }
+            player_animation_limit = 8;
+            player_animation_infinite = true;
+            break;
+
         case 'sword':
             player_frameY = 1;
+            player_animation_infinite = false;
             break;
+
         case 'damage':
             player_frameY = 2;
             player_animation_limit = 7;
+            player_animation_infinite = false;
             break;
+
         case 'defeated':
             player_frameY = 5;
             player_animation_limit = 9;
+            player_animation_infinite = false;
             break;
     }
 }
@@ -80,13 +118,22 @@ function ChangeEnemyAnimation({animation}){
     enemy_frameX = 0;
 
     switch(animation){
+        case 'idle':
+            enemy_frameY = 0;
+            enemy_animation_limit = 7;
+            enemy_animation_infinite = true;
+            break;
+
         case 'damage':
             enemy_frameY = 1;
             enemy_animation_limit = 10;
+            enemy_animation_infinite = false;
             break;
+
         case 'attack':
             enemy_frameY = 2;
             enemy_animation_limit = 10;
+            enemy_animation_infinite = false;
             break;
     }
 }
@@ -109,6 +156,39 @@ function ChangeEnemySfx({sfx}){
     enemy_sfx.volume = sfx_volume;
     enemy_sfx.setAttribute('src', '../assets/sfx/' + sfx + '.mp3');
     enemy_sfx.play();
+}
+
+//!Damage & Attacks
+function PlayerAttack(move){
+    //* Crit Attacks
+    //? When the bar to measure the time to attack, the crit damage will be not necesary
+    let damage = 0;
+    let crit_multiplier = 1;
+    let crit_chance = Math.round(Math.random() * 10);
+
+    if(crit_chance == 0){
+        battle_stats.criticals += 1;
+        crit_multiplier = player_stats.crit_multiplier;
+    }
+
+    //* Moves
+    switch(move){
+        case 'sword':
+            ChangePlayerSfx({sfx: move});
+            ChangePlayerAnimation({animation: move});
+            damage = player_equipment_stats.sword_damage;
+            break;
+    }
+    
+    damage *= crit_multiplier;
+
+    enemy_stats[0].health -= damage;
+    battle_stats.damage_given +=  damage;
+    battle_stats.attacks += 1;
+    
+    ChangeEnemyAnimation({animation: 'damage'});
+    ChangeEnemySfx({sfx:'bone_crush'});
+    UpdateEnemyStats();
 }
 
 //! Backpack
@@ -141,6 +221,7 @@ function WriteItemDescription({item}){
 
 function EraseItemDescription(){ player_hud_backpack_description.innerHTML = ''; }
 
+//+ Use Backpack Item
 function UseBackpackItem({item}){
     let item_index = player_backpack_healing_items.findIndex(array => array.item === item);
     let item_array = player_backpack_healing_items[item_index];
@@ -172,6 +253,7 @@ function UpdatePlayerStats(){
     //Updates the graffic bars and texts of the player's HUD
     player_health_text.innerText = player_stats.health + ' / ' + player_stats.max_health;
     player_health_graffic.style.width = Math.round((player_stats.health / player_stats.max_health)*100) + '%';
+
     player_armor_text.innerText = player_equipment_stats.armor + ' / ' + player_equipment_stats.max_armor;
     player_armor_graffic.style.width = Math.round((player_equipment_stats.armor / player_equipment_stats.max_armor)*100) + '%';
 }
@@ -190,35 +272,7 @@ function UpdateEnemyStats(){
 //+ Player
 function PlayerTurn({category, move}){
     if(category == 'attack'){
-        //* Crit Attacks
-        //? When the bar to measure the time to attack, the crit damage will be not necesary
-        let damage = 0;
-        let crit_multiplier = 1;
-        let crit_chance = Math.round(Math.random() * 10);
-    
-        if(crit_chance == 0){
-            battle_stats.criticals += 1;
-            crit_multiplier = player_stats.crit_multiplier;
-        }
-    
-        //* Moves
-        switch(move){
-            case 'sword':
-                ChangePlayerSfx({sfx: move});
-                ChangePlayerAnimation({animation: move});
-                damage = player_equipment_stats.sword_damage;
-                break;
-        }
-        
-        damage *= crit_multiplier;
-
-        enemy_stats[0].health -= damage;
-        battle_stats.damage_given +=  damage;
-        battle_stats.attacks += 1;
-        
-        ChangeEnemyAnimation({animation: 'damage'});
-        ChangeEnemySfx({sfx:'bone_crush'});
-        UpdateEnemyStats();
+        PlayerAttack(move);
     }
 
     if(category == 'backpack'){
@@ -256,7 +310,7 @@ function delay(ms){
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-//! Combat turns
+//! Set combat turns
 async function SetCombatTurns({category, move}){
     HideAllMenus();
 

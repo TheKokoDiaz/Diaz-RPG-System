@@ -38,22 +38,22 @@
     <span id="hud_bottom_warning_bar"></span>
 
     <!-- + Screens -->
-    <div id="hud_victory_screen">
-        <div class="title">Victory</div>
-        <div class="results_box">
-            <div class="sub_box stats">
-                <div class="subtitle">Stats:</div>
-                <ul class="list" id="victory_stats"></ul>
+    <div id="hud_victory">
+        <div class="hud_victory__title">Victory</div>
+        <div class="hud_victory__results_box">
+            <div class="hud_victory__sub_box hud_victory__sub_box--stats">
+                <div class="hud_victory__subtitle">Stats:</div>
+                <ul class="hud_victory__list" id="victory_stats"></ul>
             </div>
-            <div class="sub_box objects">
-                <div class="subtitle">Obtained Items:</div>
+            <div class="hud_victory__sub_box hud_victory__sub_box--objects">
+                <div class="hud_victory__subtitle">Obtained Items:</div>
             </div>
-            <div class="sub_box exp">
-                <div class="subtitle">Earned Exp:</div>
-                <div class="body"></div>
+            <div class="hud_victory__sub_box hud_victory__sub_box--exp">
+                <div class="hud_victory__subtitle">Earned Exp:</div>
+                <div class="hud_victory__body"></div>
             </div>
-            <div class="sub_box continue">
-                <div class="button">Continue</div>
+            <div class="hud_victory__sub_box hud_victory__sub_box--continue">
+                <div class="hud_victory__button">Continue</div>
             </div>
         </div>
     </div>
@@ -65,67 +65,67 @@
     <audio src="" id="player_sfx"></audio>
     
     <!-- +  Status-->
-    <div class="player_hud_status">
-        <div class="name">Player</div>
+    <div class="hud_status">
+        <div class="hud_status__name">Player</div>
 
-        <div class="bar">
+        <div class="hud_status__bar">
             <!-- Health (HP) -->
-            <div class="health">
-                <div class="graffic" id="player_health_graffic"></div>
-                <img class="icon" src="assets/icons/HP.png">
-                <div class="text" id="player_health_text"></div>
+            <div class="hud_status__health">
+                <div class="hud_status__graffic hud_status__graffic--health" id="player_health_graffic"></div>
+                <img class="hud_status__icon hud_status__icon--health" src="assets/icons/HP.png">
+                <div class="hud_status__text hud_status__text--health" id="player_health_text"></div>
             </div>
 
             <!-- Armor (AR) -->
-            <div class="armor">
-                <div class="graffic" id="player_armor_graffic"></div>
-                <img class="icon" src="assets/icons/AR.png">
-                <div class="text" id="player_armor_text"></div>
+            <div class="hud_status__armor">
+                <div class="hud_status__graffic hud_status__graffic--armor" id="player_armor_graffic"></div>
+                <img class="hud_status__icon hud_status__icon--armor" src="assets/icons/AR.png">
+                <div class="hud_status__text hud_status__text--armor" id="player_armor_text"></div>
             </div>
         </div>
     </div>
 
     <!-- + Buffs & Debuffs -->
-    <div class="player_hud_effects">
-        <div class="buff">1</div>
-        <div class="debuff">2</div>
+    <div class="hud_effects">
+        <div class="hud_effect hud_effect--buff">1</div>
+        <div class="hud_effect hud_effect--debuff">2</div>
     </div>
 
     <!-- + Moves -->
-    <div class="player_hud_moves" id="player_hud_moves_general">
-        <div class="move" onclick="TogglePlayerMenus({menu: 'attack'})">
-            <p>Attack</p>
-            <img src="assets/icons/attack.png">
+    <div class="hud_moves" id="hud_moves_general">
+        <div class="hud_moves__move" onclick="TogglePlayerMenus({menu: 'attack'})">
+            <p class="hud_moves__text">Attack</p>
+            <img src="assets/icons/attack.png" class="hud_moves__img">
         </div>
-        <div class="move" onclick="TogglePlayerMenus({menu: 'backpack'})">
-            <p>Backpack</p>
-            <img src="assets/icons/backpack.png">
+        <div class="hud_moves__move" onclick="TogglePlayerMenus({menu: 'backpack'})">
+            <p class="hud_moves__text">Backpack</p>
+            <img src="assets/icons/backpack.png" class="hud_moves__img">
         </div>
-        <div class="move disable">3</div>
-        <div class="move disable">4</div>
+        <div class="hud_moves__move hud_moves__move--disable">Specials</div>
+        <div class="hud_moves__move hud_moves__move--disable">4</div>
     </div>
 
     <!-- * Attack Moves -->
-    <div class="player_hud_moves" id="player_hud_moves_attack">
-        <div class="move" onclick="SetCombatTurns({category: 'attack', move: 'sword'})">
-            <p>Sword</p>
-            <img src="assets/icons/sword.png">
+    <div class="hud_moves" id="hud_moves_attack">
+        <div class="hud_moves__move" onclick="SetCombatTurns({category: 'attack', move: 'sword'})">
+            <p class="hud_moves__text">Sword</p>
+            <img src="assets/icons/sword.png" class="hud_moves__img">
         </div>
-        <div class="move disable">Bow</div>
-        <div class="move disable">Greatsword</div>
-        <div class="move disable">Lance</div>
+        <div class="hud_moves__move hud_moves__move--disable">Bow</div>
+        <div class="hud_moves__move hud_moves__move--disable">Greatsword</div>
+        <div class="hud_moves__move hud_moves__move--disable">Lance</div>
     </div>
 
     <!-- * Return Button -->
-    <div id="player_hud_moves_return" onclick="TogglePlayerMenus({menu: 'general'})">↩</div>
+    <div id="hud_moves__return" onclick="TogglePlayerMenus({menu: 'general'})">↩</div>
     
     <!-- + Sprite -->
     <canvas id="player_sprite"></canvas>
     
     <!-- + Backpack -->
-    <div id="player_hud_backpack">
-        <div class="player_hud_backpack_description"></div>
-        <div class="player_hud_backpack_items"></div>
+    <div id="hud_backpack">
+        <div class="hud_backpack__description"></div>
+        <div class="hud_backpack__items"></div>
     </div>
 
     <!-- ! Enemy-->
@@ -133,11 +133,11 @@
     <audio src="" id="enemy_sfx"></audio>
     
     <!-- + Status HUD -->
-    <div class="enemy_hud_status">
-        <div class="text">Enemy:</div>
-        <div class="text" id="enemy_health_text">HP:</div>
-        <div class="bar">
-            <div class="health" id="enemy_health_graffic"></div>
+    <div class="enemy_status">
+        <div class="enemy_status__text">Enemy:</div>
+        <div class="enemy_status__text" id="enemy_health_text">HP:</div>
+        <div class="enemy_status__bar">
+            <div class="enemy_status__health" id="enemy_health_graffic"></div>
         </div>
     </div>
 

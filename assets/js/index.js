@@ -2,10 +2,10 @@
 
 //! Toggle HUD
 function HideAllMenus(){
-    player_hud_moves_attack.style.bottom = '-31%';
-    player_hud_moves_return.style.bottom = '-31%';
-    player_hud_moves_general.style.bottom = '-31%';
-    player_hud_backpack.style.bottom = '-75%';
+    hud_moves_attack.style.bottom = '-31%';
+    hud_moves_return.style.bottom = '-31%';
+    hud_moves_general.style.bottom = '-31%';
+    hud_backpack.style.bottom = '-75%';
     EraseItemDescription();
 }
 
@@ -15,15 +15,15 @@ function TogglePlayerMenus({menu = ''}){
 
     switch(menu){
         case 'general':
-            player_hud_moves_general.style.bottom = '1vh';
+            hud_moves_general.style.bottom = '1vh';
             break;
 
         case 'attack':
-            player_hud_moves_attack.style.bottom = '1vh';
+            hud_moves_attack.style.bottom = '1vh';
             break;
         
         case 'backpack':
-            player_hud_backpack.style.bottom = '0';
+            hud_backpack.style.bottom = '0';
             UpdatePlayerBackpack();
             break;
 
@@ -32,8 +32,8 @@ function TogglePlayerMenus({menu = ''}){
             break;
     }
 
-    if(menu != 'general'){ player_hud_moves_return.style.bottom = '1vh'; }
-    else{ player_hud_moves_return.style.bottom = '-31%'; }
+    if(menu != 'general'){ hud_moves_return.style.bottom = '1vh'; }
+    else{ hud_moves_return.style.bottom = '-31%'; }
 }
 
 //+ Warnings
@@ -59,21 +59,21 @@ function SwitchWarnings(action){
 
 //+ Victory Screen
 function ShowVictoryScreen(){
-    player_hud_victory.style.display = 'flex';
+    hud_victory.style.display = 'flex';
     
     setTimeout(function(){
-        player_hud_victory.style.opacity = '100%';
+        hud_victory.style.opacity = '100%';
     }, 450);
     
     setTimeout(function(){
-        player_hud_victory.style.top = '0';
-        player_hud_victory.style.height = '100%';
-        player_hud_victory.style.justifyContent = 'start';
-        player_hud_victory_results_box.style.display = 'flex'
+        hud_victory.style.top = '0';
+        hud_victory.style.height = '100%';
+        hud_victory.style.justifyContent = 'start';
+        hud_victory_results_box.style.display = 'flex'
     }, 1950);
 
     //* Stats
-    player_hud_victory_stats.innerHTML = '<li> Attacks: ' + battle_stats.attacks + '</li>' + '<li> Criticals: ' + battle_stats.criticals + '</li>' + '<li> Damage Given: ' + battle_stats.damage_given + '</li>' + '<li> Medicine Used: ' + battle_stats.medicine_used + '</li>' + '<li> Hits Taken: ' + battle_stats.hits_taken + '</li>' + '<li> Damage Taken: ' + battle_stats.damage_taken + '</li>';
+    hud_victory_stats.innerHTML = '<li> Attacks: ' + battle_stats.attacks + '</li>' + '<li> Criticals: ' + battle_stats.criticals + '</li>' + '<li> Damage Given: ' + battle_stats.damage_given + '</li>' + '<li> Medicine Used: ' + battle_stats.medicine_used + '</li>' + '<li> Hits Taken: ' + battle_stats.hits_taken + '</li>' + '<li> Damage Taken: ' + battle_stats.damage_taken + '</li>';
 }
 
 //! Change Animations
@@ -195,13 +195,13 @@ function PlayerAttack(move){
 //+ Update & Writing
 function UpdatePlayerBackpack(){
     let item_array = '';
-    player_hud_backpack_items.innerHTML = '';
+    hud_backpack_items.innerHTML = '';
     
     for(let n = 0; n < player_backpack_healing_items.length; n++){
         item_array = player_backpack_healing_items[n];
         
         if(item_array.quantity != 0){
-            player_hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + item_array.item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + item_array.item + '`})"><img src="assets/icons/' + item_array.item + '.png"> <p>' + item_array.quantity + '</p></div>';
+            hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + item_array.item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + item_array.item + '`})"><img src="assets/icons/' + item_array.item + '.png"> <p>' + item_array.quantity + '</p></div>';
         }
     }
 }
@@ -216,10 +216,10 @@ function WriteItemDescription({item}){
     item_array = player_backpack_healing_items[item_index];
 
     item_name = item_array.item.charAt(0).toUpperCase() + item_array.item.slice(1);
-    player_hud_backpack_description.innerHTML = '<b>' + item_name + ':</b> ' + item_array.description;
+    hud_backpack_description.innerHTML = '<b>' + item_name + ':</b> ' + item_array.description;
 }
 
-function EraseItemDescription(){ player_hud_backpack_description.innerHTML = ''; }
+function EraseItemDescription(){ hud_backpack_description.innerHTML = ''; }
 
 //+ Use Backpack Item
 function UseBackpackItem({item}){

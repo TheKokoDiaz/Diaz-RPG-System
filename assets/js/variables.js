@@ -13,21 +13,21 @@ const player_sfx = document.getElementById('player_sfx');
 const hud_top_warning_bar = document.querySelector('#hud_top_warning_bar')
 const hud_bottom_warning_bar = document.querySelector('#hud_bottom_warning_bar')
 
-const player_hud_moves_return = document.querySelector('#player_hud_moves_return');
-const player_hud_moves_general = document.querySelector('#player_hud_moves_general');
-const player_hud_moves_attack = document.querySelector('#player_hud_moves_attack');
+const hud_moves_return = document.querySelector('#hud_moves__return');
+const hud_moves_general = document.querySelector('#hud_moves_general');
+const hud_moves_attack = document.querySelector('#hud_moves_attack');
 
-const player_hud_backpack = document.querySelector('#player_hud_backpack');
-const player_hud_backpack_description = document.querySelector('.player_hud_backpack_description');
-const player_hud_backpack_items = document.querySelector('.player_hud_backpack_items');
+const hud_backpack = document.querySelector('#hud_backpack');
+const hud_backpack_description = document.querySelector('.hud_backpack__description');
+const hud_backpack_items = document.querySelector('.hud_backpack__items');
 
-const player_hud_victory = document.querySelector('#hud_victory_screen');
-const player_hud_victory_results_box = document.querySelector('.results_box');
-const player_hud_victory_stats = document.querySelector('#victory_stats');
+const hud_victory = document.querySelector('#hud_victory');
+const hud_victory_results_box = document.querySelector('.hud_victory__results_box');
+const hud_victory_stats = document.querySelector('#victory_stats');
 
 //+ Graphics
 const player_health_text = document.getElementById('player_health_text');
-const player_health_border = document.querySelector('.player_hud_status .bar .health')
+const player_health_border = document.querySelector('.hud_status__health')
 const player_health_graffic = document.getElementById('player_health_graffic');
 
 const player_armor_text = document.getElementById('player_armor_text');
@@ -35,7 +35,7 @@ const player_armor_graffic = document.getElementById('player_armor_graffic');
 
 //+ Stats
 let player_stats = {
-    health: 100,
+    health: 10,
     max_health: 100,
     stamina: 100,
     max_stamina: 100,

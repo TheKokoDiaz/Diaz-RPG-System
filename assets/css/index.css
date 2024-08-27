@@ -10,16 +10,16 @@
 }
 
 /* ! General */
+*{
+    box-sizing: border-box;
+}
+
 html{
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
     background-color: rgba(0, 0, 50, 50%);
     font-family: 'Raleway-Regular';
 }
 
-body{
+html, body{
     width: 100%;
     height: 100%;
     margin: 0;
@@ -38,7 +38,6 @@ img{
     left: -10%;
     width: 120%;
     height: 22%;
-    box-sizing: border-box;
     transform: rotate(-4deg);
     background-color: rgba(10, 10, 10, 75%);
     transition-duration: 450ms;
@@ -49,12 +48,11 @@ img{
 #hud_bottom_warning_bar{bottom: -30%;}
 
 /* + Victory Screen */
-#hud_victory_screen{
+#hud_victory{
     border: 0.2rem solid whitesmoke;
     border-width: 0.2rem 0 0.2rem 0;
     width: 100%;
     position: fixed;
-    box-sizing: border-box;
     user-select: none;
     z-index: 20;
     padding: 2rem;
@@ -70,14 +68,14 @@ img{
     overflow: hidden;
 }
 
-#hud_victory_screen .title{
+.hud_victory__title{
     font-size: 5rem;
     font-weight: bold;
     color: whitesmoke;
     transition-duration: 650ms;
 }
 
-#hud_victory_screen .results_box{
+.hud_victory__results_box{
     width: 80%;
     height: 100%;
     margin-top: 1.5rem;
@@ -85,7 +83,6 @@ img{
     border-width: 0.15rem 0 0 0;
     color: whitesmoke;
     transition-duration: 650ms;
-    box-sizing: border-box;
     justify-content: space-around;
     align-items: start;
     flex-wrap: wrap;
@@ -93,12 +90,12 @@ img{
     padding: 0.8rem;
 }
 
-#hud_victory_screen .results_box .subtitle{
+.hud_victory__subtitle{
     font-weight: bold;
     font-size: 1.1rem;
 }
 
-#hud_victory_screen .results_box .sub_box{
+.hud_victory__sub_box{
     width: 10%;
     height: 10%;
     border-radius: 0.5rem;
@@ -106,27 +103,21 @@ img{
     color: whitesmoke;
     transition-duration: 650ms;
     flex-direction: row;
-    box-sizing: border-box;
     padding: 1rem;
 }
 
-#hud_victory_screen .results_box .stats{
+.hud_victory__sub_box--stats, .hud_victory__sub_box--objects{
     width: 49%;
     height: 76%;
     line-height: 2;
 }
 
-#hud_victory_screen .results_box .objects{
-    width: 49%;
-    height: 76%;
-}
-
-#hud_victory_screen .results_box .exp{
+.hud_victory__sub_box--exp{
     width: 49%;
     height: 19%;
 }
 
-#hud_victory_screen .results_box .continue{
+.hud_victory__sub_box--continue{
     width: 49%;
     height: 19%;
     background-color: rgb(0, 0, 0, 0);
@@ -135,37 +126,36 @@ img{
     align-items: center;
 }
 
-#hud_victory_screen .results_box .continue .button{
+.hud_victory__button{
     width: 30%;
     border: 1px solid whitesmoke;
     text-align: center;
     padding: 1rem;
     border-radius: 0.5rem;
-    box-sizing: border-box;
     cursor: pointer;
     transition-duration: 300ms;
     display: none;
 }
 
-#hud_victory_screen .results_box .continue .button:hover{
-    background-color: whitesmoke;
-    color: rgb(0, 40, 140);
-}
-
-#hud_victory_screen .results_box .continue .button:active{
+.hud_victory__button:hover{
     color: whitesmoke;
     background-color: rgba(0, 40, 100);
     font-weight: bold;
 }
 
+.hud_victory__button:active{
+    background-color: whitesmoke;
+    color: rgb(0, 40, 140);
+}
+
 /* ! Player */
 /* + Status */
-.player_hud_status{
+.hud_status{
     width: 30%;
     height: 6rem;
     position: fixed;
     top: 1vh;
-    left: 2vh;
+    left: 3.5vh;
     padding: 1vh;
     user-select: none;
     display: flex;
@@ -174,39 +164,73 @@ img{
     flex-direction: column;
     gap: 1vh;
     border-radius: 8px;
-    box-sizing: border-box;
     background-color: rgb(0, 50, 150);
     z-index: 5;
+    transform: skew(-12deg);
 }           
 
-.player_hud_status .name{
+.hud_status__name{
     font-weight: bold;
     color: white;
 }
 
-.player_hud_status .bar{
+.hud_status__bar{
     flex-direction: row;
     width: 100%;
     height: 60px;
-    box-sizing: border-box;
-    transition-duration: 300ms;
 }
 
-.bar .health, .bar .armor{
-    box-sizing: border-box;
+.hud_status__health, .hud_status__armor{
     display: flex;
     justify-content: start;
     align-items: center;
     transition-duration: 300ms;
 }
 
-.player_hud_status .bar .health{
+.hud_status__health{
     width: 100%;
-    height: 50%;
+    height: 55%;
     border: 2px rgb(0, 200, 0) solid;
     background-color: rgba(0, 255, 0, 30%);
     animation: none;
-    transition-duration: 300ms;
+}
+
+.hud_status__armor{
+    width: 80%;
+    height: 45%;
+    border: 2px rgb(150, 150, 0) solid;
+    background-color: rgba(200, 200, 0, 30%);
+}
+
+.hud_status__icon{
+    position: absolute;
+    height: 0.8rem;
+    padding-left: 1vh;
+}
+
+.hud_status__text{
+    position: absolute;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding-left: 3.5vh;
+}
+
+.hud_status__graffic{
+    width: 100%;
+    height: 100%;
+    transition-duration: 500ms;
+}
+
+.hud_status__graffic--health{
+    background-color: rgb(0, 220, 0);
+}
+
+#player_health_graffic{
+    animation: none;
+}
+
+.hud_status__graffic--armor{
+    background-color: rgb(215, 215, 0);
 }
 
 @keyframes border_health_warning {
@@ -215,62 +239,19 @@ img{
     100%{border-color: rgb(220, 0, 0);}
 }
 
-.player_hud_status .bar .armor{
-    width: 80%;
-    height: 50%;
-    border: 2px rgb(150, 150, 0) solid;
-    background-color: rgba(200, 200, 0, 30%);
-}
-
-.player_hud_status .bar .health .icon, .player_hud_status .bar .armor .icon{
-    position: absolute;
-    height: 1.5vh;
-    padding-left: 1vh;
-}
-
-.player_hud_status .bar .health .text, .player_hud_status .bar .armor .text{
-    position: absolute;
-    font-weight: bold;
-    font-size: 0.9rem;
-    padding-left: 3.5vh;
-}
-
-.player_hud_status .bar .health .graffic, .player_hud_status .bar .armor .graffic{
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-.player_hud_status .bar .health .graffic{
-    width: 100%;
-    background-color: rgb(0, 220, 0);
-    transition-duration: 500ms;
-}
-
-#player_health_graffic{
-    animation: none;
-}
-
 @keyframes graphic_health_warning {
     0%{background-color: rgb(220, 0, 0);}
     50%{background-color: rgb(220, 120, 0);}
     100%{background-color: rgb(220, 0, 0);}
 }
 
-.player_hud_status .bar .armor .graffic{
-    width: 100%;
-    background-color: rgb(215, 215, 0);
-    transition-duration: 500ms;
-}
-
 /* + Buffs & Debuffs */
-.player_hud_effects{
+.hud_effects{
     width: 30%;
     position: fixed;
     top: 6.7rem;
     left: 2vh;
-    box-sizing: border-box;
-    display: none; /* ! */
+    display: flex; /* ! */
     user-select: none;
     justify-content: start;
     align-items: center;
@@ -279,7 +260,7 @@ img{
     z-index: 5;
 }
 
-.player_hud_effects .buff, .player_hud_effects .debuff{
+.hud_effect{
     color: white;
     background-color: rgba(0, 50, 150, 70%);
     width: 25px;
@@ -291,14 +272,14 @@ img{
     align-items: center;
 }
 
-.player_hud_effects .buff img, .player_hud_effects .debuff img{
+.hud_effect img{
     width: 100%;
     height: 100%;
     opacity: 50%;
 }
 
 /* + Moves */
-.player_hud_moves{
+.hud_moves{
     width: 50%;
     height: 20%;
     left: 2vh;
@@ -306,7 +287,6 @@ img{
     padding: 0.5vh;
     position: fixed;
     border-radius: 8px;
-    box-sizing: border-box;
     background-color: rgb(40, 40, 120);
     display: flex;
     justify-content: space-between;
@@ -317,14 +297,13 @@ img{
     z-index: 5;
 }
 
-.player_hud_moves .move{
+.hud_moves__move{
     height: 47%;
     flex-basis: 49.8%;
     user-select: none;
     cursor: pointer;
     color: white;
     border-radius: 8px;
-    box-sizing: border-box;
     background-color: rgb(0, 25, 110);
     display: flex;
     justify-content: center;
@@ -333,43 +312,43 @@ img{
     overflow: hidden;
 }
 
-.player_hud_moves .move:hover{
-    animation: player_hud_moves_animation 1s infinite;
+.hud_moves__move:hover{
+    animation: hud_moves_animation 1s infinite;
 }
 
-@keyframes player_hud_moves_animation {
+@keyframes hud_moves_animation {
     0%{ background-color: rgb(0, 25, 110); }
     50%{ background-color: rgb(0, 40, 140); }
     100%{ background-color: rgb(0, 25, 110); }
 }
 
-.player_hud_moves .move:active{
+.hud_moves__move:active{
     animation: none;
     background-color: rgb(0, 50, 150);
 }
 
-.player_hud_moves .move p{
+.hud_moves__text{
     width: 70%;
     text-align: center;
 }
 
-.player_hud_moves .move img{
+.hud_moves__img{
     height: 130%;
     opacity: 30%;
 }
 
-#player_hud_moves_attack{
+#hud_moves_attack{
     bottom: -31%;
 }
 
-.player_hud_moves .disable{
+.hud_moves__move--disable{
     color: rgb(20, 20, 20);
     background-color: rgb(80, 80, 80);
     pointer-events: none;
     opacity: 0%;
 }
 
-#player_hud_moves_return{
+#hud_moves__return{
     height: 10%;
     aspect-ratio: 1/1;
     left: 50%;
@@ -397,14 +376,13 @@ img{
 }
 
 /* + Backpack */
-#player_hud_backpack{
+#hud_backpack{
     position: fixed;
     bottom: -75%;
     left: 2vh;
     width: 50%;
     height: 75%;
     border-radius: 8px 8px 0 0;
-    box-sizing: border-box;
     background-color: rgb(40, 40, 120);
     padding: 1vh;
     z-index: 6;
@@ -416,12 +394,11 @@ img{
     transition-duration: 300ms;
 }
 
-#player_hud_backpack .player_hud_backpack_description{
+.hud_backpack__description{
     width: 100%;
     height: 5rem;
     color: white;
     border-radius: 8px;
-    box-sizing: border-box;
     background-color: rgb(50, 50, 150);
     margin-bottom: 1vh;
     padding: 1vh 2vh;
@@ -429,10 +406,9 @@ img{
     flex-shrink: 0;
 }
 
-#player_hud_backpack .player_hud_backpack_items{
+.hud_backpack__items{
     width: 100%;
     height: 100%;
-    box-sizing: border-box;
     display: flex;
     justify-content: start;
     align-items: start;
@@ -441,28 +417,27 @@ img{
     gap: 1vh;
 }
 
-#player_hud_backpack .player_hud_backpack_items::-webkit-scrollbar{
+.hud_backpack__items::-webkit-scrollbar{
     width: 8px;
     border-radius: 8px;
     background-color: rgb(80, 80, 150);
 }
 
-#player_hud_backpack .player_hud_backpack_items::-webkit-scrollbar-thumb{
+.hud_backpack__items::-webkit-scrollbar-thumb{
     border-radius: 8px;
     background-color: rgb(50, 50, 150);
 }
 
-#player_hud_backpack .player_hud_backpack_items::-webkit-scrollbar-thumb:active{
+.hud_backpack__items::-webkit-scrollbar-thumb:active{
     background-color: rgb(0, 40, 140);
 }
 
-#player_hud_backpack .player_hud_backpack_items div{
+.hud_backpack__items div{
     width: 19%;
     aspect-ratio: 1/1;
     padding: 0vh;
     margin-bottom: 0.75vh;
     border-radius: 8px;
-    box-sizing: border-box;
     background-color: rgb(0, 25, 110);
     display: flex;
     justify-content: center;
@@ -475,7 +450,7 @@ img{
     position: relative;
 }
 
-#player_hud_backpack .player_hud_backpack_items div p{
+.hud_backpack__items div p{
     position: absolute;
     bottom: -1vh;
     right: 1vh;
@@ -489,14 +464,16 @@ img{
     border-radius: 8px;
 }
 
-#player_hud_backpack .player_hud_backpack_items div:hover{ animation: player_hud_moves_animation 1s infinite; }
+.hud_backpack__items div:hover{
+    animation: hud_moves_animation 1s infinite;
+}
 
-#player_hud_backpack .player_hud_backpack_items div:active{
+.hud_backpack__items div:active{
     animation: none;
     background-color: rgb(0, 50, 150);
 }
 
-#player_hud_backpack .player_hud_backpack_items div img{
+.hud_backpack__items div img{
     height: 70%;
     opacity: 60%;
     margin: 2vh;
@@ -505,7 +482,7 @@ img{
 
 /* ! Enemy */
 /* + Status */
-.enemy_hud_status{
+.enemy_status{
     background-color: rgba(255, 150, 0, 70%);
     width: 30%;
     height: 80px;
@@ -513,24 +490,22 @@ img{
     right: 2vh;
     padding: 1vh;
     border-radius: 8px;
-    box-sizing: border-box;
     position: fixed;
     z-index: 5;
     user-select: none;
-}
-
-.enemy_hud_status .text{
     font-weight: bold;
 }
 
-.enemy_hud_status .bar{
+.enemy_status__bar, .enemy_status__health{
     width: 100%;
+}
+
+.enemy_status__bar{
     height: 20px;
     border: 1px solid rgb(100, 0, 0);
 }
 
-.enemy_hud_status .bar .health{
-    width: 100%;
+.enemy_status__health{
     height: 100%;
     background-color: red;
 }

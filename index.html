@@ -4,7 +4,7 @@
     <!-- ? Programed by "El Koko Díaz" -->
     
     <!-- !Start Date: July 6th, 2023 -->
-    <!-- + Update: August 26th, 2024 -->
+    <!-- + Update: August 28th, 2024 -->
 
     <!-- ? Icons from web site: "https://www.flaticon.es" -->
     <!-- ? SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
@@ -14,10 +14,12 @@
         + Add Animations
         + Add Defeat text
         + Frame account to crit hits
+            - Using a keyboard key to do effective attacks
         + Use animations and effects to represent the crits
         + Loading Screen
         + Custom Status Bar
         + Adaptive music
+        + Adrenalin & Special Attacks
     -->
 
     <meta charset="UTF-8">
@@ -76,11 +78,11 @@
                 <div class="hud_status__text hud_status__text--health" id="player_health_text"></div>
             </div>
 
-            <!-- Armor (AR) -->
-            <div class="hud_status__armor">
-                <div class="hud_status__graffic hud_status__graffic--armor" id="player_armor_graffic"></div>
-                <img class="hud_status__icon hud_status__icon--armor" src="assets/icons/AR.png">
-                <div class="hud_status__text hud_status__text--armor" id="player_armor_text"></div>
+            <!-- Energy (EP) -->
+            <div class="hud_status__energy">
+                <div class="hud_status__graffic hud_status__graffic--energy" id="player_energy_graffic"></div>
+                <img class="hud_status__icon hud_status__icon--energy" src="assets/icons/EP.png">
+                <div class="hud_status__text hud_status__text--energy" id="player_energy_text"></div>
             </div>
         </div>
     </div>
@@ -101,8 +103,11 @@
             <p class="hud_moves__text">Backpack</p>
             <img src="assets/icons/backpack.png" class="hud_moves__img">
         </div>
-        <div class="hud_moves__move hud_moves__move--disable">Specials</div>
-        <div class="hud_moves__move hud_moves__move--disable">4</div>
+        <div class="hud_moves__move hud_moves__move" onclick="TogglePlayerMenus({menu: 'specials'})">
+            <p class="hud_moves__text">Specials</p>
+            <img src="assets/icons/specials.png" class="hud_moves__img">
+        </div>
+        <div class="hud_moves__move hud_moves__move--invisible">4</div>
     </div>
 
     <!-- * Attack Moves -->
@@ -111,10 +116,13 @@
             <p class="hud_moves__text">Sword</p>
             <img src="assets/icons/sword.png" class="hud_moves__img">
         </div>
-        <div class="hud_moves__move hud_moves__move--disable">Bow</div>
-        <div class="hud_moves__move hud_moves__move--disable">Greatsword</div>
-        <div class="hud_moves__move hud_moves__move--disable">Lance</div>
+        <div class="hud_moves__move hud_moves__move--invisible">Bow</div>
+        <div class="hud_moves__move hud_moves__move--invisible">Greatsword</div>
+        <div class="hud_moves__move hud_moves__move--invisible">Lance</div>
     </div>
+    
+    <!-- * Special Moves -->
+    <div class="hud_moves" id="hud_moves_specials"></div>
 
     <!-- * Return Button -->
     <div id="hud_moves__return" onclick="TogglePlayerMenus({menu: 'general'})">↩</div>

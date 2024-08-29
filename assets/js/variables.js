@@ -10,17 +10,25 @@ const music = document.getElementById("music");
 const player_sfx = document.getElementById('player_sfx');
 
 //+ HUD
+//* Warnings
 const hud_top_warning_bar = document.querySelector('#hud_top_warning_bar')
 const hud_bottom_warning_bar = document.querySelector('#hud_bottom_warning_bar')
 
+//* Menus and Buttons
 const hud_moves_return = document.querySelector('#hud_moves__return');
 const hud_moves_general = document.querySelector('#hud_moves_general');
 const hud_moves_attack = document.querySelector('#hud_moves_attack');
+const hud_moves_specials = document.querySelector('#hud_moves_specials');
 
+//* Backpack
 const hud_backpack = document.querySelector('#hud_backpack');
 const hud_backpack_description = document.querySelector('.hud_backpack__description');
 const hud_backpack_items = document.querySelector('.hud_backpack__items');
 
+//* Specials
+const hud_moves__tornado = document.getElementById('hud_moves__tornado');
+
+//* Victory screen
 const hud_victory = document.querySelector('#hud_victory');
 const hud_victory_results_box = document.querySelector('.hud_victory__results_box');
 const hud_victory_stats = document.querySelector('#victory_stats');
@@ -30,15 +38,15 @@ const player_health_text = document.getElementById('player_health_text');
 const player_health_border = document.querySelector('.hud_status__health')
 const player_health_graffic = document.getElementById('player_health_graffic');
 
-const player_armor_text = document.getElementById('player_armor_text');
-const player_armor_graffic = document.getElementById('player_armor_graffic');
+const player_energy_text = document.getElementById('player_energy_text');
+const player_energy_graffic = document.getElementById('player_energy_graffic');
 
 //+ Stats
 let player_stats = {
-    health: 10,
+    health: 20,
     max_health: 100,
-    stamina: 100,
-    max_stamina: 100,
+    energy: 5,
+    max_energy: 100,
     speed: 5,
     strength: 5,
     crit_multiplier: 1.5
@@ -46,9 +54,6 @@ let player_stats = {
 
 //+ Equipment
 let player_equipment_stats = {
-    armor: 5,
-    max_armor: 5,
-    armor_protection: 6,
     sword_damage: 30,
     bow_damage: 15,
     greatsword_damage: 50,
@@ -58,20 +63,13 @@ let player_equipment_stats = {
 };
 
 //+ Backpack Items
-let player_backpack_healing_items = [
+let player_backpack_items = [
     {
         item: 'bandage',
         quantity: 2,
         description: 'Use it to heal 60 HP',
         category: 'HP',
         points: 60
-    },
-    {
-        item: 'plate',
-        quantity: 3,
-        description: 'Use it to repair 20 AR',
-        category: 'AR',
-        points: 20
     },
     {
         item: 'med-kit',
@@ -88,6 +86,30 @@ let player_backpack_healing_items = [
         points: 20
     },
 ];
+
+//+ Specials
+let player_specials_moves = {
+    tornado: {
+        name: 'tornado',
+        ep: 50,
+        learned: true
+    },
+    a: {
+        name: 'a',
+        ep: 0,
+        learned: false
+    },
+    b: {
+        name: 'b',
+        ep: 0,
+        learned: false
+    },
+    c: {
+        name: 'c',
+        ep: 0,
+        learned: false
+    },
+};
 
 //+ Animation
 const spritesheet_width = 911;

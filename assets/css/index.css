@@ -180,7 +180,7 @@ img{
     height: 60px;
 }
 
-.hud_status__health, .hud_status__armor{
+.hud_status__health, .hud_status__energy{
     display: flex;
     justify-content: start;
     align-items: center;
@@ -195,11 +195,11 @@ img{
     animation: none;
 }
 
-.hud_status__armor{
+.hud_status__energy{
     width: 80%;
     height: 45%;
-    border: 2px rgb(150, 150, 0) solid;
-    background-color: rgba(200, 200, 0, 30%);
+    border: 2px rgb(0, 200, 200) solid;
+    background-color: rgba(0, 200, 200, 30%);
 }
 
 .hud_status__icon{
@@ -229,8 +229,8 @@ img{
     animation: none;
 }
 
-.hud_status__graffic--armor{
-    background-color: rgb(215, 215, 0);
+.hud_status__graffic--energy{
+    background-color: rgb(0, 250, 220);
 }
 
 @keyframes border_health_warning {
@@ -299,7 +299,7 @@ img{
 
 .hud_moves__move{
     height: 47%;
-    flex-basis: 49.8%;
+    flex-basis: 49.6%;
     user-select: none;
     cursor: pointer;
     color: white;
@@ -341,9 +341,17 @@ img{
     bottom: -31%;
 }
 
+#hud_moves_specials{
+    bottom: -31%;
+}
+
 .hud_moves__move--disable{
     color: rgb(20, 20, 20);
     background-color: rgb(80, 80, 80);
+    pointer-events: none;
+}
+
+.hud_moves__move--invisible{
     pointer-events: none;
     opacity: 0%;
 }
@@ -508,6 +516,7 @@ img{
 .enemy_status__health{
     height: 100%;
     background-color: red;
+    transition-duration: 300ms;
 }
 
 /* + Sprite */

@@ -63,6 +63,18 @@ function SwitchWarnings(action){
     }
 }
 
+function HighlightEnergy(action){
+    if(action == 'on'){
+        player_energy_border.style.animation = 'border_specialMoveReady 1s infinite';
+        player_energy_graffic.style.animation = 'graphic_specialMoveReady 1s infinite';
+    }
+    
+    if(action == 'off'){
+        player_energy_border.style.animation = 'none';
+        player_energy_graffic.style.animation = 'none';
+    }
+}
+
 //+ Victory Screen
 function ShowVictoryScreen(){
     hud_victory.style.display = 'flex';
@@ -231,9 +243,8 @@ function UseBackpackItem({item}){
     let item_index = player_backpack_items.findIndex(array => array.item === item);
     let item_array = player_backpack_items[item_index];
     
-    if(item_array.category == 'HP'){
-        ChangePlayerHealth(item_array.points);
-    }
+    ChangePlayerHealth(item_array.hp);
+    ChangePlayerEnergy(item_array.ep);
 
     battle_stats.medicine_used += 1;
     item_array.quantity -= 1;
@@ -361,7 +372,6 @@ function EnemyTurn(){
     let enemy_damage = enemy_stats[0].damage;
 
     ChangePlayerHealth(- enemy_damage);
-    ChangePlayerEnergy(Math.round(- enemy_damage / 4));
     battle_stats.damage_taken += enemy_damage;
     
     battle_stats.hits_taken += 1;

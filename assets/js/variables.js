@@ -39,6 +39,7 @@ const player_health_border = document.querySelector('.hud_status__health')
 const player_health_graffic = document.getElementById('player_health_graffic');
 
 const player_energy_text = document.getElementById('player_energy_text');
+const player_energy_border = document.querySelector('.hud_status__energy');
 const player_energy_graffic = document.getElementById('player_energy_graffic');
 
 //+ Stats
@@ -67,23 +68,43 @@ let player_backpack_items = [
     {
         item: 'bandage',
         quantity: 2,
-        description: 'Use it to heal 60 HP',
-        category: 'HP',
-        points: 60
+        description: 'Fast to apply, it heals 60 HP',
+        hp: 60,
+        ep: 0,
+        buff: null
+        // keyCombination:
     },
     {
         item: 'med-kit',
         quantity: 1,
-        description: 'Use it to heal 150 HP',
-        category: 'HP',
-        points: 150
+        description: 'Hard to use but it heals 150 HP',
+        hp: 150,
+        ep: 0,
+        buff: null
     },
     {
         item: 'band-aid',
         quantity: 5,
-        description: 'Use it to heal 20 HP',
-        category: 'HP',
-        points: 20
+        description: 'Instant use, it heals 25 HP',
+        hp: 25,
+        ep: 0,
+        buff: null
+    },
+    {
+        item: 'adrenalin',
+        quantity: 1,
+        description: 'Recover all your HP and AR',
+        hp: 200,
+        ep: 200,
+        buff: null
+    },
+    {
+        item: 'ramen',
+        quantity: 1,
+        description: 'It fills you with HP slowly',
+        hp: 30,
+        ep: 10,
+        buff: null
     },
 ];
 

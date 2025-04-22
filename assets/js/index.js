@@ -233,7 +233,7 @@ function WriteItemDescription({item}){
     item_array = player_backpack_items[item_index];
 
     item_name = item_array.item.charAt(0).toUpperCase() + item_array.item.slice(1);
-    hud_backpack_description.innerHTML = '<b>' + item_name + ':</b> ' + item_array.description;
+    hud_backpack_description.innerHTML = '<b>' + item_name + ':</b><br> ' + item_array.description;
 }
 
 function EraseItemDescription(){ hud_backpack_description.innerHTML = ''; }
@@ -250,16 +250,12 @@ function UseBackpackItem({item}){
     item_array.quantity -= 1;
 }
 
-//! Specials
+//! Specials (Techniques)
 function CheckSpecialMove(special_move){
     let class_name = 'hud_moves__move';
     
     if(player_stats.energy < player_specials_moves[special_move].ep){
         class_name += ' hud_moves__move--disable';
-    }
-    
-    if(player_specials_moves[special_move].learned == false){
-        class_name += ' hud_moves__move--invisible';
     }
 
     return class_name;
@@ -316,6 +312,7 @@ function ChangePlayerHealth(HP){
     //Prevents negative numbers
     if(player_stats.health < 0){ player_stats.health = 0; }
 
+    // Activate warnings when the health is low
     if(player_stats.health <= player_stats.max_health/4){
         SwitchWarnings('on');
     } else {
@@ -335,6 +332,13 @@ function ChangePlayerEnergy(EP){
 
     //Prevents negative numbers
     if(player_stats.energy < 0){ player_stats.energy = 0; }
+
+    // Advice when a tech is ready to use
+    if(player_stats.energy >= 50){
+        HighlightEnergy('on');
+    } else {
+        HighlightEnergy('off');
+    }
 
     //Updates the graffic bars and texts of the player's HUD
     player_energy_text.innerText = 'EP = ' + Math.round((player_stats.energy / player_stats.max_energy)*100) + '%';;
@@ -388,37 +392,38 @@ function delay(ms){
 }
 
 //! Set combat turns
+let battleTurns = 0;
+
 async function SetCombatTurns({category, move}){
     HideAllMenus();
 
-    if(player_stats.speed > enemy_stats[0].speed){
-        PlayerTurn({category, move});
+    // 1.- Player Turn
+    PlayerTurn({category, move});
+    await delay(900);
+
+    // 2.- Alterate Stats acording to Buffs & Debuffs
+
+    // 3.- Enemy's Turn
+    if(enemy_stats[0].health != 0){
+        EnemyTurn();
         await delay(900);
+    }
+    
+    // 4.- Regeneration & Poison
 
-        if(enemy_stats[0].health != 0){
-            EnemyTurn();
-            await delay(900);
-        }
-
-        if(enemy_stats[0].health != 0 && player_stats.health != 0){
-            TogglePlayerMenus({menu: 'general'});
-        }
-    } else {
-        if(player_stats.speed < enemy_stats[0].speed){
-            /* Enemy's Turn */
-            /* Player's Turn */
-        } else {
-            /* If PLayer Speed = Enemy Speed
-            do "Choque" */
-        }
+    // 5.- Check if both can continue fighting to repeat the loop
+    if(enemy_stats[0].health != 0 && player_stats.health != 0){
+        TogglePlayerMenus({menu: 'general'});
     }
 
+    // Enemy Defeated (Victory)
     if(enemy_stats[0].health == 0){
         /* + Change the enemy and player animation
         + Sfx of Victory */
         ShowVictoryScreen();
     }
 
+    // Player Defeated (Game Over)
     if(player_stats.health == 0){
         //* Change the enemy animation
         ChangePlayerAnimation({animation: 'defeated'})

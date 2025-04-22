@@ -44,12 +44,10 @@ const player_energy_graffic = document.getElementById('player_energy_graffic');
 
 //+ Stats
 let player_stats = {
-    health: 20,
+    health: 25,
     max_health: 100,
-    energy: 5,
+    energy: 10,
     max_energy: 100,
-    speed: 5,
-    strength: 5,
     crit_multiplier: 1.5
 };
 
@@ -106,30 +104,22 @@ let player_backpack_items = [
         ep: 10,
         buff: null
     },
+    {
+        item: 'vitamins',
+        quantity: 1,
+        description: 'Increase energy and strength',
+        hp: 0,
+        ep: 20,
+        buff: null
+    },
 ];
 
 //+ Specials
 let player_specials_moves = {
     tornado: {
         name: 'tornado',
-        ep: 50,
-        learned: true
-    },
-    a: {
-        name: 'a',
-        ep: 0,
-        learned: false
-    },
-    b: {
-        name: 'b',
-        ep: 0,
-        learned: false
-    },
-    c: {
-        name: 'c',
-        ep: 0,
-        learned: false
-    },
+        ep: 50
+    }
 };
 
 //+ Animation
@@ -179,8 +169,6 @@ const enemy_health_text = document.getElementById('enemy_health_text');
 let enemy_stats = [{
     health: 250,
     max_health: 250,
-    speed: 2,
-    strength: 2,
     damage: 12
     //? defense
 }];

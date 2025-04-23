@@ -84,10 +84,8 @@
     </div>
 
     <!-- + Buffs & Debuffs -->
-    <div class="hud_effects">
-        <div class="hud_effect hud_effect--buff">1</div>
-        <div class="hud_effect hud_effect--debuff">2</div>
-    </div>
+    <div id="hud_effects_box" class="hud_effects"></div>
+    <div id="hud_effect--info"></div>
 
     <!-- + Moves -->
     <div class="hud_moves" id="hud_moves_general">
@@ -95,15 +93,14 @@
             <p class="hud_moves__text">Attack</p>
             <img src="assets/icons/attack.png" class="hud_moves__img">
         </div>
-        <div class="hud_moves__move" onclick="TogglePlayerMenus({menu: 'backpack'})">
-            <p class="hud_moves__text">Backpack</p>
-            <img src="assets/icons/backpack.png" class="hud_moves__img">
-        </div>
         <div class="hud_moves__move hud_moves__move" onclick="TogglePlayerMenus({menu: 'specials'})">
             <p class="hud_moves__text">Techniques</p>
             <img src="assets/icons/specials.png" class="hud_moves__img">
         </div>
-        <div class="hud_moves__move hud_moves__move--invisible">4</div>
+        <div class="hud_moves__move" onclick="TogglePlayerMenus({menu: 'backpack'})">
+            <p class="hud_moves__text">Backpack</p>
+            <img src="assets/icons/backpack.png" class="hud_moves__img">
+        </div>
     </div>
 
     <!-- * Attack Moves -->

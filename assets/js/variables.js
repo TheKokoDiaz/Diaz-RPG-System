@@ -33,6 +33,10 @@ const hud_victory = document.querySelector('#hud_victory');
 const hud_victory_results_box = document.querySelector('.hud_victory__results_box');
 const hud_victory_stats = document.querySelector('#victory_stats');
 
+//* Buffs & Debuffs
+const hud_effects_box = document.getElementById('hud_effects_box');
+const hud_effects_info = document.getElementById('hud_effect--info');
+
 //+ Graphics
 const player_health_text = document.getElementById('player_health_text');
 const player_health_border = document.querySelector('.hud_status__health')
@@ -46,20 +50,28 @@ const player_energy_graffic = document.getElementById('player_energy_graffic');
 let player_stats = {
     health: 25,
     max_health: 100,
-    energy: 10,
+    energy: 100,
     max_energy: 100,
-    crit_multiplier: 1.5
+    attack: 30,
+    crit_multiplier: 1.5,
+    defense: 0
 };
 
-//+ Equipment
-let player_equipment_stats = {
-    sword_damage: 30,
-    bow_damage: 15,
-    greatsword_damage: 50,
-    lance_damage: 10,
-    shield_block: 5,
-    shield_weight: 5
-};
+// Buffs & Debuffs
+let player_effects = [
+    {
+        name: 'Regeneration',
+        duration: 3,
+        description: 'Heals some HP per turn',
+        category: 'buff'
+    },
+    {
+        name: 'Weakness',
+        duration: 2,
+        description: 'You deal less damage',
+        category: 'debuff'
+    },
+]
 
 //+ Backpack Items
 let player_backpack_items = [
@@ -70,7 +82,6 @@ let player_backpack_items = [
         hp: 60,
         ep: 0,
         buff: null
-        // keyCombination:
     },
     {
         item: 'med-kit',
@@ -119,6 +130,10 @@ let player_specials_moves = {
     tornado: {
         name: 'tornado',
         ep: 50
+    },
+    heal: {
+        name: 'heal',
+        ep: 60
     }
 };
 
@@ -156,6 +171,28 @@ let battle_stats = {
     hits_taken: 0,
     damage_taken: 0
 };
+
+//+ Effects
+let buffs = {
+    regeneration: {
+        name: 'Regeneration',
+        duration: 4,
+        description: 'Heals some HP per turn',
+        category: 'buff'
+    },
+    superRegeneration: {
+        name: 'Super-Regeneration',
+        duration: 5,
+        description: 'Heals HP per turn',
+        category: 'buff'
+    },
+    hyperRegeneration: {
+        name: 'Hyper-Regeneration',
+        duration: 6,
+        description: 'Heals a lot of HP per turn',
+        category: 'buff'
+    },
+}
 
 //! Enemy
 //+ SFX

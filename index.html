@@ -4,13 +4,12 @@
     <!-- ? Programed by "El Koko Díaz" -->
     
     <!-- !Start Date: July 6th, 2023 -->
-    <!-- + Update: April 20, 2025 -->
+    <!-- + Update: April 24, 2025 -->
 
     <!-- ? Icons from web site: "https://www.flaticon.es" -->
     <!-- ? SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
 
     <!-- !Things to do: 
-        + Add Music
         + Add Animations
         + Add Defeat text
         + Frame account to crit hits
@@ -22,8 +21,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Battle!</title>
+    <title>Díaz RPG System</title>
 
+    <link rel="shortcut icon" href="assets/icons/header.png">
     <!-- * Stylesheets -->
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
@@ -85,10 +85,8 @@
     </div>
 
     <!-- + Buffs & Debuffs -->
-    <div class="hud_effects">
-        <div class="hud_effect hud_effect--buff">1</div>
-        <div class="hud_effect hud_effect--debuff">2</div>
-    </div>
+    <div id="hud_effects_box" class="hud_effects" onmouseleave="HideEffectDescription()"></div>
+    <div id="hud_effect--info"></div>
 
     <!-- + Moves -->
     <div class="hud_moves" id="hud_moves_general">
@@ -96,15 +94,14 @@
             <p class="hud_moves__text">Attack</p>
             <img src="assets/icons/attack.png" class="hud_moves__img">
         </div>
-        <div class="hud_moves__move" onclick="TogglePlayerMenus({menu: 'backpack'})">
-            <p class="hud_moves__text">Backpack</p>
-            <img src="assets/icons/backpack.png" class="hud_moves__img">
-        </div>
         <div class="hud_moves__move hud_moves__move" onclick="TogglePlayerMenus({menu: 'specials'})">
             <p class="hud_moves__text">Techniques</p>
             <img src="assets/icons/specials.png" class="hud_moves__img">
         </div>
-        <div class="hud_moves__move hud_moves__move--invisible">4</div>
+        <div class="hud_moves__move" onclick="TogglePlayerMenus({menu: 'backpack'})">
+            <p class="hud_moves__text">Backpack</p>
+            <img src="assets/icons/backpack.png" class="hud_moves__img">
+        </div>
     </div>
 
     <!-- * Attack Moves -->
@@ -113,9 +110,6 @@
             <p class="hud_moves__text">Sword</p>
             <img src="assets/icons/sword.png" class="hud_moves__img">
         </div>
-        <div class="hud_moves__move hud_moves__move--invisible">Bow</div>
-        <div class="hud_moves__move hud_moves__move--invisible">Greatsword</div>
-        <div class="hud_moves__move hud_moves__move--invisible">Lance</div>
     </div>
     
     <!-- * Special Moves -->

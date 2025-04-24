@@ -33,6 +33,10 @@ const hud_victory = document.querySelector('#hud_victory');
 const hud_victory_results_box = document.querySelector('.hud_victory__results_box');
 const hud_victory_stats = document.querySelector('#victory_stats');
 
+//* Buffs & Debuffs
+const hud_effects_box = document.getElementById('hud_effects_box');
+const hud_effects_info = document.getElementById('hud_effect--info');
+
 //+ Graphics
 const player_health_text = document.getElementById('player_health_text');
 const player_health_border = document.querySelector('.hud_status__health')
@@ -44,67 +48,80 @@ const player_energy_graffic = document.getElementById('player_energy_graffic');
 
 //+ Stats
 let player_stats = {
-    health: 20,
+    health: 25,
     max_health: 100,
-    energy: 5,
+    energy: 15,
     max_energy: 100,
-    speed: 5,
-    strength: 5,
-    crit_multiplier: 1.5
+    attack: 30,
+    crit_multiplier: 1.5,
+    defense: 3
 };
 
-//+ Equipment
-let player_equipment_stats = {
-    sword_damage: 30,
-    bow_damage: 15,
-    greatsword_damage: 50,
-    lance_damage: 10,
-    shield_block: 5,
-    shield_weight: 5
-};
+// Buffs & Debuffs
+let player_effects = [
+    {
+        name: 'Regeneration',
+        duration: 3,
+        description: 'Heals some HP per turn',
+        category: 'buff'
+    },
+    {
+        name: 'Weakness',
+        duration: 3,
+        description: 'You deal less damage',
+        category: 'debuff'
+    },
+]
 
 //+ Backpack Items
 let player_backpack_items = [
     {
         item: 'bandage',
         quantity: 2,
-        description: 'Fast to apply, it heals 60 HP',
+        description: 'Fast to apply, it heals a decent amount of HP',
         hp: 60,
         ep: 0,
         buff: null
-        // keyCombination:
     },
     {
         item: 'med-kit',
         quantity: 1,
-        description: 'Hard to use but it heals 150 HP',
+        description: 'Hard to use but it can restore all your HP',
         hp: 150,
         ep: 0,
         buff: null
     },
     {
         item: 'band-aid',
-        quantity: 5,
-        description: 'Instant use, it heals 25 HP',
-        hp: 25,
+        quantity: 3,
+        description: 'It heals a tiny amount of HP, but using it makes fell you better',
+        hp: 5,
         ep: 0,
-        buff: null
+        buff: 'regeneration'
     },
     {
         item: 'adrenalin',
         quantity: 1,
-        description: 'Recover all your HP and AR',
-        hp: 200,
+        description: 'It fills you with EP and a lot of energy',
+        hp: 10,
         ep: 200,
-        buff: null
+        buff: 'hyperEnergized'
     },
     {
         item: 'ramen',
         quantity: 1,
-        description: 'It fills you with HP slowly',
+        description: 'Delicious and with a lot of protein, it fills you with HP slowly',
         hp: 30,
         ep: 10,
-        buff: null
+        buff: 'regeneration'
+    },
+    {
+        item: 'vitamins',
+        quantity: 1,
+        description: 'Increases energy',
+        hp: 0,
+        ep: 20,
+        buff: 'energized'
     },
 ];
 
@@ -112,24 +129,12 @@ let player_backpack_items = [
 let player_specials_moves = {
     tornado: {
         name: 'tornado',
-        ep: 50,
-        learned: true
+        ep: 50
     },
-    a: {
-        name: 'a',
-        ep: 0,
-        learned: false
-    },
-    b: {
-        name: 'b',
-        ep: 0,
-        learned: false
-    },
-    c: {
-        name: 'c',
-        ep: 0,
-        learned: false
-    },
+    heal: {
+        name: 'heal',
+        ep: 60
+    }
 };
 
 //+ Animation
@@ -167,6 +172,61 @@ let battle_stats = {
     damage_taken: 0
 };
 
+let effect_stats = {
+    damage: -15,
+    defense: 0
+};
+
+//+ Effects
+let buffs = {
+    energized: {
+        name: 'Energized',
+        duration: 5,
+        description: 'Recover EP through time',
+        category: 'buff'
+    },
+    energized: {
+        name: 'Super-Energized',
+        duration: 4,
+        description: 'Recover many EP in some time',
+        category: 'buff'
+    },
+    hyperEnergized: {
+        name: 'Hyper-Energized',
+        duration: 3,
+        description: 'Recover a lot of EP in a short time',
+        category: 'buff'
+    },
+
+    regeneration: {
+        name: 'Regeneration',
+        duration: 6,
+        description: 'Heals some HP per turn',
+        category: 'buff'
+    },
+    superRegeneration: {
+        name: 'Super-Regeneration',
+        duration: 5,
+        description: 'Heals HP per turn',
+        category: 'buff'
+    },
+    hyperRegeneration: {
+        name: 'Hyper-Regeneration',
+        duration: 4,
+        description: 'Heals a lot of HP per turn',
+        category: 'buff'
+    },
+}
+
+let debuffs = {
+    weakness: {
+        name: 'Weakness',
+        duration: 3,
+        description: 'You deal less damage',
+        category: 'debuff'
+    },
+}
+
 //! Enemy
 //+ SFX
 const enemy_sfx = document.getElementById('enemy_sfx');
@@ -177,11 +237,9 @@ const enemy_health_text = document.getElementById('enemy_health_text');
 
 //+ Stats
 let enemy_stats = [{
-    health: 250,
-    max_health: 250,
-    speed: 2,
-    strength: 2,
-    damage: 12
+    health: 500,
+    max_health: 500,
+    damage: 15
     //? defense
 }];
 

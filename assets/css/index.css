@@ -251,48 +251,91 @@ img{
 }
 
 @keyframes border_specialMoveReady {
-    0% {border-color: rgb(180, 255, 250);}
+    0% {border-color: rgb(250, 255, 180);}
     50% {border-color: rgb(0, 250, 220);}
-    100% {border-color: rgb(180, 255, 250);}
+    100% {border-color: rgb(250, 255, 180);}
 }
 
 @keyframes graphic_specialMoveReady {
-    0% {background-color: rgb(180, 255, 250);}
+    0% {background-color: rgb(250, 255, 180);}
     50% {background-color: rgb(0, 250, 220);}
-    100% {background-color: rgb(180, 255, 250);}
+    100% {background-color: rgb(250, 255, 180);}
 }
 
 /* + Buffs & Debuffs */
-.hud_effects{
+#hud_effects_box{
     width: 30%;
-    position: fixed;
     top: 6.7rem;
     left: 2vh;
-    display: flex; /* ! */
-    user-select: none;
+    position: fixed;
+
+    display: flex;
     justify-content: start;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5vh;
+    
+    user-select: none;
     z-index: 5;
 }
 
 .hud_effect{
-    color: white;
-    background-color: rgba(0, 50, 150, 70%);
     width: 25px;
     height: 25px;
+    padding: 0.25rem;
+
+    color: white;
     border-radius: 8px;
-    overflow: hidden;
+    
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    overflow: hidden;
 }
 
 .hud_effect img{
     width: 100%;
     height: 100%;
-    opacity: 50%;
+}
+
+.hud_effect--buff{
+    background-color: rgb(0, 50, 150);
+}
+
+.hud_effect--buff:hover{
+    background-color: rgb(50, 100, 250);
+}
+
+.hud_effect--debuff{
+    background-color: rgb(150, 50, 0);
+}
+
+.hud_effect--debuff:hover{
+    background-color: rgb(250, 100, 50);
+}
+
+.hud_effect--buff:hover, .hud_effect--debuff:hover{
+    cursor: help;
+}
+
+#hud_effect--info{
+    width: 30%;
+    top: 8.5rem;
+    left: 2vh;
+    position: fixed;
+    padding: 0.2rem 0.5rem;
+    
+    border-radius: 8px;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 20, 50%);
+    
+    color: white;
+    text-align: justify;
+
+    z-index: 10;
+    opacity: 0%;
+    user-select: none;
 }
 
 /* + Moves */
@@ -301,15 +344,18 @@ img{
     height: 20%;
     left: 2vh;
     bottom: 1vh;
-    padding: 0.5vh;
     position: fixed;
+
+    padding: 0.5vh;
     border-radius: 8px;
     background-color: rgb(40, 40, 120);
+
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     flex-direction: row;
     flex-wrap: wrap;
+
     transition-duration: 300ms;
     z-index: 5;
 }
@@ -317,16 +363,20 @@ img{
 .hud_moves__move{
     height: 47%;
     flex-basis: 49.6%;
-    user-select: none;
-    cursor: pointer;
+    margin: 0.25% 0;
+
     color: white;
     border-radius: 8px;
     background-color: rgb(0, 25, 110);
+    
     display: flex;
     justify-content: center;
     align-items: center;
-    transition-duration: 300ms;
     overflow: hidden;
+    
+    transition-duration: 300ms;
+    user-select: none;
+    cursor: pointer;
 }
 
 .hud_moves__move:hover{
@@ -437,7 +487,9 @@ img{
     
     display: flex;
     justify-content: start;
+    align-content: flex-start;
     align-items: start;
+
     flex-wrap: wrap;
     overflow-y: scroll;
     gap: 1vh;
@@ -461,10 +513,12 @@ img{
 .hud_backpack__items div{
     width: 19%;
     aspect-ratio: 1/1;
-    padding: 0vh;
-    margin-bottom: 0.75vh;
     border-radius: 8px;
     background-color: rgb(0, 25, 110);
+    
+    padding: 0;
+    margin-bottom: 0.3%;
+    position: relative;
 
     display: flex;
     justify-content: center;
@@ -472,9 +526,9 @@ img{
     flex-direction: column;
     overflow: hidden;
     flex-shrink: 0;
+
     user-select: none;
     cursor: pointer;
-    position: relative;
 }
 
 .hud_backpack__items div p{

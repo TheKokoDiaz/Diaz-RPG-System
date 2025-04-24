@@ -32,10 +32,6 @@ function TogglePlayerMenus({menu = ''}){
             hud_moves_specials.style.bottom = '1vh';
             WriteSpecialMoves();
             break;
-
-        default:
-            console.log('ERROR: No recognized argument for TogglePlayerMenus');
-            break;
     }
 
     if(menu != 'general'){ hud_moves_return.style.bottom = '1vh'; }
@@ -196,8 +192,8 @@ function PlayerAttack(move){
             break;
     }
     
-    damage *= crit_multiplier;
-    ChangePlayerEnergy(Math.round(damage/2));
+    damage = (damage + effect_stats.damage) * crit_multiplier;
+    ChangePlayerEnergy(Math.round(damage/3));
 
     enemy_stats[0].health -= damage;
     battle_stats.damage_given +=  damage;
@@ -218,7 +214,7 @@ function UpdatePlayerBackpack(){
         item_array = player_backpack_items[n];
         
         if(item_array.quantity != 0){
-            hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + item_array.item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + item_array.item + '`})"><img src="assets/icons/' + item_array.item + '.png"> <p>' + item_array.quantity + '</p></div>';
+            hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + item_array.item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + item_array.item + '`})"><img src="assets/icons/items/' + item_array.item + '.png"> <p>' + item_array.quantity + '</p></div>';
         }
     }
 }
@@ -245,6 +241,10 @@ function UseBackpackItem({item}){
     
     ChangePlayerHealth(item_array.hp);
     ChangePlayerEnergy(item_array.ep);
+
+    if(item_array.buff != null){
+        AddPlayerEffect(buffs[item_array.buff])
+    }
 
     battle_stats.medicine_used += 1;
     item_array.quantity -= 1;
@@ -299,7 +299,7 @@ function PlayerSpecial(move){
     ChangePlayerEnergy(-player_specials_moves[move].ep);
     
     if(damage != 0){
-        damage *= crit_multiplier;
+        damage = (damage + effect_stats.damage) * crit_multiplier;
     
         enemy_stats[0].health -= damage;
         battle_stats.damage_given +=  damage;
@@ -366,7 +366,7 @@ function UpdatePlayerEffects(){
     hud_effects_box.innerHTML = '';
 
     player_effects.forEach(effect => {
-        hud_effects_box.innerHTML += '<div class="hud_effect hud_effect--' + effect.category + '" onmouseover="ShowEffectDescription(`' + effect.name + '`, `' + effect.description + '`, `' + effect.duration + '`)" onmouseleave="HideEffectDescription()"><img src="assets/icons/' + effect.name + '.png"></div>';
+        hud_effects_box.innerHTML += '<div class="hud_effect hud_effect--' + effect.category + '" onmouseover="ShowEffectDescription(`' + effect.name + '`, `' + effect.description + '`, `' + effect.duration + '`)" onmouseleave="HideEffectDescription()"><img src="assets/icons/effects/' + effect.name + '.png"></div>';
     });
 }
 
@@ -380,21 +380,43 @@ function CountPlayerEffects(){
             auxiliar_effects.push(effect);
         }
     });
-
-    console.log(buffs);
-    console.log(player_effects);
     
     player_effects = auxiliar_effects;
 }
 
 function ApplyPlayerEffects(effect){
+    effect_stats.damage = 0;
+    effect_stats.defense = 0;
+
     switch(effect){
+        //* Buffs
+        case 'Energized':
+            ChangePlayerEnergy(7);
+            break;
+        
+        case 'Super-Energized':
+            ChangePlayerEnergy(15);
+            break;
+        
+        case 'Hyper-Energized':
+            ChangePlayerEnergy(30);
+            break;
+
         case 'Regeneration':
             ChangePlayerHealth(8);
             break;
 
         case 'Super-Regeneration':
             ChangePlayerHealth(16);
+            break;
+        
+        case 'Hyper-Regeneration':
+            ChangePlayerHealth(32);
+            break;
+
+        //* Debuffs
+        case 'Weakness':
+            effect_stats.damage -= 15;
             break;
     }   
 }
@@ -437,11 +459,12 @@ function PlayerTurn({category, move}){
 
 //+ Enemy
 function EnemyTurn(){
-    let enemy_damage = enemy_stats[0].damage;
+    /* let enemy_damage = enemy_stats[0].damage; */
+    let enemy_damage = enemy_stats[0].damage - player_stats.defense;
 
     ChangePlayerHealth(- enemy_damage);
-    battle_stats.damage_taken += enemy_damage;
     
+    battle_stats.damage_taken += enemy_damage;
     battle_stats.hits_taken += 1;
 
     ChangeEnemyAnimation({animation: 'attack'});

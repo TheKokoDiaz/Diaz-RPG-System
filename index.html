@@ -4,7 +4,7 @@
     <!-- ? Programed by "El Koko Díaz" -->
     
     <!-- !Start Date: July 6th, 2023 -->
-    <!-- + Update: April 24, 2025 -->
+    <!-- + Update: April 26, 2025 -->
 
     <!-- ? Icons from web site: "https://www.flaticon.es" -->
     <!-- ? SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
@@ -22,131 +22,129 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Díaz RPG System</title>
-
+    
+    <!-- * Tab Icon -->
     <link rel="shortcut icon" href="assets/icons/header.png">
+
     <!-- * Stylesheets -->
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
     <!-- ! Game -->
-    <!-- + Music -->
+    <!-- + Music & SFX -->
     <audio src="" id="music"></audio>
+    <audio src="" id="player_sfx"></audio>
+    <audio src="" id="enemy_sfx"></audio>
 
     <!-- + HUD -->
-    <span id="hud_top_warning_bar"></span>
-    <span id="hud_bottom_warning_bar"></span>
+    <aside id="hud_top_warning_bar"></aside>
+    <aside id="hud_bottom_warning_bar"></aside>
 
     <!-- + Screens -->
-    <div id="hud_victory">
-        <div class="hud_victory__title">Victory</div>
-        <div class="hud_victory__results_box">
-            <div class="hud_victory__sub_box hud_victory__sub_box--stats">
+    <section id="hud_victory">
+        <header class="hud_victory__title">Victory</header>
+        <section class="hud_victory__results_box">
+            <aside class="hud_victory__sub_box hud_victory__sub_box--stats">
                 <div class="hud_victory__subtitle">Stats:</div>
                 <ul class="hud_victory__list" id="victory_stats"></ul>
-            </div>
-            <div class="hud_victory__sub_box hud_victory__sub_box--objects">
+            </aside>
+            <aside class="hud_victory__sub_box hud_victory__sub_box--objects">
                 <div class="hud_victory__subtitle">Obtained Items:</div>
-            </div>
-            <div class="hud_victory__sub_box hud_victory__sub_box--exp">
+            </aside>
+            <aside class="hud_victory__sub_box hud_victory__sub_box--exp">
                 <div class="hud_victory__subtitle">Earned Exp:</div>
                 <div class="hud_victory__body"></div>
-            </div>
-            <div class="hud_victory__sub_box hud_victory__sub_box--continue">
-                <div class="hud_victory__button">Continue</div>
-            </div>
-        </div>
-    </div>
+            </aside>
+            <aside class="hud_victory__sub_box hud_victory__sub_box--continue">
+                <button class="hud_victory__button">Continue</button>
+            </aside>
+        </section>
+    </section>
 
-    <div id="hud_defeat_screen"></div>
+    <section id="hud_defeat_screen"></section>
 
     <!-- ! Player -->
-    <!-- + SFX -->
-    <audio src="" id="player_sfx"></audio>
-    
-    <!-- +  Status-->
-    <div class="hud_status">
-        <div class="hud_status__name">Zokuria</div>
-
-        <div class="hud_status__bar">
-            <!-- Health (HP) -->
-            <div class="hud_status__health">
-                <div class="hud_status__graffic hud_status__graffic--health" id="player_health_graffic"></div>
-                <img class="hud_status__icon hud_status__icon--health" src="assets/icons/HP.png">
-                <div class="hud_status__text hud_status__text--health" id="player_health_text"></div>
-            </div>
-
-            <!-- Energy (EP) -->
-            <div class="hud_status__energy">
-                <div class="hud_status__graffic hud_status__graffic--energy" id="player_energy_graffic"></div>
-                <img class="hud_status__icon hud_status__icon--energy" src="assets/icons/EP.png">
-                <div class="hud_status__text hud_status__text--energy" id="player_energy_text"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- + Buffs & Debuffs -->
-    <div id="hud_effects_box" class="hud_effects" onmouseleave="HideEffectDescription()"></div>
-    <div id="hud_effect--info"></div>
-
-    <!-- + Moves -->
-    <div class="hud_moves" id="hud_moves_general">
-        <div class="hud_moves__move" onclick="TogglePlayerMenus({menu: 'attack'})">
-            <p class="hud_moves__text">Attack</p>
-            <img src="assets/icons/attack.png" class="hud_moves__img">
-        </div>
-        <div class="hud_moves__move hud_moves__move" onclick="TogglePlayerMenus({menu: 'specials'})">
-            <p class="hud_moves__text">Techniques</p>
-            <img src="assets/icons/specials.png" class="hud_moves__img">
-        </div>
-        <div class="hud_moves__move" onclick="TogglePlayerMenus({menu: 'backpack'})">
-            <p class="hud_moves__text">Backpack</p>
-            <img src="assets/icons/backpack.png" class="hud_moves__img">
-        </div>
-    </div>
-
-    <!-- * Attack Moves -->
-    <div class="hud_moves" id="hud_moves_attack">
-        <div class="hud_moves__move" onclick="SetCombatTurns({category: 'attack', move: 'sword'})">
-            <p class="hud_moves__text">Sword</p>
-            <img src="assets/icons/sword.png" class="hud_moves__img">
-        </div>
-    </div>
-    
-    <!-- * Special Moves -->
-    <div class="hud_moves" id="hud_moves_specials"></div>
-
-    <!-- * Return Button -->
-    <div id="hud_moves__return" onclick="TogglePlayerMenus({menu: 'general'})">↩</div>
-    
     <!-- + Sprite -->
     <canvas id="player_sprite"></canvas>
-    
-    <!-- + Backpack -->
-    <div id="hud_backpack">
-        <div class="hud_backpack__description"></div>
-        <div class="hud_backpack__items"></div>
-    </div>
 
-    <!-- ! Enemy-->
-    <!-- + SFX -->
-    <audio src="" id="enemy_sfx"></audio>
-    
-    <!-- + Status HUD -->
-    <div class="enemy_status">
-        <div class="enemy_status__text">Enemy:</div>
-        <div class="enemy_status__text" id="enemy_health_text">HP:</div>
-        <div class="enemy_status__bar">
-            <div class="enemy_status__health" id="enemy_health_graffic"></div>
-        </div>
-    </div>
+    <!-- +  Status -->
+    <section class="hud_status">
+        <header class="hud_status__name">Zokuria</header>
+        
+        <aside class="hud_status__bar">
+            <!-- Health (HP) -->
+            <section class="hud_status__health">
+                <aside class="hud_status__graffic hud_status__graffic--health" id="player_health_graffic"></aside>
+                <img class="hud_status__icon hud_status__icon--health" src="assets/icons/HP.png">
+                <span class="hud_status__text hud_status__text--health" id="player_health_text"></span>
+            </section>
 
+            <!-- Energy (EP) / Aura -->
+            <section class="hud_status__energy">
+                <aside class="hud_status__graffic hud_status__graffic--energy" id="player_energy_graffic"></aside>
+                <img class="hud_status__icon hud_status__icon--energy" src="assets/icons/EP.png">
+                <span class="hud_status__text hud_status__text--energy" id="player_energy_text"></span>
+            </section>
+        </aside>
+    </section>
+
+    <!-- + Buffs & Debuffs -->
+    <section id="hud_effects_box" class="hud_effects" onmouseleave="HideEffectDescription()"></section>
+    <span id="hud_effect--info"></span>
+
+    <!-- + Moves -->
+    <section class="hud_moves" id="hud_moves_general">
+        <button class="hud_moves__move" onclick="TogglePlayerMenus({menu: 'attack'})">
+            <p class="hud_moves__text">Attack</p>
+            <img src="assets/icons/attack.png" class="hud_moves__img">
+        </button>
+        <button class="hud_moves__move hud_moves__move" onclick="TogglePlayerMenus({menu: 'specials'})">
+            <p class="hud_moves__text">Techniques</p>
+            <img src="assets/icons/specials.png" class="hud_moves__img">
+        </button>
+        <button class="hud_moves__move" onclick="TogglePlayerMenus({menu: 'backpack'})">
+            <p class="hud_moves__text">Backpack</p>
+            <img src="assets/icons/backpack.png" class="hud_moves__img">
+        </button>
+    </section>
+
+    <!-- * Attack Moves -->
+    <section class="hud_moves" id="hud_moves_attack">
+        <button class="hud_moves__move" onclick="SetCombatTurns({category: 'attack', move: 'sword'})">
+            <p class="hud_moves__text">Sword</p>
+            <img src="assets/icons/sword.png" class="hud_moves__img">
+        </button>
+    </section>
+    
+    <!-- * Special Moves -->
+    <section class="hud_moves" id="hud_moves_specials"></section>
+
+    <!-- * Backpack -->
+    <section id="hud_backpack">
+        <span class="hud_backpack__description"></span>
+        <aside class="hud_backpack__items"></aside>
+    </section>
+
+    <!-- * Return Button -->
+    <button id="hud_moves__return" onclick="TogglePlayerMenus({menu: 'general'})">↩</button>
+
+    <!-- ! Enemy -->
     <!-- + Sprite -->
     <canvas id="enemy_sprite"></canvas>
 
-    <!-- * JavaScript -->
+    <!-- + Status HUD -->
+    <section class="enemy_status">
+        <header class="enemy_status__text">Enemy:</header>
+        <span class="enemy_status__text" id="enemy_health_text">HP:</span>
+        <aside class="enemy_status__bar">
+            <div class="enemy_status__health" id="enemy_health_graffic"></div>
+        </aside>
+    </section>
+
+    <!-- ! JavaScript -->
     <script src="assets/js/variables.js"></script>
-    <script src="assets/js/player_animation.js"></script>
-    <script src="assets/js/enemy_animation.js"></script>
+    <script src="assets/js/player.js"></script>
+    <script src="assets/js/enemy.js"></script>
     <script src="assets/js/index.js"></script>
 </body>
 </html>

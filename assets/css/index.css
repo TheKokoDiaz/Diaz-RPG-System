@@ -11,12 +11,13 @@
 
 /* ! General */
 *{
+    font-family: 'Raleway-Regular';
+    font-size: 1rem;
     box-sizing: border-box;
 }
 
 html{
     background-color: rgba(0, 0, 50, 50%);
-    font-family: 'Raleway-Regular';
 }
 
 html, body{
@@ -366,6 +367,7 @@ img{
     margin: 0.25% 0;
 
     color: white;
+    border: 0;
     border-radius: 8px;
     background-color: rgb(0, 25, 110);
     
@@ -425,20 +427,24 @@ img{
 
 #hud_moves__return{
     height: 10%;
-    aspect-ratio: 1/1;
     left: 50%;
     bottom: -31%;
     margin-left: 3vh;
-    color: white;
+    aspect-ratio: 1/1;
     position: fixed;
+
+    color: white;
     border-radius: 8px;
     background-color: rgb(40, 40, 120);
-    user-select: none;
-    cursor: pointer;
+    border: 0;
+    
     display: flex;
     justify-content: center;
     align-items: center;
+
     transition-duration: 300ms;
+    user-select: none;
+    cursor: pointer;
 }
 
 /* + Sprite*/

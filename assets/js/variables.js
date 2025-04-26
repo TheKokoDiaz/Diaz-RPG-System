@@ -5,6 +5,74 @@ let music_volume = 80/100;
 
 const music = document.getElementById("music");
 
+//! Battle
+//+ End Battle Stats
+let battle_stats = {
+    attacks: 0,
+    criticals: 0,
+    damage_given: 0,
+    medicine_used: 0,
+    hits_taken: 0,
+    damage_taken: 0
+};
+
+//+ Buffs & Debuffs effects on player
+let effect_stats = {
+    maxHP: 0,
+    damage: -15,
+    defense: 0
+};
+
+//+ Effects
+let buffs = {
+    energized: {
+        name: 'Energized',
+        duration: 5,
+        description: 'Recover EP through time',
+        category: 'buff'
+    },
+    energized: {
+        name: 'Super-Energized',
+        duration: 4,
+        description: 'Recover many EP in some time',
+        category: 'buff'
+    },
+    hyperEnergized: {
+        name: 'Hyper-Energized',
+        duration: 3,
+        description: 'Recover a lot of EP in a short time',
+        category: 'buff'
+    },
+
+    regeneration: {
+        name: 'Regeneration',
+        duration: 6,
+        description: 'Heals some HP per turn',
+        category: 'buff'
+    },
+    superRegeneration: {
+        name: 'Super-Regeneration',
+        duration: 5,
+        description: 'Heals HP per turn',
+        category: 'buff'
+    },
+    hyperRegeneration: {
+        name: 'Hyper-Regeneration',
+        duration: 4,
+        description: 'Heals a lot of HP per turn',
+        category: 'buff'
+    },
+}
+
+let debuffs = {
+    weakness: {
+        name: 'Weakness',
+        duration: 3,
+        description: 'You deal less damage',
+        category: 'debuff'
+    },
+}
+
 //! Player
 //+ SFX
 const player_sfx = document.getElementById('player_sfx');
@@ -57,7 +125,7 @@ let player_stats = {
     defense: 3
 };
 
-// Buffs & Debuffs
+//+ Buffs & Debuffs
 let player_effects = [
     {
         name: 'Regeneration',
@@ -67,7 +135,7 @@ let player_effects = [
     },
     {
         name: 'Weakness',
-        duration: 3,
+        duration: 2,
         description: 'You deal less damage',
         category: 'debuff'
     },
@@ -161,71 +229,6 @@ let player_straggerFrames = 6;
 
 //+ Player's Turn
 let player_move = '';
-
-//+ Battle Stats
-let battle_stats = {
-    attacks: 0,
-    criticals: 0,
-    damage_given: 0,
-    medicine_used: 0,
-    hits_taken: 0,
-    damage_taken: 0
-};
-
-let effect_stats = {
-    damage: -15,
-    defense: 0
-};
-
-//+ Effects
-let buffs = {
-    energized: {
-        name: 'Energized',
-        duration: 5,
-        description: 'Recover EP through time',
-        category: 'buff'
-    },
-    energized: {
-        name: 'Super-Energized',
-        duration: 4,
-        description: 'Recover many EP in some time',
-        category: 'buff'
-    },
-    hyperEnergized: {
-        name: 'Hyper-Energized',
-        duration: 3,
-        description: 'Recover a lot of EP in a short time',
-        category: 'buff'
-    },
-
-    regeneration: {
-        name: 'Regeneration',
-        duration: 6,
-        description: 'Heals some HP per turn',
-        category: 'buff'
-    },
-    superRegeneration: {
-        name: 'Super-Regeneration',
-        duration: 5,
-        description: 'Heals HP per turn',
-        category: 'buff'
-    },
-    hyperRegeneration: {
-        name: 'Hyper-Regeneration',
-        duration: 4,
-        description: 'Heals a lot of HP per turn',
-        category: 'buff'
-    },
-}
-
-let debuffs = {
-    weakness: {
-        name: 'Weakness',
-        duration: 3,
-        description: 'You deal less damage',
-        category: 'debuff'
-    },
-}
 
 //! Enemy
 //+ SFX

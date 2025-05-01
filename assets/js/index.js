@@ -85,6 +85,7 @@ function ShowVictoryScreen(){
         hud_victory.style.height = '100%';
         hud_victory.style.justifyContent = 'start';
         hud_victory_results_box.style.display = 'flex'
+        hud_victory.style.overflowY = 'auto';
     }, 1950);
 
     //* Stats

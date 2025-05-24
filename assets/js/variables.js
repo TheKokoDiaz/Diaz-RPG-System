@@ -224,6 +224,7 @@ player_canvas_sprite.src = 'assets/sprites/Player_Sprite_Sheet.png';
 const player_sprite_width = spritesheet_width;
 const player_sprite_height = spritesheet_height;
 
+let playerLastTime = 0;
 let player_game_frame = 0;
 let player_straggerFrames = 6;
 
@@ -262,5 +263,6 @@ enemy_canvas_sprite.src = 'assets/sprites/Enemy_Sprite_Sheet.png';
 const enemy_sprite_width = spritesheet_width;
 const enemy_sprite_height = spritesheet_height;
 
+let enemyLastTime = 0;
 let enemy_game_frame = 0;
 let enemy_straggerFrames = 6;

@@ -1,27 +1,39 @@
 //! Animation
 //+ Play animation
-function enemy_animation(){
+function enemyDeltaTime(enemyCurrentTime) {
+    let deltaTime = (enemyCurrentTime - enemyLastTime) / 1000;
+    enemyLastTime = enemyCurrentTime;
+
+    enemyAnimation(deltaTime);
+
+    requestAnimationFrame(enemyDeltaTime);
+}
+
+function enemyAnimation(deltaTime) {
+    // Canva Properties
     enemy_ctx.clearRect(0, 0, enemy_canvas_width, enemy_canvas_height);
     enemy_ctx.drawImage(enemy_canvas_sprite, enemy_frameX * enemy_sprite_width, enemy_frameY * enemy_sprite_height, enemy_sprite_width, enemy_sprite_height,  0, 0, enemy_canvas_width, enemy_canvas_height);
 
-    if(enemy_game_frame % enemy_straggerFrames == 0){
+    // Animation
+    enemy_straggerFrames += deltaTime;
+    if (enemy_straggerFrames >= 1/12) {
         if(enemy_frameX < (enemy_animation_limit - 1)){
             enemy_frameX++;
         } else {
             if(enemy_animation_infinite == true){
                 enemy_frameX = 0;
             } else {
-                //This is when the enemy has a defeat animation
+                // This is when the enemy has a defeat animation
                 ////if(enemy_frameY != 5){ChangeEnemyAnimation({animation: 'idle'});}
                 ChangeEnemyAnimation({animation: 'idle'});
             }
         }
-    }
 
-    enemy_game_frame++;
-    requestAnimationFrame(enemy_animation);
+        enemy_straggerFrames = 0;
+    }
 }
-enemy_animation();
+
+requestAnimationFrame(enemyDeltaTime);
 
 //+ Change animation
 function ChangeEnemyAnimation({animation}){

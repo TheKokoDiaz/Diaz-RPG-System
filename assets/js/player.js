@@ -293,45 +293,42 @@ function PlayerSpecial(move){
 
 //+ Backpack
 function UpdatePlayerBackpack(){
-    let item_array = '';
     hud_backpack_items.innerHTML = '';
     
     for(let n = 0; n < player_backpack_items.length; n++){
-        item_array = player_backpack_items[n];
+        indexItem = player_backpack_items[n];
         
-        if(item_array.quantity != 0){
-            hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription({item: `' + item_array.item + '`})" onclick="SetCombatTurns({category: `backpack`, move: `' + item_array.item + '`})"><img src="assets/icons/items/' + item_array.item + '.png"> <p>' + item_array.quantity + '</p></div>';
+        if(indexItem.quantity != 0){
+            hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription(`' + indexItem.item + '`, `' + indexItem.description + '`)" onclick="SetCombatTurns({category: `backpack`, move: `' + indexItem.item + '`})"><img src="assets/icons/items/' + indexItem.item + '.png"> <p>' + indexItem.quantity + '</p></div>';
         }
     }
+    
 }
 
-function WriteItemDescription({item}){
-    let item_array = '';
-    let item_name = '';
-    let item_index = '';
-
-    item_index = player_backpack_items.findIndex(array => array.item === item);
-    item_array = player_backpack_items[item_index];
-
-    item_name = item_array.item.charAt(0).toUpperCase() + item_array.item.slice(1);
-    hud_backpack_description.innerHTML = '<b>' + item_name + ':</b><br> ' + item_array.description;
+function WriteItemDescription(item, description){
+    indexItemame = item.charAt(0).toUpperCase() + item.slice(1);
+    hud_backpack_description.innerHTML = '<b>' + indexItemame + ':</b><br> ' + description;
 }
 
 function EraseItemDescription(){ hud_backpack_description.innerHTML = ''; }
 
-function UseBackpackItem({item}){
-    let item_index = player_backpack_items.findIndex(array => array.item === item);
-    let item_array = player_backpack_items[item_index];
+function UseBackpackItem(move){
+    for(let n = 0; n < player_backpack_items.length; n++){
+        let indexItem = player_backpack_items[n];
+
+        if(indexItem.item == move){
+            ChangePlayerHealth(indexItem.hp);
+            ChangePlayerEnergy(indexItem.ep);
     
-    ChangePlayerHealth(item_array.hp);
-    ChangePlayerEnergy(item_array.ep);
-
-    if(item_array.buff != null){
-        AddPlayerEffect(buffs[item_array.buff])
+            if(indexItem.buff != null){
+                AddPlayerEffect(buffs[indexItem.buff]);
+            }
+            
+            battle_stats.medicine_used += 1;
+            indexItem.quantity -= 1;
+            break;
+        }
     }
-
-    battle_stats.medicine_used += 1;
-    item_array.quantity -= 1;
 }
 
 //! Combat Turn
@@ -341,7 +338,7 @@ function PlayerTurn({category, move}){
     }
 
     if(category == 'backpack'){
-        UseBackpackItem({item: move});
+        UseBackpackItem(move);
     }
     
     if(category == 'specials'){

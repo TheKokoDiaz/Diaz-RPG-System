@@ -119,8 +119,8 @@ function ChangePlayerEnergy(EP){
 }
 
 //! Buffs & Debuffs
-function AddPlayerEffect(effectName){
-    player_effects.unshift(JSON.parse(JSON.stringify(effectName)));
+function AddPlayerEffect(effect){
+    player_effects.unshift(structuredClone(effect));
 
     UpdatePlayerEffects();
 }
@@ -272,7 +272,7 @@ function PlayerSpecial(move){
             ChangePlayerAnimation({animation: 'sword'}); */
 
             ChangePlayerHealth(30);
-            AddPlayerEffect(buffs.regeneration);
+            AddPlayerEffect(regeneration);
             break;
         }
     
@@ -321,7 +321,7 @@ function UseBackpackItem(move){
             ChangePlayerEnergy(indexItem.ep);
     
             if(indexItem.buff != null){
-                AddPlayerEffect(buffs[indexItem.buff]);
+                AddPlayerEffect(indexItem.buff);
             }
             
             battle_stats.medicine_used += 1;

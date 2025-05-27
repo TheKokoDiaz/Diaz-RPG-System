@@ -577,7 +577,12 @@ img{
 }
 
 .hud_backpack__items div img{
-    height: 70%;
+    height: 60%;
+    transition-duration: 300ms;
+}
+
+.hud_backpack__items div img:hover{
+    height: 75%;
 }
 
 

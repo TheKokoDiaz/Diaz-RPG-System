@@ -19,59 +19,9 @@ let battle_stats = {
 //+ Buffs & Debuffs effects on player
 let effect_stats = {
     maxHP: 0,
-    damage: -15,
+    damage: 0,
     defense: 0
 };
-
-//+ Effects
-let buffs = {
-    energized: {
-        name: 'Energized',
-        duration: 5,
-        description: 'Recover EP through time',
-        category: 'buff'
-    },
-    energized: {
-        name: 'Super-Energized',
-        duration: 4,
-        description: 'Recover many EP in some time',
-        category: 'buff'
-    },
-    hyperEnergized: {
-        name: 'Hyper-Energized',
-        duration: 3,
-        description: 'Recover a lot of EP in a short time',
-        category: 'buff'
-    },
-
-    regeneration: {
-        name: 'Regeneration',
-        duration: 6,
-        description: 'Heals some HP per turn',
-        category: 'buff'
-    },
-    superRegeneration: {
-        name: 'Super-Regeneration',
-        duration: 5,
-        description: 'Heals HP per turn',
-        category: 'buff'
-    },
-    hyperRegeneration: {
-        name: 'Hyper-Regeneration',
-        duration: 4,
-        description: 'Heals a lot of HP per turn',
-        category: 'buff'
-    },
-}
-
-let debuffs = {
-    weakness: {
-        name: 'Weakness',
-        duration: 3,
-        description: 'You deal less damage',
-        category: 'debuff'
-    },
-}
 
 //! Player
 //+ SFX
@@ -126,20 +76,7 @@ let player_stats = {
 };
 
 //+ Buffs & Debuffs
-let player_effects = [
-    {
-        name: 'Regeneration',
-        duration: 3,
-        description: 'Heals some HP per turn',
-        category: 'buff'
-    },
-    {
-        name: 'Weakness',
-        duration: 2,
-        description: 'You deal less damage',
-        category: 'debuff'
-    },
-]
+let player_effects = []
 
 //+ Backpack Items
 let player_backpack_items = [

@@ -89,16 +89,10 @@ let player_backpack_items = [
 ];
 
 //+ Specials
-let player_specials_moves = {
-    tornado: {
-        name: 'tornado',
-        ep: 50
-    },
-    heal: {
-        name: 'heal',
-        ep: 60
-    }
-};
+let player_specials_moves = [
+    tornado, 
+    heal
+];
 
 //+ Animation
 const spritesheet_width = 911;

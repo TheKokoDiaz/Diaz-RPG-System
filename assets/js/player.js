@@ -106,13 +106,6 @@ function ChangePlayerEnergy(EP){
     //Prevents negative numbers
     if(player_stats.energy < 0){ player_stats.energy = 0; }
 
-    // Advice when a tech is ready to use
-    if(player_stats.energy >= 50){
-        HighlightEnergy('on');
-    } else {
-        HighlightEnergy('off');
-    }
-
     //Updates the graffic bars and texts of the player's HUD
     player_energy_text.innerText = 'EP = ' + Math.round((player_stats.energy / player_stats.max_energy)*100) + '%';;
     player_energy_graffic.style.width = Math.round((player_stats.energy / player_stats.max_energy)*100) + '%';
@@ -127,9 +120,12 @@ function AddPlayerEffect(effect){
 
 function UpdatePlayerEffects(){
     hud_effects_box.innerHTML = '';
+    HighlightEnergy('off');
 
     player_effects.forEach(effect => {
         hud_effects_box.innerHTML += '<div class="hud_effect hud_effect--' + effect.category + '" onmouseover="ShowEffectDescription(`' + effect.name + '`, `' + effect.description + '`, `' + effect.duration + '`)" onmouseleave="HideEffectDescription()"><img src="assets/icons/effects/' + effect.name + '.png"></div>';
+
+        if(effect.name == 'Energized' || effect.name == 'Super-Energized' || effect.name == 'Hyper-Energized'){ HighlightEnergy('on'); }
     });
 }
 
@@ -229,11 +225,11 @@ function PlayerAttack(move){
     UpdateEnemyStats();
 }
 
-//+ Techniques
-function CheckSpecialMove(special_move){
+//+ techIndexniques
+function CheckSpecialMove(techCost){
     let class_name = 'hud_moves__move';
     
-    if(player_stats.energy < player_specials_moves[special_move].ep){
+    if(player_stats.energy < techCost){
         class_name += ' hud_moves__move--disable';
     }
 
@@ -243,13 +239,24 @@ function CheckSpecialMove(special_move){
 function WriteSpecialMoves(){
     hud_moves_specials.innerHTML = '';
 
-    for (let special_move in player_specials_moves) {
-        hud_moves_specials.innerHTML += '<button id="hud_moves__' + player_specials_moves[special_move].name + '" class="' + CheckSpecialMove(player_specials_moves[special_move].name) + '" onclick="SetCombatTurns({category: `specials`, move: `' + player_specials_moves[special_move].name + '`})"><p class="hud_moves__text">' + player_specials_moves[special_move].name.charAt(0).toUpperCase() + player_specials_moves[special_move].name.slice(1) + ' (' + player_specials_moves[special_move].ep + ' %)</p><img src="assets/icons/' + player_specials_moves[special_move].name + '.png" class="hud_moves__img"></button>';
+    for(let n in player_specials_moves){
+        let indexTech = player_specials_moves[n];
+        
+        hud_moves_specials.innerHTML += '<button id="hud_moves__' + indexTech.name + '" class="' + CheckSpecialMove(indexTech.cost) + '" onclick="SetCombatTurns({category: `specials`, move: `' + indexTech.name + '`})"><p class="hud_moves__text">' + indexTech.name.charAt(0).toUpperCase() + indexTech.name.slice(1) + ' (' + indexTech.cost + ' %)</p><img src="assets/icons/' + indexTech.name + '.png" class="hud_moves__img"></button>';
     }
 }
 
-// Use a Technique
+// Use a technique
 function PlayerSpecial(move){
+    // Search the technique
+    let tech;
+    for(let n in player_specials_moves){
+        if(player_specials_moves[n].name == move){
+            tech = player_specials_moves[n];
+            break;
+        }
+    }
+
     //* Crit Attacks
     let damage = 0;
     let crit_multiplier = 1;
@@ -260,7 +267,7 @@ function PlayerSpecial(move){
         crit_multiplier = player_stats.crit_multiplier;
     }
 
-    switch(move){
+    switch(tech.name){
         case 'tornado':
             ChangePlayerSfx({sfx: 'sword'});
             ChangePlayerAnimation({animation: 'sword'});
@@ -276,7 +283,7 @@ function PlayerSpecial(move){
             break;
         }
     
-    ChangePlayerEnergy(-player_specials_moves[move].ep);
+    ChangePlayerEnergy(-tech.cost);
     
     if(damage != 0){
         damage = (damage + effect_stats.damage) * crit_multiplier;

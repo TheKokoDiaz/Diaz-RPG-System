@@ -24,8 +24,6 @@ let effect_stats = {
 };
 
 //! Player
-//+ SFX
-const player_sfx = document.getElementById('player_sfx');
 
 //+ HUD
 //* Warnings

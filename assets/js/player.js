@@ -68,13 +68,6 @@ function ChangePlayerAnimation({animation}){
     }
 }
 
-//! SFX
-function ChangePlayerSfx({sfx}){
-    player_sfx.volume = sfx_volume;
-    player_sfx.setAttribute('src', '../assets/sfx/' + sfx + '.mp3');
-    player_sfx.play();
-}
-
 //! Update Stats
 function ChangePlayerHealth(HP){
     player_stats.health += HP;
@@ -207,7 +200,8 @@ function PlayerAttack(move){
 
     switch(move){
         case 'sword':
-            ChangePlayerSfx({sfx: move});
+            /* ChangePlayerSfx(move); */
+            Karma.changeSfx(move);
             ChangePlayerAnimation({animation: move});
             damage = player_stats.attack;
             break;
@@ -269,14 +263,14 @@ function PlayerSpecial(move){
 
     switch(tech.name){
         case 'tornado':
-            ChangePlayerSfx({sfx: 'sword'});
+            /* ChangePlayerSfx('sword'); */
+            Karma.changeSfx('sword');
             ChangePlayerAnimation({animation: 'sword'});
             damage = player_stats.attack * 3;
             break;
         
         case 'heal':
-            /* ChangePlayerSfx({sfx: 'sword'});
-            ChangePlayerAnimation({animation: 'sword'}); */
+            /* Insert audio */
 
             ChangePlayerHealth(30);
             AddPlayerEffect(regeneration);

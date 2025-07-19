@@ -3,8 +3,8 @@
 <head>
     <!-- ? Programed by "El Koko Díaz" -->
     
-    <!-- !Start Date: July 6th, 2023 -->
-    <!-- + Update: May 27, 2025 -->
+    <!-- ! Start Date: July 6th, 2023 -->
+    <!-- + Update: July 19th, 2025 -->
 
     <!-- ? Icons from web site: "https://www.flaticon.es" -->
     <!-- ? SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
@@ -18,9 +18,17 @@
         + Adaptive music
     -->
 
+    <!-- !Bugs to correct:
+        * Being revived for "Regeneration" buff 
+        * Buff description being locked
+        * Lock the landscape mode
+    -->
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     
     <title>Díaz RPG System</title>
     
@@ -40,6 +48,12 @@
     <!-- + HUD -->
     <aside id="hud_top_warning_bar"></aside>
     <aside id="hud_bottom_warning_bar"></aside>
+
+    <!-- + Play Button -->
+    <button id="fullScreen" onclick="enterFullScreen()">
+        <div class="fullScreen__playIcon"></div>
+        <div class="fullScreen_title">Play!</div>
+    </button>
 
     <!-- + Screens -->
     <section id="hud_victory">

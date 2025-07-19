@@ -306,7 +306,7 @@ function UpdatePlayerBackpack(){
         indexItem = player_backpack_items[n];
         
         if(indexItem.quantity != 0){
-            hud_backpack_items.innerHTML += '<div onmouseover="WriteItemDescription(`' + indexItem.item + '`, `' + indexItem.description + '`)" onclick="SetCombatTurns({category: `backpack`, move: `' + indexItem.item + '`})"><img src="assets/icons/items/' + indexItem.item + '.png"> <p>' + indexItem.quantity + '</p></div>';
+            hud_backpack_items.innerHTML += '<div onclick="WriteItemDescription(`' + indexItem.item + '`, `' + indexItem.description + '`)" ondblclick="SetCombatTurns({category: `backpack`, move: `' + indexItem.item + '`})"><img src="assets/icons/items/' + indexItem.item + '.png"> <p>' + indexItem.quantity + '</p></div>';
         }
     }
     

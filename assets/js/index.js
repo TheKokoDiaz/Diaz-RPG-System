@@ -95,7 +95,7 @@ function ShowVictoryScreen(){
 //! Music
 function ChangeMusic(theme){
     music.volume = music_volume;
-    music.setAttribute('src', '../assets/music/' + theme + '.mp3');
+    music.setAttribute('src', '../assets/music/' + theme);
     music.play();
 }
 
@@ -151,3 +151,13 @@ ChangePlayerHealth(0);
 ChangePlayerEnergy(0);
 UpdatePlayerEffects();
 UpdateEnemyStats();
+
+function enterFullScreen(){
+    const btn = document.getElementById('fullScreen');
+
+    const html = document.documentElement;
+    html.requestFullscreen();
+    screen.orientation.lock('landscape');
+
+    btn.style.display = "none";
+}

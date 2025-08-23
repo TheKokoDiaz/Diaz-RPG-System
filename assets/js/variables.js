@@ -81,7 +81,7 @@ let player_stats = {
 };
 
 //+ Buffs & Debuffs
-let player_effects = []
+let player_effects = [];
 
 //+ Backpack Items
 let player_backpack_items = [

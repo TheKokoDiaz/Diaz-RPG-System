@@ -187,6 +187,11 @@ function ApplyPlayerEffects(effect){
     }   
 }
 
+function ClearPlayerEffects(){
+    player_effects = [];
+    UpdatePlayerEffects();
+}
+
 function ShowEffectDescription(name, description, duration){
     hud_effects_info.innerHTML = '<b>' + name + '</b><br>' + description + '<br><br><i>( ' + duration + ' turns left )</i>'
     hud_effects_info.style.opacity = '100%';

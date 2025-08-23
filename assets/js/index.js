@@ -142,8 +142,10 @@ async function SetCombatTurns({category, move}){
     }
     
     // 4.- Regeneration & Poison
-    CountPlayerEffects();
-    UpdatePlayerEffects();
+    if(player_stats.health != 0){
+        CountPlayerEffects();
+        UpdatePlayerEffects();
+    }
 
     // 5.- Check if both can continue fighting to repeat the loop
     if(enemy_stats[0].health != 0 && player_stats.health != 0){
@@ -160,7 +162,8 @@ async function SetCombatTurns({category, move}){
     // Player Defeated (Game Over)
     if(player_stats.health == 0){
         //* Change the enemy animation
-        ChangePlayerAnimation({animation: 'defeated'})
+        ChangePlayerAnimation({animation: 'defeated'});
+        ClearPlayerEffects();
         //*Sfx of Defeat
         //*Game Over
     }

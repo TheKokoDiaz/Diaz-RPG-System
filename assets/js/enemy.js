@@ -73,7 +73,7 @@ function UpdateEnemyStats(){
     if(enemy_stats[0].health < 0){ enemy_stats[0].health = 0; }
 
     //Updates the graffic bar and the text numbers of the enemy´s HUD
-    enemy_health_text.innerText = 'HP: ' + enemy_stats[0].health + '/' + enemy_stats[0].max_health;
+    enemy_health_text.innerText = 'Enemy: ' + enemy_stats[0].health + ' / ' + enemy_stats[0].max_health;
     enemy_health_graffic.style.width = Math.round((enemy_stats[0].health / enemy_stats[0].max_health)*100) + '%';
 }
 

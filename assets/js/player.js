@@ -107,8 +107,14 @@ function ChangePlayerEnergy(EP){
     if(player_stats.energy < 0){ player_stats.energy = 0; }
 
     //Updates the graffic bars and texts of the player's HUD
-    player_energy_text.innerText = 'EP = ' + Math.round((player_stats.energy / player_stats.max_energy)*100) + '%';;
+    player_energy_text.innerText = 'EP = ' + Math.round((player_stats.energy / player_stats.max_energy)*100) + ' %';;
     player_energy_graffic.style.width = Math.round((player_stats.energy / player_stats.max_energy)*100) + '%';
+
+    if(player_stats.energy >= cheapestTech){
+        HighlightTechBtn('on');
+    } else {
+        HighlightTechBtn('off');
+    }
 }
 
 //! Buffs & Debuffs
@@ -225,7 +231,7 @@ function PlayerAttack(move){
     UpdateEnemyStats();
 }
 
-//+ techIndexniques
+//+ Techniques
 function CheckSpecialMove(techCost){
     let class_name = 'hud_moves__move';
     

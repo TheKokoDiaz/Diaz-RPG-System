@@ -4,21 +4,22 @@
     <!-- ? Programed by "El Koko Díaz" -->
     
     <!-- ! Start Date: July 6th, 2023 -->
-    <!-- + Update: July 19th, 2025 -->
+    <!-- + Update: August 22th, 2025 -->
 
     <!-- ? Icons from web site: "https://www.flaticon.es" -->
     <!-- ? SFX effects from web site: "http://www.sonidosmp3gratis.com/index.php" -->
 
-    <!-- !Things to do: 
-        + Add Animations
-        + Add Defeat text
-        + Frame account to crit hits
-        + Use animations and effects to represent the crits
-        + Loading Screen
-        + Adaptive music
+    <!-- ! Things to do: 
+        + 1. Add Animations
+        + 2. Add Defeat text (Game Over)
+        + 3. Frame account to crit hits
+        + 4. Use animations to represent the crits
+        + 5. Loading Screen
+        + 6. Music
+        + 7. Language configuration (English / Spanish (México))
     -->
 
-    <!-- !Bugs to correct:
+    <!-- ! Bugs to correct:
         * Being revived for "Regeneration" buff 
         * Buff description being locked
         * Lock the landscape mode
@@ -113,7 +114,7 @@
             <p class="hud_moves__text">Attack</p>
             <img src="assets/icons/attack.png" class="hud_moves__img">
         </button>
-        <button class="hud_moves__move hud_moves__move" onclick="TogglePlayerMenus({menu: 'specials'})">
+        <button class="hud_moves__move" id="hud_moves_techs" onclick="TogglePlayerMenus({menu: 'specials'})">
             <p class="hud_moves__text">Techniques</p>
             <img src="assets/icons/specials.png" class="hud_moves__img">
         </button>
@@ -149,8 +150,7 @@
 
     <!-- + Status HUD -->
     <section class="enemy_status">
-        <header class="enemy_status__text">Enemy:</header>
-        <span class="enemy_status__text" id="enemy_health_text">HP:</span>
+        <header class="enemy_status__text" id="enemy_health_text">Enemy:</header>
         <aside class="enemy_status__bar">
             <div class="enemy_status__health" id="enemy_health_graffic"></div>
         </aside>

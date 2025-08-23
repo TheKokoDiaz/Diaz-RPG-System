@@ -28,11 +28,16 @@ let effect_stats = {
 const player_sfx = document.getElementById('player_sfx');
 
 //+ HUD
+//* FullScreen
+const fullScreenBtn = document.getElementById('fullScreen');
+
 //* Warnings
 const hud_top_warning_bar = document.querySelector('#hud_top_warning_bar')
 const hud_bottom_warning_bar = document.querySelector('#hud_bottom_warning_bar')
 
 //* Menus and Buttons
+const hud_moves_techs = document.querySelector('#hud_moves_techs');
+
 const hud_moves_return = document.querySelector('#hud_moves__return');
 const hud_moves_general = document.querySelector('#hud_moves_general');
 const hud_moves_attack = document.querySelector('#hud_moves_attack');
@@ -93,6 +98,8 @@ let player_specials_moves = [
     tornado, 
     heal
 ];
+
+let cheapestTech = tornado.cost;
 
 //+ Animation
 const spritesheet_width = 911;

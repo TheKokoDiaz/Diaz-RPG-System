@@ -1,4 +1,13 @@
 //! HUD
+//+ Fullscreen
+function enterFullScreen(){
+    const html = document.documentElement;
+    html.requestFullscreen();
+    screen.orientation.lock('landscape');
+
+    fullScreenBtn.style.display = "none";
+}
+
 //+ Toggle HUD
 function HideAllMenus(){
     hud_moves_general.style.bottom = '-31%';
@@ -72,6 +81,17 @@ function HighlightEnergy(action){
     }
 }
 
+function HighlightTechBtn(action){
+    if(action == 'on'){
+        hud_moves_techs.style.animation = 'highlight_button 1s infinite';
+    }
+    
+    if(action == 'off'){
+        hud_moves_techs.style.animation = 'none';
+    }
+}
+
+
 //+ Victory Screen
 function ShowVictoryScreen(){
     hud_victory.style.display = 'flex';
@@ -100,7 +120,7 @@ function ChangeMusic(theme){
 }
 
 //! Delay
-//Delay function to avoid cuts in the animations
+// It's to avoid cuts in the animations
 function delay(ms){
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -151,13 +171,3 @@ ChangePlayerHealth(0);
 ChangePlayerEnergy(0);
 UpdatePlayerEffects();
 UpdateEnemyStats();
-
-function enterFullScreen(){
-    const btn = document.getElementById('fullScreen');
-
-    const html = document.documentElement;
-    html.requestFullscreen();
-    screen.orientation.lock('landscape');
-
-    btn.style.display = "none";
-}

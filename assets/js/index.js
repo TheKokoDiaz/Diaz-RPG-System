@@ -131,7 +131,7 @@ async function SetCombatTurns({category, move}){
 
     // 1.- Player Turn
     PlayerTurn({category, move});
-    await delay(900);
+    await delay(1200);
 
     // 2.- Alterate Stats acording to Buffs & Debuffs
     
@@ -152,6 +152,16 @@ async function SetCombatTurns({category, move}){
         TogglePlayerMenus({menu: 'general'});
     }
 
+    // 6.- Change the idle animation
+    if(player_stats.energy >= cheapestTech){
+        ChangePlayerAnimation('aura');
+    }
+    
+    if(player_stats.health <= player_stats.max_health/4){
+        ChangePlayerAnimation('weak');
+    }
+
+    //+ End of the combat
     // Enemy Defeated (Victory)
     if(enemy_stats[0].health == 0){
         /* + Change the enemy and player animation

@@ -511,11 +511,13 @@ button{
 
 /* + Sprite*/
 #player_sprite{
-    height: 40%;
-    left: 5%;
-    bottom: 25%;
-    border: 1px solid rgba(255, 255, 255, 10%);
+    height: 50%;
+    left: 0.5%;
+    bottom: 22%;
     position: absolute;
+    image-rendering: pixelated;
+
+    transition-duration: 300ms;
 }
 
 /* + Backpack */
@@ -672,10 +674,9 @@ button{
 
 /* + Sprite */
 #enemy_sprite{
-    height: 45%;
-    right: 5%;
-    bottom: 25%;
-    border: 1px solid rgba(255, 255, 255, 10%);
+    height: 55%;
+    right: 0.5%;
+    bottom: 22%;
     position: absolute;
 }
 

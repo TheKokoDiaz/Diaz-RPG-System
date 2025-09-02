@@ -89,5 +89,5 @@ function EnemyTurn(){
     ChangeEnemyAnimation({animation: 'attack'});
     ChangeEnemySfx({sfx: 'punch'});
     
-    ChangePlayerAnimation({animation: 'damage'});
+    ChangePlayerAnimation('damage');
 }

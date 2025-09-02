@@ -16,7 +16,7 @@ function playerAnimation(deltaTime) {
 
     // Animation
     player_straggerFrames += deltaTime;
-    if (player_straggerFrames >= 1/12) {
+    if (player_straggerFrames >= player_speedAnimation) {
         if(player_frameX < (player_animation_limit - 1)){
             player_frameX++;
         } else {
@@ -24,7 +24,7 @@ function playerAnimation(deltaTime) {
             if(player_animation_infinite == true){
                 player_frameX = 0;
             } else {
-                if(player_frameY != 5){ChangePlayerAnimation({animation: 'idle'});}
+                ChangePlayerAnimation('idle');
             }
         }
 
@@ -35,36 +35,80 @@ function playerAnimation(deltaTime) {
 requestAnimationFrame(playerDeltaTime);
 
 //+ Change Animations
-function ChangePlayerAnimation({animation}){
+function ChangePlayerAnimation(animation){
     player_frameX = 0;
 
     switch(animation){
         case 'idle':
-            if(player_stats.health <= player_stats.max_health / 4){
-                player_frameY = 3;
+            /* if(player_stats.health <= player_stats.max_health / 4){
+                player_frameY = 6;
+                player_animation_limit = 8;
+                player_speedAnimation = 1/4;
             } else {
                 player_frameY = 0;
-            }
-            player_animation_limit = 8;
+                player_animation_limit = 5;
+                player_speedAnimation = 1/6;
+                } */
+            player_frameY = 0;
+            player_animation_limit = 5;
+            player_speedAnimation = 1/6;
             player_animation_infinite = true;
             break;
-
+            
         case 'sword':
             player_frameY = 1;
+            player_animation_limit = 4;
+            player_speedAnimation = 1/12;
+            player_animation_infinite = false;
+            break;
+            
+        case 'counter':
+            player_frameY = 2;
+            player_animation_limit = 7;
+            player_speedAnimation = 1/12;
+            player_animation_infinite = false;
+            break;
+
+        case 'aura':
+            player_frameY = 3;
+            player_animation_limit = 4;
+            player_speedAnimation = 1/6;
+            player_animation_infinite = true;
+            break;
+        
+        case 'healing':
+            player_frameY = 4;
+            player_animation_limit = 12;
+            player_speedAnimation = 1/12;
             player_animation_infinite = false;
             break;
 
         case 'damage':
-            player_frameY = 2;
-            player_animation_limit = 7;
+            player_frameY = 5;
+            player_animation_limit = 5;
+            player_speedAnimation = 1/12;
+            player_animation_infinite = false;
+            break;
+        
+        case 'weak':
+            player_frameY = 6;
+            player_animation_limit = 8;
+            player_speedAnimation = 1/4;
+            player_animation_infinite = true;
+            break;
+
+        case 'potion':
+            player_frameY = 7;
+            player_animation_limit = 8;
+            player_speedAnimation = 1/12;
             player_animation_infinite = false;
             break;
 
-        case 'defeated':
+        /* case 'defeated':
             player_frameY = 5;
             player_animation_limit = 9;
             player_animation_infinite = false;
-            break;
+            break; */
     }
 }
 
@@ -219,7 +263,7 @@ function PlayerAttack(move){
     switch(move){
         case 'sword':
             ChangePlayerSfx({sfx: move});
-            ChangePlayerAnimation({animation: move});
+            ChangePlayerAnimation(move);
             damage = player_stats.attack;
             break;
     }
@@ -281,13 +325,13 @@ function PlayerSpecial(move){
     switch(tech.name){
         case 'tornado':
             ChangePlayerSfx({sfx: 'sword'});
-            ChangePlayerAnimation({animation: 'sword'});
+            ChangePlayerAnimation('counter');
             damage = player_stats.attack * 3;
             break;
         
         case 'heal':
-            /* ChangePlayerSfx({sfx: 'sword'});
-            ChangePlayerAnimation({animation: 'sword'}); */
+            /* ChangePlayerSfx({sfx: 'sword'}); */
+            ChangePlayerAnimation('healing');
 
             ChangePlayerHealth(30);
             AddPlayerEffect(regeneration);
@@ -347,6 +391,8 @@ function UseBackpackItem(move){
             break;
         }
     }
+
+    ChangePlayerAnimation('potion');
 }
 
 //! Combat Turn

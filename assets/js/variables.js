@@ -71,7 +71,7 @@ const player_energy_graffic = document.getElementById('player_energy_graffic');
 
 //+ Stats
 let player_stats = {
-    health: 25,
+    health: 30,
     max_health: 100,
     energy: 15,
     max_energy: 100,
@@ -102,12 +102,12 @@ let player_specials_moves = [
 let cheapestTech = tornado.cost;
 
 //+ Animation
-const spritesheet_width = 911;
-const spritesheet_height = 512;
+const spritesheet_width = 128;
+const spritesheet_height = 64;
 
 let player_frameX = 0;
 let player_frameY = 0;
-let player_animation_limit = 8;
+let player_animation_limit = 5;
 let player_animation_infinite = false;
 
 const player_canvas = document.getElementById('player_sprite');
@@ -122,7 +122,8 @@ const player_sprite_height = spritesheet_height;
 
 let playerLastTime = 0;
 let player_game_frame = 0;
-let player_straggerFrames = 6;
+let player_straggerFrames = 0;
+let player_speedAnimation = 1/12;
 
 //+ Player's Turn
 let player_move = '';
@@ -151,13 +152,13 @@ let enemy_animation_infinite = false;
 
 const enemy_canvas = document.getElementById('enemy_sprite');
 const enemy_ctx = enemy_canvas.getContext('2d');
-const enemy_canvas_width = enemy_canvas.width = spritesheet_width;
-const enemy_canvas_height = enemy_canvas.height = spritesheet_height;
+const enemy_canvas_width = enemy_canvas.width = 911;
+const enemy_canvas_height = enemy_canvas.height = 512;
 
 const enemy_canvas_sprite = new Image();
 enemy_canvas_sprite.src = 'assets/sprites/Enemy_Sprite_Sheet.png';
-const enemy_sprite_width = spritesheet_width;
-const enemy_sprite_height = spritesheet_height;
+const enemy_sprite_width = 912;
+const enemy_sprite_height = 512;
 
 let enemyLastTime = 0;
 let enemy_game_frame = 0;

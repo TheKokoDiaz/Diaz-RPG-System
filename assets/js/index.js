@@ -50,8 +50,7 @@ function TogglePlayerMenus({menu = ''}){
 // Low Health
 function SwitchWarnings(action){
     if(action == 'off'){
-        hud_top_warning_bar.style.top = '-30%';
-        hud_bottom_warning_bar.style.bottom = '-30%';
+        HideDramaBars();
 
         player_health_graffic.style.animation = 'none';
         player_health_border.style.animation = 'none';
@@ -59,13 +58,23 @@ function SwitchWarnings(action){
     }
     
     if(action == 'on'){
-        hud_top_warning_bar.style.top = '-10%';
-        hud_bottom_warning_bar.style.bottom = '-10%';
+        ShowDramaBars();
 
         player_health_graffic.style.animation = 'graphic_health_warning 1s infinite';
         player_health_border.style.animation = 'border_health_warning 1s infinite';
         player_health_border.style.backgroundColor = 'rgba(255, 0, 0, 30%)';
     }
+}
+
+// "Drama" Bars
+function ShowDramaBars(){
+    hud_top_warning_bar.style.top = '-10%';
+    hud_bottom_warning_bar.style.bottom = '-10%';
+}
+
+function HideDramaBars(){
+    hud_top_warning_bar.style.top = '-30%';
+    hud_bottom_warning_bar.style.bottom = '-30%';
 }
 
 // Ready Technique

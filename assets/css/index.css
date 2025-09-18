@@ -32,11 +32,17 @@ img{
     -webkit-user-drag: none;
     -webkit-user-select: none;
     user-select: none;
+
+    image-rendering: pixelated;
 }
 
 button{
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
+}
+
+canvas{
+    image-rendering: pixelated;
 }
 
 /* + Warning Bars */
@@ -515,7 +521,6 @@ button{
     left: 0.5%;
     bottom: 22%;
     position: absolute;
-    image-rendering: pixelated;
 
     transition-duration: 300ms;
 }

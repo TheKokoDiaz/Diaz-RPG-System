@@ -86,9 +86,9 @@ let player_effects = [];
 //+ Backpack Items
 let player_backpack_items = [
     adrenalin,
-    bandAid,
-    bandage,
-    medKit,
+    regenerationPotion,
+    healPotion,
+    superHealPotion,
     ramen,
     vitamins,
 ];

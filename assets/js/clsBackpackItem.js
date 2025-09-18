@@ -13,43 +13,43 @@ class backpackItem{
 let adrenalin = new backpackItem({
     item: 'adrenalin',
     quantity: 1,
-    description: 'It fills you with EP and a lot of energy',
+    description: 'It fills you with lot of energy',
     hp: 10,
     ep: 200,
     buff: hyperEnergized
 });
 
-let bandAid = new backpackItem({
-    item: 'band-aid',
+let regenerationPotion = new backpackItem({
+    item: 'Regeneration Potion',
     quantity: 3,
-    description: 'It heals a tiny amount of HP, but using it makes fell you better',
-    hp: 5,
+    description: 'Allows you to recover health during some time',
+    hp: 0,
     ep: 0,
-    buff: regeneration
+    buff: superRegeneration
 });
 
-let bandage = new backpackItem({
-    item: 'bandage',
+let healPotion = new backpackItem({
+    item: 'Heal Potion',
     quantity: 2,
-    description: 'Fast to apply, it heals a decent amount of HP',
+    description: 'It heals a decent amount of health',
     hp: 60,
     ep: 0,
     buff: null
 });
 
-let medKit = new backpackItem({
-    item: 'med-kit',
+let superHealPotion = new backpackItem({
+    item: 'Super Heal Potion',
     quantity: 1,
-    description: 'Hard to use but it can restore all your HP',
-    hp: 150,
+    description: 'Restore all your health and a little more through time',
+    hp: 200,
     ep: 0,
-    buff: null
+    buff: regeneration
 });
 
 let ramen = new backpackItem({
     item: 'ramen',
     quantity: 1,
-    description: 'Delicious and with a lot of protein, it fills you with energy slowly',
+    description: 'Delicious! It fills you with energy slowly',
     hp: 50,
     ep: 20,
     buff: superEnergized
@@ -58,7 +58,7 @@ let ramen = new backpackItem({
 let vitamins = new backpackItem({
     item: 'vitamins',
     quantity: 1,
-    description: 'Increases energy',
+    description: 'Increases energy through time',
     hp: 0,
     ep: 20,
     buff: energized
